@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProNFC - Luminii定制版</title>
+    <title>ProNFC -for Luminii</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         
         :root {
             --primary-color: #EF9554; /* 橙色主题色 */
-            --secondary-color: #2196F3; /* 蓝色主题色 */
+            --secondary-color: #165DFF; /* 蓝色主题色 */
             --background-color: #f8f9fa;
             --card-background: #ffffff;
             --text-primary: #333333;
@@ -39,7 +39,7 @@
             display: flex;
             justify-content: flex-end;
             padding: 10px 0;
-            margin-bottom: 20px;
+            margin-bottom: 4px;
         }
         
         .lang-btn {
@@ -73,11 +73,11 @@
             text-align: center;
         }
         
-        .brand-logo {
+        .app-logo {
             width: 120px;
             height: 120px;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, #EF9554 100%);
+            /* background: linear-gradient(135deg, var(--primary-color) 0%, #EF9554 100%); */
             border-radius: 24px;
             display: flex;
             align-items: center;
@@ -110,37 +110,41 @@
         
         /* Luminii客户定制区 */
         .client-section {
-            background-color: var(--card-background);
+            background-color: #fbd68f;
             border-radius: 12px;
             padding: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
         }
         
         .client-header {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
-        
-        .client-logo {
-            width: 60px;
-            height: 60px;
-            background-color: var(--primary-color);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            font-size: 20px;
-            margin-right: 15px;
-        }
+		
+		.client-logo-bg {
+			width: 200px;
+			height: 62px;
+			/* background: linear-gradient(135deg, var(--primary-color) 0%, #EF9554 100%); */
+			padding: 26rpx 0rpx 26rpx 0;
+			border-radius: 12px 12px 12px 12px;
+		}
+		
+		.client-logo {
+		   width: 100%;
+		    height: 80%;
+			/* margin-left: 30rpx; */
+			/* margin: 26rpx 10rpx 26rpx 30rpx; */
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		}
         
         .client-info h2 {
             font-size: 24px;
             margin-bottom: 5px;
-            color: var(--primary-color);
+            color: var(--text-secondary);
         }
         
         .client-info p {
@@ -346,25 +350,27 @@
     <div class="container">
         <!-- 1. 多语言切换区 -->
         <div class="language-switcher animate-in">
-            <button class="lang-btn active" id="lang-zh" onclick="switchLanguage('zh')">中文</button>
+            <button class="lang-btn" id="lang-zh" onclick="switchLanguage('zh')">中文</button>
             <button class="lang-btn" id="lang-en" onclick="switchLanguage('en')">English</button>
         </div>
         
         <!-- 2. ProNFC Logo和介绍区 -->
         <section class="brand-section animate-in">
-			<img class="brand-logo" src="./res/app_icon.png">
+			<img class="app-logo" src="./res/app_icon.png">
             <h1 class="brand-name" id="brand-name">ProNFC</h1>
             <p class="brand-tagline" id="brand-tagline">专业的NFC解决方案</p>
-            <p class="brand-description" id="brand-description">
-                ProNFC是一款功能强大的NFC读写与管理工具，支持多种NFC标签的读取、写入和管理，提供安全可靠的数据交换方案，适用于企业资产管理、智能门禁、产品防伪等多种场景。
-            </p>
+            <p class="brand-description" id="brand-description"></p>
+			<p class="brand-description" id="brand-description1"></p>
+			<p class="brand-description" id="brand-description2"></p>
         </section>
         
         <!-- 3. Luminii客户定制区 -->
         <section class="client-section animate-in" id="client-section">
             <div class="client-header">
-				<img class="client-logo" src="./res/app_icon.png">
                 <div class="client-info">
+					<div class="client-logo-bg">
+						<img class="client-logo" src="./res/icon_Luminii-Logo_WHT.png">
+					</div>
                     <h2 id="client-title">Luminii定制版 - 橙色主题</h2>
                     <p id="client-subtitle">专为Luminii客户定制的橙色主题版本</p>
                 </div>
@@ -431,7 +437,9 @@
             'zh': {
                 'brand-name': 'ProNFC',
                 'brand-tagline': '专业的NFC解决方案',
-                'brand-description': 'ProNFC是一款功能强大的NFC读写与管理工具，支持多种NFC标签的读取、写入和管理，提供安全可靠的数据交换方案，适用于企业资产管理、智能门禁、产品防伪等多种场景。',
+                'brand-description': 'PRO NFC是一款利用手机的NFC读写功能来设置智能电源参数的应用，可使智能电源的配置更加便捷快速。',
+				'brand-description1':'-通过NFC设置智能电源参数。',
+				'brand-description2':'-查看已写入的记录并可重新编辑。',
                 'client-title': 'Luminii定制版 - 橙色主题',
                 'client-subtitle': '专为Luminii客户定制的橙色主题版本',
                 'feature-1': '专属橙色主题界面与品牌标识',
@@ -454,7 +462,9 @@
             'en': {
                 'brand-name': 'ProNFC',
                 'brand-tagline': 'Professional NFC Solution',
-                'brand-description': 'PRO NFC is an application that uses the NFC read/write function of the cell phone to set the parameters of the smart power supply. Make the configuration of smart power supply more convenient and fast. \n -NFC to set smart power parameters. \n -View the written records and re-edit.',
+                'brand-description': 'PRO NFC is an application that uses the NFC read/write function of the cell phone to set the parameters of the smart power supply. Make the configuration of smart power supply more convenient and fast.',
+				'brand-description1':'-NFC to set smart power parameters.',
+				'brand-description2':'-View the written records and re-edit.',
                 'client-title': 'Luminii Custom Edition - Orange Theme',
                 'client-subtitle': 'Orange theme version customized for Luminii customers',
                 'feature-1': 'Exclusive orange theme interface and brand identity',
@@ -468,7 +478,7 @@
                 'theme-info-title': 'Theme Launch Instructions',
                 'theme-steps': [
                     'Click the "Launch Luminii Edition" button above to start ProNFC with orange theme.',
-                    'If the app is already installed, it will start directly with Luminii orange theme and remember this setting.',
+                    'If the app is already installed, it will start directly with Luminii orange theme and remember this style.',
                     'If the app is not detected, the page will automatically scroll to the download section.',
                     'After downloading and installing, launch again through this page to apply orange theme.'
                 ],
@@ -477,11 +487,14 @@
         };
         
         // 当前语言
-        let currentLang = 'zh';
+        let currentLang = '';
         
         // 切换语言
         function switchLanguage(lang) {
-            if (lang === currentLang) return;
+            if (lang === currentLang) {
+				console.log('return currentlang');
+				return;
+			}
             
             currentLang = lang;
             
@@ -498,6 +511,8 @@
             document.getElementById('brand-name').textContent = texts['brand-name'];
             document.getElementById('brand-tagline').textContent = texts['brand-tagline'];
             document.getElementById('brand-description').textContent = texts['brand-description'];
+            document.getElementById('brand-description1').textContent = texts['brand-description1'];
+            document.getElementById('brand-description2').textContent = texts['brand-description2'];
             
             // 更新客户定制区域
             document.getElementById('client-title').textContent = texts['client-title'];
