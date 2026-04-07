@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打开我的APP（橙色主题）</title>
+    <script>
+        // 尝试打开APP
+        function openApp() {
+            // 记录尝试打开的时间
+            localStorage.setItem('openAppTime', Date.now());
+            
+            // 定义APP的URL Scheme
+            var appScheme = 'scpower.pronfc://?theme=orange&source=test';
+            
+            // 定义备用方案（应用商店）
+            var appStoreUrl = 'https://apps.apple.com/cn/app/your-app-id'; // 替换为你的App Store链接
+            var playStoreUrl = 'https://play.google.com/store/apps/details?id=your.package.name'; // 替换为你的Google Play包名
+            
+            // 尝试打开APP
+            window.location.href = appScheme;
+            
+            // 检查是否成功打开APP
+            setTimeout(function() {
+                // 如果还在当前页面，说明没有安装APP
+                var startTime = parseInt(localStorage.getItem('openAppTime') || 0);
+                if (Date.now() - startTime < 3000) { // 3秒内还在当前页面
+                    redirectToStore();
+                }
+            }, 2500);
+        }
+        
+        function redirectToStore() {
+            // 判断设备类型
+            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            var isAndroid = /Android/.test(navigator.userAgent);
+            
+            if (isIOS) {
+                window.location.href = 'https://apps.apple.com/cn/app/your-app-id';
+            } else if (isAndroid) {
+                window.location.href = 'https://play.google.com/store/apps/details?id=your.package.name';
+            } else {
+                alert('请在手机浏览器中打开此页面');
+            }
+        }
+        
+        // 页面加载时自动尝试打开APP
+        window.onload = function() {
+            // 只有在移动设备上才自动尝试
+            if (/Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                openApp();
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .open-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+            width: 100%;
+        }
+        
+        .open-btn:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 152, 0, 0.3);
+        }
+        
+        .qr-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: #f5f5f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .instructions {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #666;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .app-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        
+        .app-details h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .app-details .app-tag {
+            background: #FF9800;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-info">
+            <div class="app-icon">APP</div>
+            <div class="app-details">
+                <h2>我的APP</h2>
+                <span class="app-tag">橙色主题</span>
+            </div>
+        </div>
+        
+        <h1>打开我的APP</h1>
+        <p>点击下方按钮，将在<span style="color: #FF9800; font-weight: bold;">橙色主题</span>模式下打开APP</p>
+        
+        <button class="open-btn" onclick="openApp()">立即打开APP</button>
+        
+        <div class="instructions">
+            <h3>如果无法自动打开，请按以下步骤操作：</h3>
+            <ol>
+                <li>点击上方按钮，会提示"在[APP]中打开链接"</li>
+                <li>点击"打开"按钮即可进入APP</li>
+                <li>如果未安装APP，将会跳转到应用商店</li>
+            </ol>
+        </div>
+        
+        <div class="qr-section">
+            <p>或者扫描二维码打开</p>
+            <div class="qr-code" id="qrCode">
+                <!-- 这里可以放置二维码图片 -->
+                <div style="text-align: center;">
+                    <div style="margin-bottom: 10px; color: #999;">[二维码]</div>
+                    <div style="font-size: 12px; color: #999;">scpower.pronfc://?theme=orange</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 生成二维码（需要qrcode.js库）
+        function generateQRCode() {
+            var qrCodeUrl = window.location.href; // 当前页面URL
+            var qrCodeDiv = document.getElementById('qrCode');
+            qrCodeDiv.innerHTML = '';
+            
+            // 如果你有qrcode.js库，可以这样生成
+            // new QRCode(qrCodeDiv, {
+            //     text: qrCodeUrl,
+            //     width: 200,
+            //     height: 200
+            // });
+        }
+        
+        // 页面加载完成后生成二维码
+        // document.addEventListener('DOMContentLoaded', generateQRCode);
+    </script>
+</body>
+</html>
