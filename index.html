@@ -240,13 +240,13 @@
         }
         
         .ios-btn {
-            background-color: #007AFF;
+            background-color: #EF9554;
             color: white;
         }
         
         .android-btn {
             background-color: #3DDC84;
-            color: #333;
+            color: white;
         }
         
         .download-btn:hover {
@@ -281,7 +281,7 @@
         }
         
         .theme-steps li {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         
         .theme-note {
@@ -291,6 +291,14 @@
             border-radius: 4px;
             font-size: 14px;
         }
+		
+		.guidelines-note {
+		    background-color: #FFF3E0;
+		    border-left: 4px solid var(--primary-color);
+		    padding: 15px;
+		    border-radius: 4px;
+		    font-size: 14px;
+		}
         
         /* 响应式设计 */
         @media (max-width: 768px) {
@@ -404,12 +412,14 @@
             
             <div class="download-buttons">
                 <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="download-btn ios-btn" id="ios-download" target="_blank">
-                    <div class="btn-logo"></div>
-                    <span id="ios-text">App Store 下载</span>
+                    <!-- <div></div> -->
+					<img class="btn-logo" src="res/apple.svg">
+                    <span id="ios-text">AppStore 下载</span>
                 </a>
                 <a href="https://play.google.com/store/apps/details?id=com.pronfc.app" class="download-btn android-btn" id="android-download" target="_blank">
-                    <div class="btn-logo">��</div>
-                    <span id="android-text">Google Play 下载</span>
+                    <!-- <div ></div> -->
+					<img class="btn-logo" src="res/android.svg">
+                    <span id="android-text">Android 版下载</span>
                 </a>
             </div>
         </section>
@@ -419,15 +429,14 @@
             <h3 id="theme-info-title">主题启动说明</h3>
             
             <ol class="theme-steps" id="theme-steps">
-                <li>点击上方"启动Luminii定制版"按钮，将使用橙色主题启动ProNFC应用;</li>
-                <li>如果已安装应用，将直接以Luminii橙色主题启动，应用会记录此主题设置;</li>
-                <li>如果未检测到应用，页面将自动显示下载区域;</li>
-                <li>下载安装后，再次通过此页面启动，将应用橙色主题.</li>
             </ol>
             
             <div class="theme-note" id="theme-note">
-                <strong>注意：</strong> 如果由于系统限制无法打开橙色主题，请联系供应商处理。您可以在应用内的设置中手动切换主题。
             </div>
+			<div class="theme-steps" id="">
+			</div>
+			<div class="guidelines-note" id="guidelines-note">
+			</div>
         </section>
     </div>
     
@@ -448,16 +457,17 @@
                 'launch-text': '启动Luminii定制版',
                 'download-title': '下载ProNFC应用程序',
                 'download-subtitle': '请根据您的设备类型选择下载方式',
-                'ios-text': 'App Store 下载',
-                'android-text': 'Google Play 下载',
+                'ios-text': 'AppStore 下载',
+                'android-text': 'Android 版下载',
                 'theme-info-title': '主题启动说明',
                 'theme-steps': [
-                    '点击上方"启动Luminii定制版"按钮，将使用橙色主题启动ProNFC应用;',
-                    '如果已安装应用，将直接以Luminii橙色主题启动，应用会记录此主题设置;',
-                    '如果未检测到应用，页面将自动显示下载区域;',
-                    '下载安装后，再次通过此页面启动，将应用橙色主题;'
+                    '如果已安装应用，请点击上方"启动Luminii定制版"按钮，将使用橙色主题启动ProNFC应用，应用会记录此主题设置;',
+                    '如果未检测到应用，页面将自动显示官方下载入口，可根据当前系统进行选择下载;',
+                    '新下载或卸载后重新安装，请通过此页面的上述步骤进行启动，以便启用橙色主题;',
+					'专属于Luminii的定制主题，仅在2026年4月10日之后更新的版本中提供，请及时更新;',
                 ],
-                'theme-note': '<strong>注意：</strong> 如果由于系统限制无法打开橙色主题，请联系供应商处理，应用将使用默认蓝色主题启动。'
+                'theme-note': '<strong>Note 1：</strong> 如果根据以上步骤无法打开橙色主题，可能是由于系统限制，请联系供应商处理。此时应用仍会以默认的蓝色主题启动并可正常使用。',
+				'guidelines-note': '<strong>Note 2：</strong> 如果因苹果或谷歌的审核政策调整，或新的系统版本对当前方式加以限制，将可能导致后续无法使用当前方式启动自定义主题模式，敬请谅解。届时我们仍会积极尝试其它可能的可行方案。'
             },
             'en': {
                 'brand-name': 'ProNFC',
@@ -473,16 +483,17 @@
                 'launch-text': 'Launch Luminii Edition',
                 'download-title': 'Download ProNFC Application',
                 'download-subtitle': 'Please select download method based on your device type',
-                'ios-text': 'Download on App Store',
-                'android-text': 'Get it on Google Play',
+                'ios-text': 'Download on AppStore',
+                'android-text': 'Get Android Apk',
                 'theme-info-title': 'Theme Launch Instructions',
                 'theme-steps': [
-                    'Click the "Launch Luminii Edition" button above to start ProNFC with orange theme.',
-                    'If the app is already installed, it will start directly with Luminii orange theme and remember this style.',
-                    'If the app is not detected, the page will automatically scroll to the download section.',
-                    'After downloading and installing, launch again through this page to apply orange theme.'
+                    'If the app is already installed, click the "Launch Luminii Custom Edition" button above to start the ProNFC app with the orange theme. The app will remember this theme setting;',
+                    'If the app is not detected, the page will automatically display the official download link. You can choose the appropriate version for your current system;',
+                    'For new installations or reinstallations after uninstalling, please launch the app via the steps above on this page to enable the orange theme.',
+					'The custom theme exclusive to Luminii is only available in versions updated after April 10, 2026. Please update promptly to access it.',
                 ],
-                'theme-note': '<strong>Note:</strong> If the orange theme cannot be opened due to system restrictions, Please contact the supplier for handling. The app will start with the default blue theme.'
+				'theme-note': '<strong>Note 1:</strong> If the orange theme cannot be enabled by following the steps above, it may be due to system restrictions. Please contact the vendor for assistance. The app will still launch with the default blue theme and remain fully functional.',
+				'guidelines-note': '<strong>Note 2:</strong> If adjustments to Apple’s or Google’s review policies, or new system version restrictions, prevent the current method from being used to launch the custom theme mode, we appreciate your understanding. We will continue to actively explore alternative feasible solutions at that time.',
             }
         };
         
@@ -540,6 +551,9 @@
             });
             
             document.getElementById('theme-note').innerHTML = texts['theme-note'];
+			
+			document.getElementById('guidelines-note').innerHTML = texts['guidelines-note'];
+			
         }
         
         // 设备检测
@@ -555,7 +569,7 @@
         // 应用下载链接（请替换为实际链接）
         const appLinks = {
             ios: 'https://apps.apple.com/cn/app/pronfc/id6448912618', // 替换为实际的App Store链接
-            android: 'https://play.google.com/store/apps/details?id=com.pronfc.app' // 替换为实际的Google Play链接
+            android: 'https://www.pgyer.com/6VGb' // 替换为实际的Google Play链接
         };
         
         // 应用URL Scheme
@@ -571,11 +585,14 @@
             localStorage.setItem('preferredTheme', 'lum_orange');
             
             // 更新下载链接
-            if (device.isIOS) {
-                document.getElementById('ios-download').href = appLinks.ios;
-            } else if (device.isAndroid) {
-                document.getElementById('android-download').href = appLinks.android;
-            }
+			document.getElementById('ios-download').href = appLinks.ios;
+			document.getElementById('android-download').href = appLinks.android;
+			
+            // if (device.isIOS) {
+            //     document.getElementById('ios-download').href = appLinks.ios;
+            // } else if (device.isAndroid) {
+            //     document.getElementById('android-download').href = appLinks.android;
+            // }
             
             // 尝试通过URL Scheme打开应用
             window.location.href = appScheme;
