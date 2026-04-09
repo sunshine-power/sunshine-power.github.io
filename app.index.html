@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRO NFC - 智能电源配置助手 | Smart Power Configuration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* 明亮模式变量 */
+            --primary-color: #0066CC;
+            --primary-light: #4d94ff;
+            --secondary-color: #333333;
+            --accent-color: #00A859;
+            --accent-light: #4cd97f;
+            --background-color: #ffffff;
+            --surface-color: #f8f9fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-muted: #888888;
+            --border-color: #e0e0e0;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.12);
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #1a2b6d 0%, #0066CC 100%);
+            --footer-bg: #1a1a1a;
+            --radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        /* 暗黑模式变量 */
+        .dark-mode {
+            --primary-color: #4d94ff;
+            --primary-light: #66a3ff;
+            --secondary-color: #e0e0e0;
+            --accent-color: #4cd97f;
+            --accent-light: #66ff99;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #cccccc;
+            --text-muted: #aaaaaa;
+            --border-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
+            --card-bg: #1e1e1e;
+            --header-bg: linear-gradient(135deg, #0d1a40 0%, #003d99 100%);
+            --footer-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-color);
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部控制栏 */
+        .control-bar {
+            background-color: var(--surface-color);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .control-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border-color);
+            border-radius: 24px;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* 头部样式 */
+        header {
+            background: var(--header-bg);
+            color: white;
+            padding: 30px 0;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo i {
+            font-size: 36px;
+            color: white;
+        }
+
+        .app-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .app-title p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* 主内容区域 */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--surface-color);
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-secondary);
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 18px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+            transition: var(--transition);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 102, 204, 0.4);
+            background-color: var(--primary-light);
+        }
+
+        /* 功能区域 */
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: var(--text-primary);
+        }
+
+        .features {
+            padding: 100px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-hover);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 102, 204, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .dark-mode .feature-icon {
+            background-color: rgba(77, 148, 255, 0.15);
+        }
+
+        .feature-icon i {
+            font-size: 32px;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        /* 使用说明 */
+        .instructions {
+            padding: 100px 0;
+            background-color: var(--surface-color);
+        }
+
+        .instructions-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 50px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-right: 25px;
+            box-shadow: 0 4px 10px rgba(0, 102, 204, 0.3);
+        }
+
+        .step-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+        }
+
+        /* 技术支持 */
+        .support {
+            padding: 100px 0;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-color);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            color: var(--text-secondary);
+        }
+
+        .faq-answer.active {
+            padding: 0 25px 25px;
+            max-height: 500px;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .contact-info {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--text-primary);
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            color: var(--primary-color);
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* 底部 */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+        }
+
+        .footer-logo h3 {
+            font-size: 22px;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .controls {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 控制栏 -->
+    <div class="control-bar">
+        <div class="container">
+            <div class="controls">
+                <button class="control-btn" id="lang-toggle">
+                    <i class="fas fa-language"></i>
+                    <span id="lang-text">English</span>
+                </button>
+                <div class="mode-toggle">
+                    <span id="mode-text">暗黑模式</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="mode-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 头部 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="app-title">
+                    <h1 data-i18n="app-name">PRO NFC</h1>
+                    <p data-i18n="app-subtitle">智能电源配置助手</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features" data-i18n="nav-features">功能特点</a></li>
+                    <li><a href="#instructions" data-i18n="nav-instructions">使用说明</a></li>
+                    <li><a href="#support" data-i18n="nav-support">技术支持</a></li>
+                    <li><a href="#contact" data-i18n="nav-contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主横幅区域 -->
+    <section class="hero">
+        <div class="container">
+            <h2 data-i18n="hero-title">利用NFC技术，快速配置智能电源</h2>
+            <p data-i18n="hero-description">PRO NFC是一款利用手机NFC读写功能设置智能电源参数的应用程序。让智能电源的配置变得更加便捷、快速，适配多种智能电源设备。</p>
+            <a href="https://apps.apple.com/cn/app/pronfc/id6448912618" class="download-btn" target="_blank" data-i18n="download-btn">
+                <i class="fab fa-apple"></i> 前往App Store下载
+            </a>
+        </div>
+    </section>
+
+    <!-- 功能特点 -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title" data-i18n="features-title">核心功能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 data-i18n="feature1-title">NFC快速配置</h3>
+                    <p data-i18n="feature1-desc">通过手机NFC功能，无需复杂操作即可快速设置智能电源的各项参数，简化配置流程。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 data-i18n="feature2-title">记录查看与编辑</h3>
+                    <p data-i18n="feature2-desc">保存所有配置记录，随时查看历史参数设置，并支持对已有配置进行重新编辑。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3 data-i18n="feature3-title">广泛兼容性</h3>
+                    <p data-i18n="feature3-desc">适配市面上多种智能电源设备，为不同品牌和型号的智能电源提供统一便捷的配置方案。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用说明 -->
+    <section class="instructions" id="instructions">
+        <div class="container">
+            <h2 class="section-title" data-i18n="instructions-title">使用说明</h2>
+            <div class="instructions-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 data-i18n="step1-title">下载并安装应用</h3>
+                        <p data-i18n="step1-desc">在App Store中搜索"PRO NFC"或通过上方链接下载并安装应用程序到您的iPhone设备。</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 data-i18n="step2-title">开启NFC功能</h3>
+                        <p data-i18n="step2-desc">确保您的手机NFC功能已开启。将手机靠近智能电源设备的NFC感应区域。</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 data-i18n="step3-title">读取与配置参数</h3>
+                        <p data-i18n="step3-desc">应用会自动读取设备信息，您可以根据需求调整电源参数，如电压、电流、定时设置等。</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 data-i18n="step4-title">保存与查看记录</h3>
+                        <p data-i18n="step4-desc">完成配置后保存设置。所有配置记录将存储在应用中，方便您随时查看和重新编辑。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术支持 -->
+    <section class="support" id="support">
+        <div class="container">
+            <h2 class="section-title" data-i18n="support-title">技术支持与常见问题</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-i18n="faq1-q">PRO NFC支持哪些设备？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq1-a">PRO NFC支持大多数具有NFC功能的智能电源设备。具体兼容设备列表请联系我们获取最新信息。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-i18n="faq2-q">我的手机没有NFC功能可以使用吗？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq2-a">很遗憾，PRO NFC需要设备具备NFC读写功能才能正常使用。请检查您的手机规格，确认是否支持NFC。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-i18n="faq3-q">如何查看之前的配置记录？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq3-a">在应用主界面点击"历史记录"按钮，即可查看所有之前的配置记录。点击任意记录可查看详情或重新编辑。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-i18n="faq4-q">配置参数时需要注意什么？</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq4-a">请确保您配置的参数在智能电源设备的允许范围内，避免设置超出设备规格的参数，以免造成设备损坏。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-info" id="contact">
+                <h3 data-i18n="contact-title">联系我们</h3>
+                <p><i class="fas fa-info-circle"></i> <span data-i18n="contact-desc">如果您遇到任何问题或有功能建议，请通过以下方式联系我们：</span></p>
+                <p><i class="fas fa-envelope"></i> <span data-i18n="contact-email">技术支持邮箱：support@pronfc-app.com</span></p>
+                <p><i class="fas fa-shield-alt"></i> <span data-i18n="contact-privacy">隐私说明：本应用不会收集任何用户数据，您的配置信息仅保存在本地设备中。</span></p>
+                <p><i class="fas fa-globe"></i> <span data-i18n="contact-language">语言支持：简体中文、英语</span></p>
+                <p><i class="fas fa-mobile-alt"></i> <span data-i18n="contact-version">当前版本：1.0.1（已修复已知问题）</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <div class="logo">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 data-i18n="app-name">PRO NFC</h3>
+                    </div>
+                    <p data-i18n="app-subtitle">智能电源配置助手</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4 data-i18n="footer-links">快速链接</h4>
+                    <ul>
+                        <li><a href="#features" data-i18n="nav-features">功能特点</a></li>
+                        <li><a href="#instructions" data-i18n="nav-instructions">使用说明</a></li>
+                        <li><a href="#support" data-i18n="nav-support">技术支持</a></li>
+                        <li><a href="https://apps.apple.com/cn/app/pronfc/id6448912618" target="_blank" data-i18n="footer-appstore">App Store下载</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4 data-i18n="footer-info">应用信息</h4>
+                    <p data-i18n="footer-developer">开发者：显云 赵</p>
+                    <p data-i18n="footer-platform">平台：iOS</p>
+                    <p data-i18n="footer-category">类别：工具</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 PRO NFC <span data-i18n="footer-copyright">智能电源配置助手. 版权所有.</span></p>
+                <p data-i18n="footer-pageinfo">本页面为PRO NFC应用介绍页，用于提供应用信息和技术支持。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 双语数据 -->
+    <script>
+        // 语言数据
+        const translations = {
+            'zh': {
+                // 控制栏
+                'lang-text': 'English',
+                'mode-text': '暗黑模式',
+                
+                // 头部
+                'app-name': 'PRO NFC',
+                'app-subtitle': '智能电源配置助手',
+                'nav-features': '功能特点',
+                'nav-instructions': '使用说明',
+                'nav-support': '技术支持',
+                'nav-contact': '联系我们',
+                
+                // 主横幅
+                'hero-title': '利用NFC技术，快速配置智能电源',
+                'hero-description': 'PRO NFC是一款利用手机NFC读写功能设置智能电源参数的应用程序。让智能电源的配置变得更加便捷、快速，适配多种智能电源设备。',
+                'download-btn': '前往App Store下载',
+                
+                // 功能特点
+                'features-title': '核心功能',
+                'feature1-title': 'NFC快速配置',
+                'feature1-desc': '通过手机NFC功能，无需复杂操作即可快速设置智能电源的各项参数，简化配置流程。',
+                'feature2-title': '记录查看与编辑',
+                'feature2-desc': '保存所有配置记录，随时查看历史参数设置，并支持对已有配置进行重新编辑。',
+                'feature3-title': '广泛兼容性',
+                'feature3-desc': '适配市面上多种智能电源设备，为不同品牌和型号的智能电源提供统一便捷的配置方案。',
+                
+                // 使用说明
+                'instructions-title': '使用说明',
+                'step1-title': '下载并安装应用',
+                'step1-desc': '在App Store中搜索"PRO NFC"或通过上方链接下载并安装应用程序到您的iPhone设备。',
+                'step2-title': '开启NFC功能',
+                'step2-desc': '确保您的手机NFC功能已开启。将手机靠近智能电源设备的NFC感应区域。',
+                'step3-title': '读取与配置参数',
+                'step3-desc': '应用会自动读取设备信息，您可以根据需求调整电源参数，如电压、电流、定时设置等。',
+                'step4-title': '保存与查看记录',
+                'step4-desc': '完成配置后保存设置。所有配置记录将存储在应用中，方便您随时查看和重新编辑。',
+                
+                // 技术支持
+                'support-title': '技术支持与常见问题',
+                'faq1-q': 'PRO NFC支持哪些设备？',
+                'faq1-a': 'PRO NFC支持大多数具有NFC功能的智能电源设备。具体兼容设备列表请联系我们获取最新信息。',
+                'faq2-q': '我的手机没有NFC功能可以使用吗？',
+                'faq2-a': '很遗憾，PRO NFC需要设备具备NFC读写功能才能正常使用。请检查您的手机规格，确认是否支持NFC。',
+                'faq3-q': '如何查看之前的配置记录？',
+                'faq3-a': '在应用主界面点击"历史记录"按钮，即可查看所有之前的配置记录。点击任意记录可查看详情或重新编辑。',
+                'faq4-q': '配置参数时需要注意什么？',
+                'faq4-a': '请确保您配置的参数在智能电源设备的允许范围内，避免设置超出设备规格的参数，以免造成设备损坏。',
+                
+                // 联系信息
+                'contact-title': '联系我们',
+                'contact-desc': '如果您遇到任何问题或有功能建议，请通过以下方式联系我们：',
+                'contact-email': '技术支持邮箱：support@pronfc-app.com',
+                'contact-privacy': '隐私说明：本应用不会收集任何用户数据，您的配置信息仅保存在本地设备中。',
+                'contact-language': '语言支持：简体中文、英语',
+                'contact-version': '当前版本：1.0.1（已修复已知问题）',
+                
+                // 底部
+                'footer-links': '快速链接',
+                'footer-appstore': 'App Store下载',
+                'footer-info': '应用信息',
+                'footer-developer': '开发者：显云 赵',
+                'footer-platform': '平台：iOS',
+                'footer-category': '类别：工具',
+                'footer-copyright': '智能电源配置助手. 版权所有.',
+                'footer-pageinfo': '本页面为PRO NFC应用介绍页，用于提供应用信息和技术支持。'
+            },
+            'en': {
+                // 控制栏
+                'lang-text': '中文',
+                'mode-text': 'Dark Mode',
+                
+                // 头部
+                'app-name': 'PRO NFC',
+                'app-subtitle': 'Smart Power Configuration Assistant',
+                'nav-features': 'Features',
+                'nav-instructions': 'Instructions',
+                'nav-support': 'Support',
+                'nav-contact': 'Contact',
+                
+                // 主横幅
+                'hero-title': 'Quickly Configure Smart Power with NFC Technology',
+                'hero-description': 'PRO NFC is an application that uses the NFC read/write function of the cell phone to set the parameters of the smart power supply. Make the configuration of smart power supply more convenient and fast, adapting to various smart power supplies.',
+                'download-btn': 'Download on App Store',
+                
+                // 功能特点
+                'features-title': 'Core Features',
+                'feature1-title': 'NFC Quick Configuration',
+                'feature1-desc': 'Quickly set various parameters of smart power supply through mobile phone NFC function without complicated operations, simplifying the configuration process.',
+                'feature2-title': 'Record Viewing & Editing',
+                'feature2-desc': 'Save all configuration records, view historical parameter settings at any time, and support re-editing of existing configurations.',
+                'feature3-title': 'Wide Compatibility',
+                'feature3-desc': 'Adapt to various smart power supply devices on the market, providing a unified and convenient configuration solution for smart power supplies of different brands and models.',
+                
+                // 使用说明
+                'instructions-title': 'Instructions',
+                'step1-title': 'Download and Install',
+                'step1-desc': 'Search for "PRO NFC" in the App Store or download and install the application to your iPhone device via the link above.',
+                'step2-title': 'Enable NFC Function',
+                'step2-desc': 'Make sure your phone\'s NFC function is enabled. Bring your phone close to the NFC sensing area of the smart power device.',
+                'step3-title': 'Read and Configure Parameters',
+                'step3-desc': 'The app will automatically read device information. You can adjust power parameters such as voltage, current, timer settings, etc. according to your needs.',
+                'step4-title': 'Save and View Records',
+                'step4-desc': 'Save settings after configuration. All configuration records will be stored in the app for you to view and re-edit at any time.',
+                
+                // 技术支持
+                'support-title': 'Technical Support & FAQ',
+                'faq1-q': 'Which devices does PRO NFC support?',
+                'faq1-a': 'PRO NFC supports most smart power supply devices with NFC function. Please contact us for the latest information on specific compatible devices.',
+                'faq2-q': 'Can I use it if my phone doesn\'t have NFC?',
+                'faq2-a': 'Unfortunately, PRO NFC requires the device to have NFC read/write function to work properly. Please check your phone specifications to confirm if it supports NFC.',
+                'faq3-q': 'How to view previous configuration records?',
+                'faq3-a': 'Click the "History" button on the main interface of the application to view all previous configuration records. Click any record to view details or re-edit.',
+                'faq4-q': 'What should I pay attention to when configuring parameters?',
+                'faq4-a': 'Please ensure that the parameters you configure are within the allowable range of the smart power device. Avoid setting parameters that exceed device specifications to prevent device damage.',
+                
+                // 联系信息
+                'contact-title': 'Contact Us',
+                'contact-desc': 'If you encounter any problems or have feature suggestions, please contact us through the following ways:',
+                'contact-email': 'Support Email: support@pronfc-app.com',
+                'contact-privacy': 'Privacy statement: This application does not collect any user data. Your configuration information is only saved locally on the device.',
+                'contact-language': 'Language Support: Simplified Chinese, English',
+                'contact-version': 'Current Version: 1.0.1 (Fixed some known issues)',
+                
+                // 底部
+                'footer-links': 'Quick Links',
+                'footer-appstore': 'App Store Download',
+                'footer-info': 'App Information',
+                'footer-developer': 'Developer: Xianyun Zhao',
+                'footer-platform': 'Platform: iOS',
+                'footer-category': 'Category: Utilities',
+                'footer-copyright': 'Smart Power Configuration Assistant. All rights reserved.',
+                'footer-pageinfo': 'This page is the PRO NFC application introduction page, providing application information and technical support.'
+            }
+        };
+
+        // 当前语言
+        let currentLang = 'zh';
+
+        // 切换语言函数
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateTextContent();
+            
+            // 更新按钮文本
+            document.getElementById('lang-text').textContent = translations[currentLang]['lang-text'];
+        }
+
+        // 更新文本内容
+        function updateTextContent() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+        }
+
+        // 切换暗黑/明亮模式
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            
+            // 更新模式文本
+            document.getElementById('mode-text').textContent = 
+                isDarkMode ? (currentLang === 'zh' ? '明亮模式' : 'Light Mode') : 
+                           (currentLang === 'zh' ? '暗黑模式' : 'Dark Mode');
+            
+            // 保存到本地存储
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 语言切换
+            document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+            
+            // 暗黑模式切换
+            document.getElementById('mode-toggle').addEventListener('change', toggleDarkMode);
+            
+            // 检查本地存储中的暗黑模式设置
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (savedDarkMode) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('mode-toggle').checked = true;
+            }
+            
+            // 更新模式文本初始值
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            document.getElementById('mode-text').textContent = 
+                isDarkMode ? (currentLang === 'zh' ? '明亮模式' : 'Light Mode') : 
+                           (currentLang === 'zh' ? '暗黑模式' : 'Dark Mode');
+            
+            // FAQ交互
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    
+                    // 切换当前FAQ
+                    item.classList.toggle('active');
+                    
+                    if (item.classList.contains('active')) {
+                        answer.classList.add('active');
+                        icon.className = 'fas fa-chevron-up';
+                    } else {
+                        answer.classList.remove('active');
+                        icon.className = 'fas fa-chevron-down';
+                    }
+                    
+                    // 关闭其他FAQ
+                    document.querySelectorAll('.faq-item').forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            const otherIcon = otherItem.querySelector('.faq-question i');
+                            otherAnswer.classList.remove('active');
+                            otherIcon.className = 'fas fa-chevron-down';
+                        }
+                    });
+                });
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
