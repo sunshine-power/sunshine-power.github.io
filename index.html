@@ -1,784 +1,693 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>ProNFC for Luminii</title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-
-			:root {
-				--primary-color: #EF9554;
-				/* 橙色主题色 */
-				--secondary-color: #165DFF;
-				/* 蓝色主题色 */
-				--background-color: #f8f9fa;
-				--card-background: #ffffff;
-				--text-primary: #333333;
-				--text-secondary: #666666;
-			}
-
-			body {
-				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-				background-color: var(--background-color);
-				color: var(--text-primary);
-				line-height: 1.6;
-				transition: all 0.3s ease;
-			}
-
-			.container {
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 20px;
-			}
-
-			/* 多语言切换区 */
-			.language-switcher {
-				display: flex;
-				justify-content: flex-end;
-				padding: 10px 0;
-				margin-bottom: 4px;
-			}
-
-			.lang-btn {
-				background: none;
-				border: 1px solid #ddd;
-				padding: 6px 12px;
-				margin-left: 8px;
-				border-radius: 4px;
-				cursor: pointer;
-				font-size: 14px;
-				transition: all 0.2s;
-			}
-
-			.lang-btn.active {
-				background-color: var(--primary-color);
-				color: white;
-				border-color: var(--primary-color);
-			}
-
-			.lang-btn:hover {
-				background-color: #f0f0f0;
-			}
-
-			/* Logo和介绍区 */
-			.brand-section {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				text-align: center;
-				background-color: var(--card-background);
-				border-radius: 12px;
-				padding: 30px;
-				margin-bottom: 10px;
-				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-				text-align: center;
-			}
-
-			.logo {
-			    width: 72px;
-			    height: 72px;
-			    background: var(--gradient-1);
-			    border-radius: 18px;
-			    display: flex;
-			    align-items: center;
-			    justify-content: center;
-			    box-shadow: 0 6px 20px rgba(45, 140, 255, 0.3);
-			    position: relative;
-			    overflow: hidden;
-			    /* 确保.logo自身在flex容器中不拉伸 */
-			    flex-shrink: 0;
-			}
-			
-			.app-logo {
-			    width: 100%;
-			    height: 100%;
-			}
-
-			.logo::after {
-				content: '';
-				position: absolute;
-				top: -50%;
-				left: -50%;
-				width: 200%;
-				height: 200%;
-				background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-				transform: rotate(45deg);
-				animation: shine 3s infinite linear;
-			}
-
-			@keyframes shine {
-				0% {
-					transform: translateX(-100%) translateY(-100%) rotate(45deg);
-				}
-
-				100% {
-					transform: translateX(100%) translateY(100%) rotate(45deg);
-				}
-			}
-
-			.brand-name {
-				font-size: 60px;
-				font-weight: 800;
-				color: var(--primary-color);
-				margin-bottom: 10px;
-			}
-
-			.brand-tagline {
-				font-size: 8px;
-				color: var(--text-secondary);
-				margin-bottom: 10px;
-			}
-
-			.brand-description {
-				font-size: 14px;
-				color: var(--text-secondary);
-				max-width: 400px;
-				margin: 0 auto;
-				line-height: 1.6;
-			}
-
-			/* Luminii客户定制区 */
-			.client-section {
-				background-color: #fbd68f;
-				border-radius: 12px;
-				padding: 30px;
-				margin-bottom: 18px;
-				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-			}
-
-			.client-header {
-				display: flex;
-				align-items: center;
-				margin-bottom: 30px;
-			}
-
-			.client-logo-bg {
-				width: 200px;
-				height: 62px;
-				/* background: linear-gradient(135deg, var(--primary-color) 0%, #EF9554 100%); */
-				padding: 26rpx 0rpx 26rpx 0;
-				border-radius: 12px 12px 12px 12px;
-			}
-
-			.client-logo {
-				width: 100%;
-				height: 80%;
-				/* margin-left: 30rpx; */
-				/* margin: 26rpx 10rpx 26rpx 30rpx; */
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-
-			.client-info h2 {
-				font-size: 20px;
-				margin-bottom: 5px;
-				color: var(--text-secondary);
-			}
-
-			.client-info p {
-				color: var(--text-secondary);
-			}
-
-			.client-features {
-				margin-bottom: 25px;
-			}
-
-			.feature-item {
-				display: flex;
-				align-items: center;
-				margin-bottom: 10px;
-			}
-
-			.feature-icon {
-				color: var(--primary-color);
-				margin-right: 10px;
-				font-size: 18px;
-			}
-
-			.launch-ios-btn {
-				background-color: var(--primary-color);
-				color: white;
-				border: none;
-				padding: 16px 40px;
-				margin-bottom: 20rpx;
-				font-size: 18px;
-				border-radius: 50px;
-				cursor: pointer;
-				font-weight: 600;
-				width: 100%;
-				transition: all 0.3s;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-
-			.launch-ios-btn:hover {
-				background-color: #F57C00;
-				transform: translateY(-2px);
-				box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
-			}
-
-			.launch-ios-btn:active {
-				transform: translateY(0);
-			}
-			
-			.launch-android-btn {
-				background-color: #3DDC84;
-				color: white;
-				border: none;
-				margin-top: 10rpx;
-				padding: 16px 40px;
-				font-size: 18px;
-				border-radius: 50px;
-				cursor: pointer;
-				font-weight: 600;
-				width: 100%;
-				transition: all 0.3s;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-			
-			.launch-android-btn:hover {
-				background-color: #70d398;
-				transform: translateY(-2px);
-				box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
-			}
-			
-			.launch-android-btn:active {
-				transform: translateY(0);
-			}
-
-			.btn-icon {
-				margin-right: 10px;
-				font-size: 20px;
-			}
-
-			/* 下载链接区 */
-			.download-section {
-				background-color: var(--card-background);
-				border-radius: 12px;
-				padding: 30px;
-				margin-bottom: 20px;
-				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-				text-align: center;
-			}
-
-			.download-section h2 {
-				font-size: 24px;
-				margin-bottom: 10px;
-				color: var(--text-primary);
-			}
-
-			.download-section p {
-				color: var(--text-secondary);
-				margin-bottom: 25px;
-			}
-
-			.download-buttons {
-				display: flex;
-				gap: 15px;
-				flex-wrap: wrap;
-				justify-content: center;
-			}
-
-			.download-btn {
-				flex: 1;
-				min-width: 200px;
-				padding: 15px 20px;
-				border-radius: 10px;
-				text-decoration: none;
-				font-weight: 600;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				transition: all 0.3s;
-			}
-
-			.ios-btn {
-				background-color: #EF9554;
-				color: white;
-			}
-
-			.android-btn {
-				background-color: #3DDC84;
-				color: white;
-			}
-
-			.download-btn:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-			}
-
-			.btn-logo {
-				width: 24px;
-				height: 24px;
-				margin-right: 10px;
-			}
-
-			/* 主题说明区 */
-			.theme-info {
-				background-color: var(--card-background);
-				border-radius: 12px;
-				padding: 25px;
-				margin-bottom: 20px;
-				box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-			}
-
-			.theme-info h3 {
-				color: var(--primary-color);
-				margin-bottom: 15px;
-				font-size: 20px;
-			}
-
-			.theme-steps {
-				margin-left: 20px;
-				margin-bottom: 20px;
-			}
-
-			.theme-steps li {
-				margin-bottom: 6px;
-			}
-
-			.theme-note {
-				background-color: #FFF3E0;
-				border-left: 4px solid var(--primary-color);
-				padding: 15px;
-				border-radius: 4px;
-				font-size: 14px;
-			}
-
-			.guidelines-note {
-				background-color: #FFF3E0;
-				border-left: 4px solid var(--primary-color);
-				padding: 15px;
-				border-radius: 4px;
-				font-size: 14px;
-			}
-
-			/* 响应式设计 */
-			@media (max-width: 768px) {
-				.container {
-					padding: 15px;
-				}
-
-				.brand-section,
-				.client-section,
-				.download-section,
-				.theme-info {
-					padding: 20px;
-				}
-
-				.brand-name {
-					font-size: 28px;
-				}
-
-				.brand-tagline {
-					font-size: 16px;
-				}
-
-				.download-buttons {
-					flex-direction: column;
-				}
-
-				.download-btn {
-					min-width: 100%;
-				}
-			}
-
-			/* 动画效果 */
-			@keyframes fadeInUp {
-				from {
-					opacity: 0;
-					transform: translateY(20px);
-				}
-
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-
-			.animate-in {
-				animation: fadeInUp 0.5s ease-out;
-			}
-
-			/* 滚动到下载区域的样式 */
-			.highlight-section {
-				animation: highlightPulse 2s ease;
-			}
-
-			@keyframes highlightPulse {
-
-				0%,
-				100% {
-					box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-				}
-
-				50% {
-					box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.2), 0 2px 12px rgba(0, 0, 0, 0.08);
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<!-- 1. 多语言切换区 -->
-			<div class="language-switcher animate-in">
-				<button class="lang-btn" id="lang-zh" onclick="switchLanguage('zh')">中文</button>
-				<button class="lang-btn" id="lang-en" onclick="switchLanguage('en')">English</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProNFC for Luminii</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #EF9554; /* 橙色主题色 */
+            --secondary-color: #165DFF; /* 蓝色主题色 */
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 多语言切换区 */
+        .language-switcher {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0;
+            margin-bottom: 4px;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            margin-left: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .lang-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Logo和介绍区 */
+        .brand-section {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .app-logo {
+            width: 108px;
+            height: 108px;
+            margin: 0 auto 12px;
+            /* background: linear-gradient(135deg, var(--primary-color) 0%, #EF9554 100%); */
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .brand-name {
+            font-size: 60px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .brand-tagline {
+            font-size: 8px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .brand-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Luminii客户定制区 */
+        .client-section {
+            background-color: #fbd68f;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .client-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+		
+		.client-logo-bg {
+			width: 200px;
+			height: 62px;
+			/* background: linear-gradient(135deg, var(--primary-color) 0%, #EF9554 100%); */
+			padding: 26rpx 0rpx 26rpx 0;
+			border-radius: 12px 12px 12px 12px;
+		}
+		
+		.client-logo {
+		   width: 100%;
+		    height: 80%;
+			/* margin-left: 30rpx; */
+			/* margin: 26rpx 10rpx 26rpx 30rpx; */
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		}
+        
+        .client-info h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+        }
+        
+        .client-info p {
+            color: var(--text-secondary);
+        }
+        
+        .client-features {
+            margin-bottom: 25px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .feature-icon {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .launch-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .launch-btn:hover {
+            background-color: #F57C00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
+        }
+        
+        .launch-btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        /* 下载链接区 */
+        .download-section {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .download-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .download-section p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .download-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .ios-btn {
+            background-color: #EF9554;
+            color: white;
+        }
+        
+        .android-btn {
+            background-color: #3DDC84;
+            color: white;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        
+        /* 主题说明区 */
+        .theme-info {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .theme-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .theme-steps {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .theme-steps li {
+            margin-bottom: 6px;
+        }
+        
+        .theme-note {
+            background-color: #FFF3E0;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+		
+		.guidelines-note {
+		    background-color: #FFF3E0;
+		    border-left: 4px solid var(--primary-color);
+		    padding: 15px;
+		    border-radius: 4px;
+		    font-size: 14px;
+		}
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .brand-section, .client-section, .download-section, .theme-info {
+                padding: 20px;
+            }
+            
+            .brand-name {
+                font-size: 28px;
+            }
+            
+            .brand-tagline {
+                font-size: 16px;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+            }
+            
+            .download-btn {
+                min-width: 100%;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        /* 滚动到下载区域的样式 */
+        .highlight-section {
+            animation: highlightPulse 2s ease;
+        }
+        
+        @keyframes highlightPulse {
+            0%, 100% { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+            50% { box-shadow: 0 0 0 4px rgba(255, 152, 0, 0.2), 0 2px 12px rgba(0, 0, 0, 0.08); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 1. 多语言切换区 -->
+        <div class="language-switcher animate-in">
+            <button class="lang-btn" id="lang-zh" onclick="switchLanguage('zh')">中文</button>
+            <button class="lang-btn" id="lang-en" onclick="switchLanguage('en')">English</button>
+        </div>
+        
+        <!-- 2. ProNFC Logo和介绍区 -->
+        <section class="brand-section animate-in">
+			<img class="app-logo" src="./res/app_icon.png">
+            <h1 class="brand-name" id="brand-name">ProNFC</h1>
+            <p class="brand-tagline" id="brand-tagline">专业的NFC解决方案</p>
+            <p class="brand-description" id="brand-description"></p>
+			<p class="brand-description" id="brand-description1"></p>
+			<p class="brand-description" id="brand-description2"></p>
+        </section>
+        
+        <!-- 3. Luminii客户定制区 -->
+        <section class="client-section animate-in" id="client-section">
+            <div class="client-header">
+                <div class="client-info">
+					<div class="client-logo-bg">
+						<img class="client-logo" src="./res/icon_Luminii-Logo_WHT.png">
+					</div>
+                    <h2 id="client-title">Luminii定制版 - 橙色主题</h2>
+                    <p id="client-subtitle">专为Luminii客户定制的橙色主题版本</p>
+                </div>
+            </div>
+            
+            <div class="client-features">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span id="feature-1">专属橙色主题界面与品牌标识</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span id="feature-2">Luminii定制Logo与启动画面</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <span id="feature-3">优化的NFC读写性能</span>
+                </div>
+            </div>
+            
+            <button class="launch-btn" id="launch-btn" onclick="launchApp()">
+                <span class="btn-icon">▶</span>
+                <span id="launch-text">启动Luminii定制版</span>
+            </button>
+        </section>
+        
+        <!-- 4. 下载链接区（默认隐藏） -->
+        <section class="download-section animate-in" id="download-section" style="display: none;">
+            <h2 id="download-title">下载ProNFC应用程序</h2>
+            <p id="download-subtitle">请根据您的设备类型选择下载方式</p>
+            
+            <div class="download-buttons">
+                <a href="https://apps.apple.com/app/idYOUR_APP_ID" class="download-btn ios-btn" id="ios-download" target="_blank">
+                    <!-- <div></div> -->
+					<img class="btn-logo" src="res/apple.svg">
+                    <span id="ios-text">AppStore 下载</span>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.pronfc.app" class="download-btn android-btn" id="android-download" target="_blank">
+                    <!-- <div ></div> -->
+					<img class="btn-logo" src="res/android.svg">
+                    <span id="android-text">Android 版下载</span>
+                </a>
+            </div>
+        </section>
+        
+        <!-- 5. 主题说明区 -->
+        <section class="theme-info animate-in">
+            <h3 id="theme-info-title">主题启动说明</h3>
+            
+            <ol class="theme-steps" id="theme-steps">
+            </ol>
+            
+            <div class="theme-note" id="theme-note">
+            </div>
+			<div class="theme-steps" id="">
 			</div>
-
-			<!-- 2. ProNFC Logo和介绍区 -->
-			<section class="brand-section animate-in">
-				<div class="logo">
-					<img class="app-logo" src="res/app_icon.png">
-				</div>
-				<h1 class="brand-name" id="brand-name">ProNFC</h1>
-				<p class="brand-tagline" id="brand-tagline">专业的NFC解决方案</p>
-				<p class="brand-description" id="brand-description"></p>
-				<p class="brand-description" id="brand-description1"></p>
-				<p class="brand-description" id="brand-description2"></p>
-			</section>
-
-			<!-- 3. Luminii客户定制区 -->
-			<section class="client-section animate-in" id="client-section">
-				<div class="client-header">
-					<div class="client-info">
-						<div class="client-logo-bg">
-							<img class="client-logo" src="./res/icon_Luminii-Logo_WHT.png">
-						</div>
-						<h2 id="client-title">Luminii定制版 - 橙色主题</h2>
-						<p id="client-subtitle">专为Luminii客户定制的橙色主题版本</p>
-					</div>
-				</div>
-
-				<div class="client-features">
-					<div class="feature-item">
-						<div class="feature-icon">✓</div>
-						<span id="feature-1">专属橙色主题界面与品牌标识</span>
-					</div>
-					<div class="feature-item">
-						<div class="feature-icon">✓</div>
-						<span id="feature-2">Luminii定制Logo与启动画面</span>
-					</div>
-					<div class="feature-item">
-						<div class="feature-icon">✓</div>
-						<span id="feature-3">优化的NFC读写性能</span>
-					</div>
-				</div>
-
-				<button class="launch-ios-btn" id="launch-ios-btn" onclick="launchApp()">
-					<span class="btn-icon">▶</span>
-					<span id="launch-ios-text">启动Luminii (iOS)</span>
-				</button>
-				<div class="theme-steps" id="">
-				</div>
-				<button class="launch-android-btn" id="launch-android-btn" onclick="launchApp()">
-					<span class="btn-icon">▶</span>
-					<span id="launch-android-text">启动Luminii (Android)</span>
-				</button>
-			</section>
-
-			<!-- 4. 下载链接区（默认隐藏） -->
-			<section class="download-section animate-in" id="download-section" style="display: none;">
-				<h2 id="download-title">下载ProNFC应用程序</h2>
-				<p id="download-subtitle">请根据您的设备类型选择下载方式</p>
-
-				<div class="download-buttons">
-					<a href="https://apps.apple.com/app/idYOUR_APP_ID" class="download-btn ios-btn" id="ios-download"
-						target="_blank">
-						<!-- <div></div> -->
-						<img class="btn-logo" src="res/apple.svg">
-						<span id="ios-text">AppStore 下载</span>
-					</a>
-					<a href="https://play.google.com/store/apps/details?id=com.pronfc.app"
-						class="download-btn android-btn" id="android-download" target="_blank">
-						<!-- <div ></div> -->
-						<img class="btn-logo" src="res/android.svg">
-						<span id="android-text">Android 版下载</span>
-					</a>
-				</div>
-			</section>
-
-			<!-- 5. 主题说明区 -->
-			<section class="theme-info animate-in">
-				<h3 id="theme-info-title">主题启动说明</h3>
-
-				<ol class="theme-steps" id="theme-steps">
-				</ol>
-
-				<div class="theme-note" id="theme-note">
-				</div>
-				<div class="theme-steps" id="">
-				</div>
-				<div class="guidelines-note" id="guidelines-note">
-				</div>
-			</section>
-		</div>
-
-		<script>
-			// 多语言支持
-			const translations = {
-				'zh': {
-					'brand-name': 'ProNFC',
-					'brand-tagline': '专业的NFC解决方案',
-					'brand-description': 'PRO NFC是一款利用手机的NFC读写功能来设置智能电源参数的应用，可使智能电源的配置更加便捷快速。',
-					'brand-description1': '-通过NFC设置智能电源参数。',
-					'brand-description2': '-查看已写入的记录并可重新编辑。',
-					'client-title': 'Luminii定制版 - 橙色主题',
-					'client-subtitle': '专为Luminii客户定制的橙色主题版本',
-					'feature-1': '专属橙色主题界面与品牌标识',
-					'feature-2': 'Luminii定制Logo与启动画面',
-					'feature-3': '优化的NFC读写性能',
-					'launch-ios-text': '启动Luminii (iOS)',
-					'launch-android-text': '启动Luminii (Android)',
-					'download-title': '下载ProNFC应用程序',
-					'download-subtitle': '请根据您的设备类型选择下载方式',
-					'ios-text': 'AppStore 下载',
-					'android-text': 'Android 版下载',
-					'theme-info-title': '主题启动说明',
-					'theme-steps': [
-						'如果已安装应用，请先确保应用处于完全关闭(非后台活动)的情况下，再点击上方"启动Luminii (iOS)/(Android)"按钮，此时将使用橙色主题启动ProNFC应用，应用会记录此主题设置;',
-						'如果未检测到应用，页面将自动显示官方下载入口，可根据当前系统进行选择下载;',
-						'新下载或卸载后重新安装，请通过此页面的上述步骤进行启动，以便启用橙色主题;',
-						'专属于Luminii的定制主题，仅在2026年4月10日之后更新的版本中提供，请及时更新;',
-					],
-					'theme-note': '<strong>Note 1：</strong> 如果根据以上步骤无法打开橙色主题，可能是由于系统限制，请联系供应商处理。此时应用仍会以默认的蓝色主题启动并可正常使用。',
-					'guidelines-note': '<strong>Note 2：</strong> 如果因苹果或谷歌的审核政策调整，或新的系统版本对当前方式加以限制，将可能导致后续无法使用当前方式启动自定义主题模式，敬请谅解。届时我们仍会积极尝试其它可能的可行方案。'
-				},
-				'en': {
-					'brand-name': 'ProNFC',
-					'brand-tagline': 'Professional NFC Solution',
-					'brand-description': 'PRO NFC is an application that uses the NFC read/write function of the cell phone to set the parameters of the smart power supply. Make the configuration of smart power supply more convenient and fast.',
-					'brand-description1': '-NFC to set smart power parameters.',
-					'brand-description2': '-View the written records and re-edit.',
-					'client-title': 'Luminii Custom Edition - Orange Theme',
-					'client-subtitle': 'Orange theme version customized for Luminii customers',
-					'feature-1': 'Exclusive orange theme interface and brand identity',
-					'feature-2': 'Luminii customized logo and splash screen',
-					'feature-3': 'Optimized NFC read/write performance',
-					'launch-ios-text': 'Launch Luminii (iOS)',
-					'launch-android-text': 'Launch Luminii (Android)',
-					'download-title': 'Download ProNFC Application',
-					'download-subtitle': 'Please select download method based on your device type',
-					'ios-text': 'Download on AppStore',
-					'android-text': 'Get Android Apk',
-					'theme-info-title': 'Theme Launch Instructions',
-					'theme-steps': [
-						'If the app is already installed, please ensure that the app is completely closed (not running in the background) before clicking the "Launch Luminii (iOS)/(Android)" button above. This will start the ProNFC app with the orange theme, and the app will record this theme setting.',
-						'If the app is not detected, the page will automatically display the official download link. You can choose the appropriate version for your current system.',
-						'For new installations or reinstallations after uninstalling, please launch the app via the steps above on this page to enable the orange theme.',
-						'The custom theme exclusive to Luminii is only available in versions updated after April 10, 2026. Please update promptly to access it.',
-					],
-					'theme-note': '<strong>Note 1:</strong> If the orange theme cannot be enabled by following the steps above, it may be due to system restrictions. Please contact the vendor for assistance. The app will still launch with the default blue theme and remain fully functional.',
-					'guidelines-note': '<strong>Note 2:</strong> If adjustments to Apple’s or Google’s review policies, or new system version restrictions, prevent the current method from being used to launch the custom theme mode, we appreciate your understanding. We will continue to actively explore alternative feasible solutions at that time.',
-				}
-			};
-
-			// 当前语言
-			let currentLang = '';
-
-			// 切换语言
-			function switchLanguage(lang) {
-				if (lang === currentLang) {
-					console.log('return currentlang');
-					return;
-				}
-
-				currentLang = lang;
-
-				// 更新语言按钮状态
-				document.querySelectorAll('.lang-btn').forEach(btn => {
-					btn.classList.remove('active');
-				});
-				document.getElementById(`lang-${lang}`).classList.add('active');
-
-				// 更新页面文本
-				const texts = translations[lang];
-
-				// 更新品牌区域
-				document.getElementById('brand-name').textContent = texts['brand-name'];
-				document.getElementById('brand-tagline').textContent = texts['brand-tagline'];
-				document.getElementById('brand-description').textContent = texts['brand-description'];
-				document.getElementById('brand-description1').textContent = texts['brand-description1'];
-				document.getElementById('brand-description2').textContent = texts['brand-description2'];
-
-				// 更新客户定制区域
-				document.getElementById('client-title').textContent = texts['client-title'];
-				document.getElementById('client-subtitle').textContent = texts['client-subtitle'];
-				document.getElementById('feature-1').textContent = texts['feature-1'];
-				document.getElementById('feature-2').textContent = texts['feature-2'];
-				document.getElementById('feature-3').textContent = texts['feature-3'];
-				document.getElementById('launch-ios-text').textContent = texts['launch-ios-text'];
-				document.getElementById('launch-android-text').textContent = texts['launch-android-text'];
-
-				// 更新下载区域
-				document.getElementById('download-title').textContent = texts['download-title'];
-				document.getElementById('download-subtitle').textContent = texts['download-subtitle'];
-				document.getElementById('ios-text').textContent = texts['ios-text'];
-				document.getElementById('android-text').textContent = texts['android-text'];
-
-				// 更新主题说明区域
-				document.getElementById('theme-info-title').textContent = texts['theme-info-title'];
-
-				const stepsList = document.getElementById('theme-steps');
-				stepsList.innerHTML = '';
-				texts['theme-steps'].forEach(step => {
-					const li = document.createElement('li');
-					li.textContent = step;
-					stepsList.appendChild(li);
-				});
-
-				document.getElementById('theme-note').innerHTML = texts['theme-note'];
-
-				document.getElementById('guidelines-note').innerHTML = texts['guidelines-note'];
-
+			<div class="guidelines-note" id="guidelines-note">
+			</div>
+        </section>
+    </div>
+    
+    <script>
+        // 多语言支持
+        const translations = {
+            'zh': {
+                'brand-name': 'ProNFC',
+                'brand-tagline': '专业的NFC解决方案',
+                'brand-description': 'PRO NFC是一款利用手机的NFC读写功能来设置智能电源参数的应用，可使智能电源的配置更加便捷快速。',
+				'brand-description1':'-通过NFC设置智能电源参数。',
+				'brand-description2':'-查看已写入的记录并可重新编辑。',
+                'client-title': 'Luminii定制版 - 橙色主题',
+                'client-subtitle': '专为Luminii客户定制的橙色主题版本',
+                'feature-1': '专属橙色主题界面与品牌标识',
+                'feature-2': 'Luminii定制Logo与启动画面',
+                'feature-3': '优化的NFC读写性能',
+                'launch-text': '启动Luminii定制版',
+                'download-title': '下载ProNFC应用程序',
+                'download-subtitle': '请根据您的设备类型选择下载方式',
+                'ios-text': 'AppStore 下载',
+                'android-text': 'Android 版下载',
+                'theme-info-title': '主题启动说明',
+                'theme-steps': [
+                    '如果已安装应用，请先确保应用处于完全关闭(非后台活动)的情况下，再点击上方"启动Luminii定制版"按钮，此时将使用橙色主题启动ProNFC应用，应用会记录此主题设置;',
+                    '如果未检测到应用，页面将自动显示官方下载入口，可根据当前系统进行选择下载;',
+                    '新下载或卸载后重新安装，请通过此页面的上述步骤进行启动，以便启用橙色主题;',
+					'专属于Luminii的定制主题，仅在2026年4月10日之后更新的版本中提供，请及时更新;',
+                ],
+                'theme-note': '<strong>Note 1：</strong> 如果根据以上步骤无法打开橙色主题，可能是由于系统限制，请联系供应商处理。此时应用仍会以默认的蓝色主题启动并可正常使用。',
+				'guidelines-note': '<strong>Note 2：</strong> 如果因苹果或谷歌的审核政策调整，或新的系统版本对当前方式加以限制，将可能导致后续无法使用当前方式启动自定义主题模式，敬请谅解。届时我们仍会积极尝试其它可能的可行方案。'
+            },
+            'en': {
+                'brand-name': 'ProNFC',
+                'brand-tagline': 'Professional NFC Solution',
+                'brand-description': 'PRO NFC is an application that uses the NFC read/write function of the cell phone to set the parameters of the smart power supply. Make the configuration of smart power supply more convenient and fast.',
+				'brand-description1':'-NFC to set smart power parameters.',
+				'brand-description2':'-View the written records and re-edit.',
+                'client-title': 'Luminii Custom Edition - Orange Theme',
+                'client-subtitle': 'Orange theme version customized for Luminii customers',
+                'feature-1': 'Exclusive orange theme interface and brand identity',
+                'feature-2': 'Luminii customized logo and splash screen',
+                'feature-3': 'Optimized NFC read/write performance',
+                'launch-text': 'Launch Luminii Edition',
+                'download-title': 'Download ProNFC Application',
+                'download-subtitle': 'Please select download method based on your device type',
+                'ios-text': 'Download on AppStore',
+                'android-text': 'Get Android Apk',
+                'theme-info-title': 'Theme Launch Instructions',
+                'theme-steps': [
+					'If the app is already installed, please ensure that the app is completely closed (not running in the background) before clicking the "Launch Luminii Custom Edition" button above. This will start the ProNFC app with the orange theme, and the app will record this theme setting.',
+                    'If the app is not detected, the page will automatically display the official download link. You can choose the appropriate version for your current system.',
+                    'For new installations or reinstallations after uninstalling, please launch the app via the steps above on this page to enable the orange theme.',
+					'The custom theme exclusive to Luminii is only available in versions updated after April 10, 2026. Please update promptly to access it.',
+                ],
+				'theme-note': '<strong>Note 1:</strong> If the orange theme cannot be enabled by following the steps above, it may be due to system restrictions. Please contact the vendor for assistance. The app will still launch with the default blue theme and remain fully functional.',
+				'guidelines-note': '<strong>Note 2:</strong> If adjustments to Apple’s or Google’s review policies, or new system version restrictions, prevent the current method from being used to launch the custom theme mode, we appreciate your understanding. We will continue to actively explore alternative feasible solutions at that time.',
+            }
+        };
+        
+        // 当前语言
+        let currentLang = '';
+        
+        // 切换语言
+        function switchLanguage(lang) {
+            if (lang === currentLang) {
+				console.log('return currentlang');
+				return;
 			}
-
-			// 设备检测
-			function getDeviceInfo() {
-				const ua = navigator.userAgent;
-				return {
-					isIOS: /iPad|iPhone|iPod/.test(ua) && !window.MSStream,
-					isAndroid: /Android/.test(ua),
-					isMobile: /Mobi|Android|iPhone|iPad|iPod/.test(ua)
-				};
-			}
-
-			// 应用下载链接（请替换为实际链接）
-			const appLinks = {
-				ios: 'https://apps.apple.com/cn/app/pronfc/id6448912618', // 替换为实际的App Store链接
-				android: 'https://www.pgyer.com/6VGb' // 替换为实际的Google Play链接
-			};
-
-			// 应用URL Scheme
-			const appScheme = 'scpower.pronfc://?theme=lum_orange&source=official_website&client=lum';
-
-			// 启动应用
-			function launchApp() {
-				const device = getDeviceInfo();
-				const clickTime = Date.now();
-
-				// 记录启动尝试
-				localStorage.setItem('lastLaunchAttempt', Date.now());
-				localStorage.setItem('preferredTheme', 'lum_orange');
-
-				// 更新下载链接
-				document.getElementById('ios-download').href = appLinks.ios;
-				document.getElementById('android-download').href = appLinks.android;
-
-				// if (device.isIOS) {
-				//     document.getElementById('ios-download').href = appLinks.ios;
-				// } else if (device.isAndroid) {
-				//     document.getElementById('android-download').href = appLinks.android;
-				// }
-
-				// 尝试通过URL Scheme打开应用
-				window.location.href = appScheme;
-
-				// 设置超时检查，如果应用未打开则显示下载区域
-				setTimeout(() => {
-					// 如果页面仍然活跃，则可能没有安装应用
-					if (Date.now() - clickTime < 2500) {
-						// 显示下载区域
-						const downloadSection = document.getElementById('download-section');
-						downloadSection.style.display = 'block';
-
-						// 滚动到下载区域
-						downloadSection.scrollIntoView({
-							behavior: 'smooth'
-						});
-
-						// 添加高亮效果
-						downloadSection.classList.add('highlight-section');
-						setTimeout(() => {
-							downloadSection.classList.remove('highlight-section');
-						}, 2000);
-
-						// 根据设备显示相应的下载说明
-						let deviceText = '';
-						if (device.isIOS) {
-							deviceText = currentLang === 'zh' ? 'iOS设备' : 'iOS device';
-						} else if (device.isAndroid) {
-							deviceText = currentLang === 'zh' ? '安卓设备' : 'Android device';
-						} else {
-							deviceText = currentLang === 'zh' ? '您的设备' : 'Your device';
-						}
-
-						const title = document.getElementById('download-title');
-						title.textContent = (currentLang === 'zh' ? '在' : 'On ') + deviceText +
-							(currentLang === 'zh' ? '上安装ProNFC' : ' install ProNFC');
-					}
-				}, 2000);
-			}
-
-			// 页面加载时初始化
-			document.addEventListener('DOMContentLoaded', function() {
-				const device = getDeviceInfo();
-
-				// 根据设备设置下载链接
-				if (device.isIOS) {
-					document.getElementById('ios-download').href = appLinks.ios;
-				} else if (device.isAndroid) {
-					document.getElementById('android-download').href = appLinks.android;
-				}
-
-				// 尝试从本地存储获取首选语言
-				const savedLang = localStorage.getItem('preferredLanguage') ||
-					(navigator.language.startsWith('zh') ? 'zh' : 'en');
-				switchLanguage(savedLang);
-
-				// 检查是否是从应用商店重定向回来的
-				const urlParams = new URLSearchParams(window.location.search);
-				const source = urlParams.get('source');
-
-				if (source === 'app_store_redirect') {
-					// 如果是应用商店重定向回来，显示提示
-					setTimeout(() => {
-						alert(currentLang === 'zh' ?
-							'应用安装完成后，请返回此页面重新点击"启动Luminii定制版"按钮' :
-							'After installing the app, please return to this page and click "Launch Luminii Edition" again'
-							);
-					}, 500);
-				}
-
-				// 保存语言偏好
-				document.querySelectorAll('.lang-btn').forEach(btn => {
-					btn.addEventListener('click', function() {
-						const lang = this.id.replace('lang-', '');
-						localStorage.setItem('preferredLanguage', lang);
-					});
-				});
-
-				// 为下载链接添加点击追踪
-				document.querySelectorAll('.download-btn').forEach(btn => {
-					btn.addEventListener('click', function(e) {
-						const deviceType = this.id.includes('ios') ? 'ios' : 'android';
-						console.log(`Download clicked for ${deviceType}`);
-						// 这里可以添加统计代码
-					});
-				});
-			});
-
-			// 处理返回按钮
-			window.addEventListener('pageshow', function(event) {
-				// 如果是从应用商店返回，自动滚动到下载区域
-				if (event.persisted) {
-					const downloadSection = document.getElementById('download-section');
-					if (downloadSection.style.display === 'block') {
-						downloadSection.scrollIntoView({
-							behavior: 'smooth'
-						});
-					}
-				}
-			});
-		</script>
-	</body>
+            
+            currentLang = lang;
+            
+            // 更新语言按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`lang-${lang}`).classList.add('active');
+            
+            // 更新页面文本
+            const texts = translations[lang];
+            
+            // 更新品牌区域
+            document.getElementById('brand-name').textContent = texts['brand-name'];
+            document.getElementById('brand-tagline').textContent = texts['brand-tagline'];
+            document.getElementById('brand-description').textContent = texts['brand-description'];
+            document.getElementById('brand-description1').textContent = texts['brand-description1'];
+            document.getElementById('brand-description2').textContent = texts['brand-description2'];
+            
+            // 更新客户定制区域
+            document.getElementById('client-title').textContent = texts['client-title'];
+            document.getElementById('client-subtitle').textContent = texts['client-subtitle'];
+            document.getElementById('feature-1').textContent = texts['feature-1'];
+            document.getElementById('feature-2').textContent = texts['feature-2'];
+            document.getElementById('feature-3').textContent = texts['feature-3'];
+            document.getElementById('launch-text').textContent = texts['launch-text'];
+            
+            // 更新下载区域
+            document.getElementById('download-title').textContent = texts['download-title'];
+            document.getElementById('download-subtitle').textContent = texts['download-subtitle'];
+            document.getElementById('ios-text').textContent = texts['ios-text'];
+            document.getElementById('android-text').textContent = texts['android-text'];
+            
+            // 更新主题说明区域
+            document.getElementById('theme-info-title').textContent = texts['theme-info-title'];
+            
+            const stepsList = document.getElementById('theme-steps');
+            stepsList.innerHTML = '';
+            texts['theme-steps'].forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                stepsList.appendChild(li);
+            });
+            
+            document.getElementById('theme-note').innerHTML = texts['theme-note'];
+			
+			document.getElementById('guidelines-note').innerHTML = texts['guidelines-note'];
+			
+        }
+        
+        // 设备检测
+        function getDeviceInfo() {
+            const ua = navigator.userAgent;
+            return {
+                isIOS: /iPad|iPhone|iPod/.test(ua) && !window.MSStream,
+                isAndroid: /Android/.test(ua),
+                isMobile: /Mobi|Android|iPhone|iPad|iPod/.test(ua)
+            };
+        }
+        
+        // 应用下载链接（请替换为实际链接）
+        const appLinks = {
+            ios: 'https://apps.apple.com/cn/app/pronfc/id6448912618', // 替换为实际的App Store链接
+            android: 'https://www.pgyer.com/6VGb' // 替换为实际的Google Play链接
+        };
+        
+        // 应用URL Scheme
+        const appScheme = 'scpower.pronfc://?theme=lum_orange&source=official_website&client=lum';
+        
+        // 启动应用
+        function launchApp() {
+            const device = getDeviceInfo();
+            const clickTime = Date.now();
+            
+            // 记录启动尝试
+            localStorage.setItem('lastLaunchAttempt', Date.now());
+            localStorage.setItem('preferredTheme', 'lum_orange');
+            
+            // 更新下载链接
+			document.getElementById('ios-download').href = appLinks.ios;
+			document.getElementById('android-download').href = appLinks.android;
+			
+            // if (device.isIOS) {
+            //     document.getElementById('ios-download').href = appLinks.ios;
+            // } else if (device.isAndroid) {
+            //     document.getElementById('android-download').href = appLinks.android;
+            // }
+            
+            // 尝试通过URL Scheme打开应用
+            window.location.href = appScheme;
+            
+            // 设置超时检查，如果应用未打开则显示下载区域
+            setTimeout(() => {
+                // 如果页面仍然活跃，则可能没有安装应用
+                if (Date.now() - clickTime < 2500) {
+                    // 显示下载区域
+                    const downloadSection = document.getElementById('download-section');
+                    downloadSection.style.display = 'block';
+                    
+                    // 滚动到下载区域
+                    downloadSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // 添加高亮效果
+                    downloadSection.classList.add('highlight-section');
+                    setTimeout(() => {
+                        downloadSection.classList.remove('highlight-section');
+                    }, 2000);
+                    
+                    // 根据设备显示相应的下载说明
+                    let deviceText = '';
+                    if (device.isIOS) {
+                        deviceText = currentLang === 'zh' ? 'iOS设备' : 'iOS device';
+                    } else if (device.isAndroid) {
+                        deviceText = currentLang === 'zh' ? '安卓设备' : 'Android device';
+                    } else {
+                        deviceText = currentLang === 'zh' ? '您的设备' : 'Your device';
+                    }
+                    
+                    const title = document.getElementById('download-title');
+                    title.textContent = (currentLang === 'zh' ? '在' : 'On ') + deviceText + 
+                                      (currentLang === 'zh' ? '上安装ProNFC' : ' install ProNFC');
+                }
+            }, 2000);
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const device = getDeviceInfo();
+            
+            // 根据设备设置下载链接
+            if (device.isIOS) {
+                document.getElementById('ios-download').href = appLinks.ios;
+            } else if (device.isAndroid) {
+                document.getElementById('android-download').href = appLinks.android;
+            }
+            
+            // 尝试从本地存储获取首选语言
+            const savedLang = localStorage.getItem('preferredLanguage') || 
+                             (navigator.language.startsWith('zh') ? 'zh' : 'en');
+            switchLanguage(savedLang);
+            
+            // 检查是否是从应用商店重定向回来的
+            const urlParams = new URLSearchParams(window.location.search);
+            const source = urlParams.get('source');
+            
+            if (source === 'app_store_redirect') {
+                // 如果是应用商店重定向回来，显示提示
+                setTimeout(() => {
+                    alert(currentLang === 'zh' 
+                        ? '应用安装完成后，请返回此页面重新点击"启动Luminii定制版"按钮'
+                        : 'After installing the app, please return to this page and click "Launch Luminii Edition" again');
+                }, 500);
+            }
+            
+            // 保存语言偏好
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.id.replace('lang-', '');
+                    localStorage.setItem('preferredLanguage', lang);
+                });
+            });
+            
+            // 为下载链接添加点击追踪
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const deviceType = this.id.includes('ios') ? 'ios' : 'android';
+                    console.log(`Download clicked for ${deviceType}`);
+                    // 这里可以添加统计代码
+                });
+            });
+        });
+        
+        // 处理返回按钮
+        window.addEventListener('pageshow', function(event) {
+            // 如果是从应用商店返回，自动滚动到下载区域
+            if (event.persisted) {
+                const downloadSection = document.getElementById('download-section');
+                if (downloadSection.style.display === 'block') {
+                    downloadSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    </script>
+</body>
 </html>
