@@ -8,16 +8,22 @@
 		<style>
 			:root {
 				/* 暗黑模式变量 - 优化科技感配色 */
-				--primary-color: #2D8CFF; /* 主蓝色 - 更柔和 */
+				--primary-color: #2D8CFF;
+				/* 主蓝色 - 更柔和 */
 				--primary-light: #5DA8FF;
 				--primary-glow: rgba(45, 140, 255, 0.4);
-				--secondary-color: #9D4EDD; /* 科技紫 - 更饱和 */
-				--accent-color: #00E5FF; /* 霓虹蓝 */
+				--secondary-color: #9D4EDD;
+				/* 科技紫 - 更饱和 */
+				--accent-color: #00E5FF;
+				/* 霓虹蓝 */
 				--accent-light: #66F3FF;
 				--accent-glow: rgba(0, 229, 255, 0.3);
-				--background-color: #0C111F; /* 更深蓝黑背景 */
-				--surface-color: #161B2A; /* 表面色 */
-				--card-bg: #1A1F30; /* 卡片背景 */
+				--background-color: #0C111F;
+				/* 更深蓝黑背景 */
+				--surface-color: #161B2A;
+				/* 表面色 */
+				--card-bg: #1A1F30;
+				/* 卡片背景 */
 				--text-primary: #F0F2F5;
 				--text-secondary: #B8C1D1;
 				--text-muted: #8A94A8;
@@ -39,7 +45,8 @@
 
 			/* 明亮模式 - 优化配色 */
 			.light-mode {
-				--primary-color: #0066FF; /* 更明亮的蓝色 */
+				--primary-color: #0066FF;
+				/* 更明亮的蓝色 */
 				--primary-light: #4D94FF;
 				--primary-glow: rgba(0, 102, 255, 0.15);
 				--secondary-color: #7B3FE4;
@@ -145,7 +152,8 @@
 				min-height: 40px;
 			}
 
-			.control-btn:hover, .control-btn:active {
+			.control-btn:hover,
+			.control-btn:active {
 				background-color: var(--primary-color);
 				color: white;
 				border-color: var(--primary-color);
@@ -251,8 +259,8 @@
 			}
 
 			.logo {
-				width: 70px;
-				height: 70px;
+				width: 72px;
+				height: 72px;
 				background: var(--gradient-1);
 				border-radius: 18px;
 				display: flex;
@@ -261,6 +269,11 @@
 				box-shadow: 0 6px 20px rgba(45, 140, 255, 0.3);
 				position: relative;
 				overflow: hidden;
+			}
+
+			.app-logo {
+				width: 100%;
+				height: 100%;
 			}
 
 			.logo::after {
@@ -332,7 +345,8 @@
 				transition: all 0.3s ease;
 			}
 
-			nav a:hover, nav a:active {
+			nav a:hover,
+			nav a:active {
 				background-color: rgba(255, 255, 255, 0.1);
 			}
 
@@ -409,12 +423,14 @@
 				transition: opacity 0.3s ease;
 			}
 
-			.download-btn:hover, .download-btn:active {
+			.download-btn:hover,
+			.download-btn:active {
 				transform: translateY(-3px) scale(1.03);
 				box-shadow: 0 10px 25px rgba(0, 229, 255, 0.4);
 			}
 
-			.download-btn:hover::before, .download-btn:active::before {
+			.download-btn:hover::before,
+			.download-btn:active::before {
 				opacity: 1;
 			}
 
@@ -472,7 +488,8 @@
 				background: var(--gradient-1);
 			}
 
-			.feature-card:hover, .feature-card:active {
+			.feature-card:hover,
+			.feature-card:active {
 				transform: translateY(-8px) scale(1.02);
 				box-shadow: 0 15px 30px var(--shadow-hover), var(--glow);
 				border-color: var(--primary-color);
@@ -504,7 +521,8 @@
 				transition: opacity 0.3s ease;
 			}
 
-			.feature-card:hover .feature-icon::after, .feature-card:active .feature-icon::after {
+			.feature-card:hover .feature-icon::after,
+			.feature-card:active .feature-icon::after {
 				opacity: 0.5;
 			}
 
@@ -646,7 +664,8 @@
 				transition: var(--transition);
 			}
 
-			.faq-item:hover, .faq-item:active {
+			.faq-item:hover,
+			.faq-item:active {
 				border-color: var(--primary-color);
 				box-shadow: var(--glow);
 			}
@@ -727,15 +746,16 @@
 				flex-shrink: 0;
 				margin-top: 2px;
 			}
-			
+
 			.contact-info a {
 				color: var(--primary-color);
 				text-decoration: none;
 				transition: color 0.3s ease;
 				word-break: break-all;
 			}
-			
-			.contact-info a:hover, .contact-info a:active {
+
+			.contact-info a:hover,
+			.contact-info a:active {
 				color: var(--accent-color);
 				text-decoration: underline;
 			}
@@ -816,7 +836,8 @@
 				font-size: 15px;
 			}
 
-			.footer-links a:hover, .footer-links a:active {
+			.footer-links a:hover,
+			.footer-links a:active {
 				color: var(--accent-color);
 			}
 
@@ -836,55 +857,55 @@
 				.container {
 					padding: 0 25px;
 				}
-				
+
 				.hero h2 {
 					font-size: 32px;
 				}
-				
+
 				.hero p {
 					font-size: 18px;
 				}
-				
+
 				.section-title {
 					font-size: 32px;
 				}
-				
+
 				.features-grid {
 					grid-template-columns: repeat(2, 1fr);
 					gap: 30px;
 				}
-				
+
 				.feature-card {
 					padding: 30px 25px;
 				}
-				
+
 				.header-content {
 					flex-direction: row;
 					justify-content: space-between;
 					align-items: center;
 				}
-				
+
 				.logo-container {
 					flex-direction: row;
 					text-align: left;
 				}
-				
+
 				.step {
 					flex-direction: row;
 					text-align: left;
 					align-items: flex-start;
 				}
-				
+
 				.step:not(:last-child)::after {
 					left: 25px;
 					transform: none;
 				}
-				
+
 				.step-number {
 					margin-right: 20px;
 					margin-bottom: 0;
 				}
-				
+
 				.footer-content {
 					flex-direction: row;
 					justify-content: space-between;
@@ -896,87 +917,87 @@
 				.container {
 					padding: 0 20px;
 				}
-				
+
 				.header-content {
 					flex-direction: row;
 					justify-content: space-between;
 					align-items: center;
 				}
-				
+
 				.logo-container {
 					flex-direction: row;
 					text-align: left;
 				}
-				
+
 				.hero h2 {
 					font-size: 42px;
 				}
-				
+
 				.hero p {
 					font-size: 20px;
 					max-width: 800px;
 				}
-				
+
 				.section-title {
 					font-size: 40px;
 					margin-bottom: 70px;
 				}
-				
+
 				.features-grid {
 					grid-template-columns: repeat(3, 1fr);
 					gap: 40px;
 				}
-				
+
 				.feature-card {
 					padding: 40px 30px;
 				}
-				
+
 				.feature-icon {
 					width: 80px;
 					height: 80px;
 				}
-				
+
 				.feature-icon i {
 					font-size: 36px;
 				}
-				
+
 				.feature-card h3 {
 					font-size: 24px;
 				}
-				
+
 				.step {
 					flex-direction: row;
 					text-align: left;
 					align-items: flex-start;
 				}
-				
+
 				.step:not(:last-child)::after {
 					left: 25px;
 					transform: none;
 				}
-				
+
 				.step-number {
 					margin-right: 30px;
 					margin-bottom: 0;
 				}
-				
+
 				.footer-content {
 					flex-direction: row;
 					justify-content: space-between;
 				}
-				
+
 				.controls {
 					gap: 20px;
 				}
-				
+
 				.control-btn {
 					padding: 10px 18px;
 				}
-				
+
 				.toggle-switch {
 					width: 60px;
 				}
-				
+
 				input:checked+.slider:before {
 					transform: translateX(32px);
 				}
@@ -987,54 +1008,54 @@
 				.container {
 					padding: 0 15px;
 				}
-				
+
 				.hero h2 {
 					font-size: 24px;
 				}
-				
+
 				.hero p {
 					font-size: 15px;
 				}
-				
+
 				.download-btn {
 					padding: 14px 24px;
 					font-size: 15px;
 				}
-				
+
 				.section-title {
 					font-size: 24px;
 				}
-				
+
 				.feature-card {
 					padding: 20px 15px;
 				}
-				
+
 				.feature-icon {
 					width: 50px;
 					height: 50px;
 				}
-				
+
 				.feature-icon i {
 					font-size: 24px;
 				}
-				
+
 				.controls {
 					gap: 10px;
 				}
-				
+
 				.control-btn {
 					padding: 6px 10px;
 					font-size: 13px;
 				}
-				
+
 				.mode-toggle {
 					font-size: 13px;
 				}
-				
+
 				.toggle-switch {
 					width: 50px;
 				}
-				
+
 				input:checked+.slider:before {
 					transform: translateX(22px);
 				}
@@ -1066,7 +1087,7 @@
 			<div class="container header-content">
 				<div class="logo-container">
 					<div class="logo">
-						<i class="fas fa-bolt"></i>
+						<img class="fas fa-bolt app-logo" src="res/app_icon.png">
 					</div>
 					<div class="app-title">
 						<h1 data-i18n="app-name">PRO NFC</h1>
@@ -1075,6 +1096,7 @@
 				</div>
 				<nav>
 					<ul>
+						<li><a href="https://www.suretron.com" data-i18n="official-website">企业官网</a></li>
 						<li><a href="#features" data-i18n="nav-features">功能特点</a></li>
 						<li><a href="#instructions" data-i18n="nav-instructions">使用说明</a></li>
 						<li><a href="#support" data-i18n="nav-support">技术支持</a></li>
@@ -1119,8 +1141,8 @@
 						<div class="feature-icon">
 							<i class="fas fa-plug"></i>
 						</div>
-						<h3 data-i18n="feature3-title">广泛兼容性</h3>
-						<p data-i18n="feature3-desc">适配市面上多种智能电源设备，为不同品牌和型号的智能电源提供统一便捷的配置方案。</p>
+						<h3 data-i18n="feature3-title">稳定兼容性</h3>
+						<p data-i18n="feature3-desc">适配本司多种智能电源设备，为不同型号和规格的智能电源提供统一便捷的配置方案。</p>
 					</div>
 				</div>
 			</div>
@@ -1135,7 +1157,7 @@
 						<div class="step-number">1</div>
 						<div class="step-content">
 							<h3 data-i18n="step1-title">下载并安装应用</h3>
-							<p data-i18n="step1-desc">在App Store中搜索"PRO NFC"或通过上方链接下载并安装应用程序到您的iPhone设备。</p>
+							<p data-i18n="step1-desc">在App Store中搜索"PRO NFC"或通过上方链接下载并安装应用程序到您的iPhone/iPad设备。</p>
 						</div>
 					</div>
 					<div class="step">
@@ -1192,7 +1214,7 @@
 							<i class="fas fa-chevron-down"></i>
 						</div>
 						<div class="faq-answer">
-							<p data-i18n="faq3-a">在应用主界面点击"历史记录"按钮，即可查看所有之前的配置记录。点击任意记录可查看详情或重新编辑。</p>
+							<p data-i18n="faq3-a">在应用主界面点击"记录中心"按钮，即可查看所有之前的配置记录。点击任意记录可查看详情或重新编辑。</p>
 						</div>
 					</div>
 					<div class="faq-item">
@@ -1215,7 +1237,7 @@
 					<p><i class="fas fa-shield-alt"></i> <span
 							data-i18n="contact-privacy">隐私说明：本应用不会收集任何用户数据，您的配置信息仅保存在本地设备中。</span></p>
 					<p><i class="fas fa-globe"></i> <span data-i18n="contact-language">语言支持：简体中文、英语</span></p>
-					<p><i class="fas fa-mobile-alt"></i> <span data-i18n="contact-version">当前版本：1.0.1（已修复已知问题）</span>
+					<!-- <p><i class="fas fa-mobile-alt"></i> <span data-i18n="contact-version">当前版本：1.0.1（已修复已知问题）</span> -->
 					</p>
 				</div>
 			</div>
@@ -1228,7 +1250,7 @@
 					<div>
 						<div class="footer-logo">
 							<div class="logo">
-								<i class="fas fa-bolt"></i>
+								<img class="fas fa-bolt app-logo" src="res/app_icon.png">
 							</div>
 							<h3 data-i18n="app-name">PRO NFC</h3>
 						</div>
@@ -1273,6 +1295,7 @@
 					// 头部
 					'app-name': 'PRO NFC',
 					'app-subtitle': '智能电源配置助手',
+					'official-website': '企业官网',
 					'nav-features': '功能特点',
 					'nav-instructions': '使用说明',
 					'nav-support': '技术支持',
@@ -1289,13 +1312,13 @@
 					'feature1-desc': '通过手机NFC功能，无需复杂操作即可快速设置智能电源的各项参数，简化配置流程。',
 					'feature2-title': '记录查看与编辑',
 					'feature2-desc': '保存所有配置记录，随时查看历史参数设置，并支持对已有配置进行重新编辑。',
-					'feature3-title': '广泛兼容性',
-					'feature3-desc': '适配市面上多种智能电源设备，为不同品牌和型号的智能电源提供统一便捷的配置方案。',
+					'feature3-title': '稳定兼容性',
+					'feature3-desc': '适配本司多种智能电源设备，为不同型号和规格的智能电源提供统一便捷的配置方案。',
 
 					// 使用说明
 					'instructions-title': '使用说明',
 					'step1-title': '下载并安装应用',
-					'step1-desc': '在App Store中搜索"PRO NFC"或通过上方链接下载并安装应用程序到您的iPhone设备。',
+					'step1-desc': '在App Store中搜索"PRO NFC"或通过上方链接下载并安装应用程序到您的iPhone/iPad设备。',
 					'step2-title': '开启NFC功能',
 					'step2-desc': '确保您的手机NFC功能已开启。将手机靠近智能电源设备的NFC感应区域。',
 					'step3-title': '读取与配置参数',
@@ -1310,7 +1333,7 @@
 					'faq2-q': '我的手机没有NFC功能可以使用吗？',
 					'faq2-a': '很遗憾，PRO NFC需要设备具备NFC读写功能才能正常使用。请检查您的手机规格，确认是否支持NFC。',
 					'faq3-q': '如何查看之前的配置记录？',
-					'faq3-a': '在应用主界面点击"历史记录"按钮，即可查看所有之前的配置记录。点击任意记录可查看详情或重新编辑。',
+					'faq3-a': '在应用主界面点击"记录中心"按钮，即可查看所有之前的配置记录。点击任意记录可查看详情或重新编辑。',
 					'faq4-q': '配置参数时需要注意什么？',
 					'faq4-a': '请确保您配置的参数在智能电源设备的允许范围内，避免设置超出设备规格的参数，以免造成设备损坏。',
 
@@ -1320,7 +1343,7 @@
 					'contact-email': '技术支持邮箱：',
 					'contact-privacy': '隐私说明：本应用不会收集任何用户数据，您的配置信息仅保存在本地设备中。',
 					'contact-language': '语言支持：简体中文、英语',
-					'contact-version': '当前版本：1.0.1（已修复已知问题）',
+					// 'contact-version': '当前版本：1.0.1（已修复已知问题）',
 
 					// 底部
 					'footer-links': '快速链接',
@@ -1340,6 +1363,7 @@
 					// 头部
 					'app-name': 'PRO NFC',
 					'app-subtitle': 'Smart Power Configuration Assistant',
+					'official-website': 'Official Website',
 					'nav-features': 'Features',
 					'nav-instructions': 'Instructions',
 					'nav-support': 'Support',
@@ -1356,13 +1380,13 @@
 					'feature1-desc': 'Quickly set various parameters of smart power supply through mobile phone NFC function without complicated operations, simplifying the configuration process.',
 					'feature2-title': 'Record Viewing & Editing',
 					'feature2-desc': 'Save all configuration records, view historical parameter settings at any time, and support re-editing of existing configurations.',
-					'feature3-title': 'Wide Compatibility',
-					'feature3-desc': 'Adapt to various smart power supply devices on the market, providing a unified and convenient configuration solution for smart power supplies of different brands and models.',
+					'feature3-title': 'Stable Compatibility',
+					'feature3-desc': 'It is compatible with multiple intelligent power supplies from our company, offering a unified and convenient configuration solution for different models and specifications of intelligent power supplies.',
 
 					// 使用说明
 					'instructions-title': 'Instructions',
 					'step1-title': 'Download and Install',
-					'step1-desc': 'Search for "PRO NFC" in the App Store or download and install the application to your iPhone device via the link above.',
+					'step1-desc': 'Search for "PRO NFC" in the App Store or download and install the application to your iPhone/iPad device via the link above.',
 					'step2-title': 'Enable NFC Function',
 					'step2-desc': 'Make sure your phone\'s NFC function is enabled. Bring your phone close to the NFC sensing area of the smart power device.',
 					'step3-title': 'Read and Configure Parameters',
@@ -1377,7 +1401,7 @@
 					'faq2-q': 'Can I use it if my phone doesn\'t have NFC?',
 					'faq2-a': 'Unfortunately, PRO NFC requires the device to have NFC read/write function to work properly. Please check your phone specifications to confirm if it supports NFC.',
 					'faq3-q': 'How to view previous configuration records?',
-					'faq3-a': 'Click the "History" button on the main interface of the application to view all previous configuration records. Click any record to view details or re-edit.',
+					'faq3-a': 'Click the "Record Center" button on the main interface of the application to view all previous configuration records. Click any record to view details or re-edit.',
 					'faq4-q': 'What should I pay attention to when configuring parameters?',
 					'faq4-a': 'Please ensure that the parameters you configure are within the allowable range of the smart power device. Avoid setting parameters that exceed device specifications to prevent device damage.',
 
@@ -1387,7 +1411,7 @@
 					'contact-email': 'Support Email: ',
 					'contact-privacy': 'Privacy statement: This application does not collect any user data. Your configuration information is only saved locally on the device.',
 					'contact-language': 'Language Support: Simplified Chinese, English',
-					'contact-version': 'Current Version: 1.0.1 (Fixed some known issues)',
+					// 'contact-version': 'Current Version: 1.0.1 (Fixed some known issues)',
 
 					// 底部
 					'footer-links': 'Quick Links',
@@ -1453,7 +1477,7 @@
 			document.addEventListener('DOMContentLoaded', function() {
 				// 语言切换
 				document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
-				
+
 				// 添加触摸设备优化
 				if (isTouchDevice()) {
 					document.body.classList.add('touch-device');
