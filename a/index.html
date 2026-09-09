@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09131f" />
+    <meta name="description" content="DALI control platform for commissioning, configuration and operation." />
+    <title>DALI Control Platform | Engineering clarity for every line</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="dark">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="DALI Control Platform home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span class="brand-copy">
+          <strong>DALI</strong>
+          <span data-i18n="brand.sub">CONTROL PLATFORM</span>
+        </span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#capabilities" data-i18n="nav.capabilities">能力</a>
+        <a href="#workflow" data-i18n="nav.workflow">流程</a>
+        <a href="#software" data-i18n="nav.software">软件体验</a>
+        <a href="#markets" data-i18n="nav.markets">行业场景</a>
+      </nav>
+      <div class="header-actions">
+        <label class="language-control">
+          <span class="sr-only" data-i18n="control.languageLabel">Language</span>
+          <select id="language-select" aria-label="Language">
+            <option value="zh-Hans">简体中文</option>
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </label>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">◐</button>
+        <a class="header-cta" href="#contact" data-i18n="nav.contact">联系团队 <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="hero.eyebrow">DALI CONTROL PLATFORM / V1.0</span></p>
+          <h1 id="hero-title" data-i18n="hero.title">让每一条总线，<em>为下一场景</em>做好准备。</h1>
+          <p class="hero-description" data-i18n="hero.description">面向专业照明工程的控制器与上位机工作台。以国际标准为基础，把搜索、寻址、分组、场景、参数与调光收拢成一条可交付、可维护的工程路径。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#capabilities" data-i18n="hero.primary">查看产品能力 <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="#contact" data-i18n="hero.secondary">获取合作资料 <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-footnote">
+            <span class="status-dot"></span>
+            <span data-i18n="hero.footnote">Built for commissioning teams, system integrators and lighting OEMs.</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="DALI software workspace preview">
+          <div class="visual-label visual-label-top"><span data-i18n="hero.visualLabel">LIVE WORKSPACE PREVIEW</span><span class="live-badge"><span class="status-dot"></span><span data-i18n="common.online">在线</span></span></div>
+          <div class="hero-frame">
+            <img src="assets/screenshots/dashboard.png" alt="DALI software dashboard preview" />
+            <div class="frame-scanline" aria-hidden="true"></div>
+          </div>
+          <div class="visual-label visual-label-bottom"><span>DALI Line 01</span><span data-i18n="hero.visualCaption">工程首页 · 状态总览</span></div>
+          <div class="floating-metric metric-one"><span data-i18n="metric.lineLabel">DALI LINE</span><strong>01</strong><small data-i18n="metric.lineSub">Ready to commission</small></div>
+          <div class="floating-metric metric-two"><span data-i18n="metric.signalLabel">BUS SIGNAL</span><strong>16.2V</strong><small data-i18n="metric.signalSub">Stable link</small></div>
+        </div>
+      </section>
+
+      <section class="standards-strip section-shell" aria-label="Supported standards">
+        <p data-i18n="standards.lead">Designed around the standards your projects already trust.</p>
+        <div class="standards-list">
+          <span>IEC 62386</span><span>DALI-2</span><span>DT6</span><span>DT8</span><span>D4i</span>
+        </div>
+      </section>
+
+      <section class="proof-grid section-shell" aria-label="Product proof points">
+        <article class="proof-item"><strong>4</strong><span data-i18n="proof.platforms">覆盖平台</span><small data-i18n="proof.platformsSub">Windows · macOS · iOS · Android</small></article>
+        <article class="proof-item"><strong>01</strong><span data-i18n="proof.workflow">条完整工程路径</span><small data-i18n="proof.workflowSub">从发现到交付，减少工具切换</small></article>
+        <article class="proof-item"><strong>16</strong><span data-i18n="proof.scenes">场景位</span><small data-i18n="proof.scenesSub">让空间逻辑可复用、可维护</small></article>
+        <article class="proof-item"><strong>64</strong><span data-i18n="proof.addresses">短地址视图</span><small data-i18n="proof.addressesSub">以总线对象为中心组织工作</small></article>
+      </section>
+
+      <section id="capabilities" class="section-shell section-block" aria-labelledby="capabilities-title">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="capabilities.eyebrow">ONE SYSTEM / MANY MOMENTS</span></p><h2 id="capabilities-title" data-i18n="capabilities.title">把工程复杂度，<br /><em>交给一套清晰的工作台。</em></h2></div>
+          <p data-i18n="capabilities.intro">从首次发现设备，到项目交付后的维护，产品能力沿着工程团队真实的工作顺序展开。每一步都有明确对象、状态和结果。</p>
+        </div>
+        <div class="capability-grid">
+          <article class="capability-card capability-featured"><span class="card-index">01</span><div><h3 data-i18n="capability.discovery.title">发现与识别</h3><p data-i18n="capability.discovery.body">快速建立控制器与 DALI Line 视图，支持全新搜索、扩展搜索和连接状态确认。</p><span class="card-tag" data-i18n="capability.discovery.tag">Commissioning start</span></div></article>
+          <article class="capability-card"><span class="card-index">02</span><div><h3 data-i18n="capability.address.title">地址与拓扑</h3><p data-i18n="capability.address.body">读取、设定与重分配短地址，按地址、群组和总线对象组织现场工作。</p><span class="card-tag" data-i18n="capability.address.tag">Addressing</span></div></article>
+          <article class="capability-card"><span class="card-index">03</span><div><h3 data-i18n="capability.scene.title">分组与场景</h3><p data-i18n="capability.scene.body">把空间意图沉淀为可读取、可复用的分组与场景逻辑。</p><span class="card-tag" data-i18n="capability.scene.tag">Space logic</span></div></article>
+          <article class="capability-card"><span class="card-index">04</span><div><h3 data-i18n="capability.parameters.title">参数与批量配置</h3><p data-i18n="capability.parameters.body">围绕亮度、渐变、范围和设备参数，提供清晰的读取、设定和批量运维入口。</p><span class="card-tag" data-i18n="capability.parameters.tag">Fleet ready</span></div></article>
+          <article class="capability-card"><span class="card-index">05</span><div><h3 data-i18n="capability.control.title">实时调光与色彩</h3><p data-i18n="capability.control.body">支持广播、组与单地址控制，覆盖开关、亮度、色温及 RGBWAF 彩色应用。</p><span class="card-tag" data-i18n="capability.control.tag">DT8 control</span></div></article>
+          <article class="capability-card capability-outline"><span class="card-index">06</span><div><h3 data-i18n="capability.lifecycle.title">连接、升级与交付</h3><p data-i18n="capability.lifecycle.body">Type-C 与 LAN 接入，配合固件升级和工程快照，让项目从现场调试走向长期运维。</p><span class="card-tag" data-i18n="capability.lifecycle.tag">Lifecycle</span></div></article>
+        </div>
+      </section>
+
+      <section id="workflow" class="workflow-band section-block" aria-labelledby="workflow-title">
+        <div class="section-shell">
+          <div class="section-heading split-heading">
+            <div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="workflow.eyebrow">FROM FIRST SCAN TO LASTING VALUE</span></p><h2 id="workflow-title" data-i18n="workflow.title">一条可交付的<br /><em>工程节奏。</em></h2></div>
+            <p data-i18n="workflow.intro">把“能控制”推进到“能复制、能交付、能持续维护”。每个阶段都围绕现场团队最关心的下一步动作。</p>
+          </div>
+          <div class="workflow-rail">
+            <article class="workflow-step is-active"><span>01</span><h3 data-i18n="workflow.discover.title">Discover</h3><p data-i18n="workflow.discover.body">发现控制器与总线设备</p></article>
+            <article class="workflow-step"><span>02</span><h3 data-i18n="workflow.address.title">Address</h3><p data-i18n="workflow.address.body">建立清晰的地址与拓扑</p></article>
+            <article class="workflow-step"><span>03</span><h3 data-i18n="workflow.compose.title">Compose</h3><p data-i18n="workflow.compose.body">配置分组与场景逻辑</p></article>
+            <article class="workflow-step"><span>04</span><h3 data-i18n="workflow.tune.title">Tune</h3><p data-i18n="workflow.tune.body">批量设定关键参数</p></article>
+            <article class="workflow-step"><span>05</span><h3 data-i18n="workflow.operate.title">Operate</h3><p data-i18n="workflow.operate.body">现场调光与状态确认</p></article>
+            <article class="workflow-step"><span>06</span><h3 data-i18n="workflow.maintain.title">Maintain</h3><p data-i18n="workflow.maintain.body">升级、诊断与持续交付</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="software" class="section-shell section-block" aria-labelledby="software-title">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="software.eyebrow">SOFTWARE EXPERIENCE</span></p><h2 id="software-title" data-i18n="software.title">为现场团队设计的<br /><em>一眼可懂。</em></h2></div>
+          <p data-i18n="software.intro">专业能力不应该被复杂界面掩盖。工作台以总线、对象、状态和下一步动作组织信息，便于在工程现场快速判断。</p>
+        </div>
+        <div class="software-showcase">
+          <div class="software-tabs" role="tablist" aria-label="Software screens">
+            <button class="software-tab is-selected" type="button" role="tab" aria-selected="true" data-screen="dashboard"><span>01</span><strong data-i18n="screen.dashboard.title">工程总览</strong><small data-i18n="screen.dashboard.sub">快速判断项目状态</small></button>
+            <button class="software-tab" type="button" role="tab" aria-selected="false" data-screen="control"><span>02</span><strong data-i18n="screen.control.title">实时控制</strong><small data-i18n="screen.control.sub">开关、亮度与色温</small></button>
+            <button class="software-tab" type="button" role="tab" aria-selected="false" data-screen="parameters"><span>03</span><strong data-i18n="screen.parameters.title">参数配置</strong><small data-i18n="screen.parameters.sub">批量运维与深度设置</small></button>
+            <button class="software-tab" type="button" role="tab" aria-selected="false" data-screen="scenes"><span>04</span><strong data-i18n="screen.scenes.title">场景编排</strong><small data-i18n="screen.scenes.sub">空间逻辑可复用</small></button>
+          </div>
+          <div class="software-preview">
+            <div class="preview-topline"><span id="screen-kicker">DALI WORKSPACE / DASHBOARD</span><span class="preview-status"><span class="status-dot"></span><span data-i18n="common.online">在线</span></span></div>
+            <img id="screen-image" src="assets/screenshots/dashboard.png" alt="DALI dashboard screenshot" />
+            <div class="preview-caption"><div><strong id="screen-title" data-i18n="screen.dashboard.title">工程总览</strong><p id="screen-description" data-i18n="screen.dashboard.body">设备、在线状态、故障与常用区域在同一视图中汇总。</p></div><span class="preview-counter" id="screen-counter">01 / 04</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hardware-band section-block" aria-labelledby="hardware-title">
+        <div class="section-shell hardware-layout">
+          <div class="hardware-copy"><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="hardware.eyebrow">THE CONTROLLER LAYER</span></p><h2 id="hardware-title" data-i18n="hardware.title">稳住现场连接，<br /><em>再把能力交给软件。</em></h2><p data-i18n="hardware.body">DALI 电源控制器 / 网关是项目的可靠入口：向上连接工程工作台，向下管理 DALI Line。通过 Type-C 或 LAN 接入，保持部署灵活，也为后续产品形态留出空间。</p><div class="hardware-points"><span data-i18n="hardware.point1">Type-C 直连</span><span data-i18n="hardware.point2">LAN 局域网</span><span data-i18n="hardware.point3">可选外部总线电源</span></div></div>
+          <div class="hardware-visual" aria-label="Hardware visual placeholder"><div class="device-placeholder"><span class="placeholder-kicker" data-i18n="placeholder.hardwareKicker">PRODUCT IMAGE SLOT</span><strong data-i18n="placeholder.hardwareTitle">Add controller render</strong><small data-i18n="placeholder.hardwareBody">预留产品实拍 / 3D 渲染图位置</small><div class="device-silhouette"><span>DALI</span><i></i><i></i><i></i><i></i></div></div><div class="hardware-note"><span class="status-dot"></span><span data-i18n="hardware.note">Controller / Gateway / DALI Line</span></div></div>
+        </div>
+      </section>
+
+      <section id="markets" class="section-shell section-block" aria-labelledby="markets-title">
+        <div class="section-heading split-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="markets.eyebrow">BUILT FOR THE SPACES THAT MATTER</span></p><h2 id="markets-title" data-i18n="markets.title">从一间展厅，<br /><em>到一套可复制的系统。</em></h2></div><p data-i18n="markets.intro">同一套基础能力，适配不同空间对氛围、效率、可维护性和未来扩展的要求。</p></div>
+        <div class="market-grid">
+          <article class="market-card market-museum"><span class="market-no">01</span><h3 data-i18n="market.museum.title">博物馆 / 展陈</h3><p data-i18n="market.museum.body">精细亮度与色温控制，为展品和动线保留层次。</p><span data-i18n="market.museum.tag">Curated light</span></article>
+          <article class="market-card market-retail"><span class="market-no">02</span><h3 data-i18n="market.retail.title">商场 / 零售</h3><p data-i18n="market.retail.body">快速复制区域策略，降低多店部署和调试成本。</p><span data-i18n="market.retail.tag">Repeatable rollout</span></article>
+          <article class="market-card market-office"><span class="market-no">03</span><h3 data-i18n="market.office.title">办公 / 园区</h3><p data-i18n="market.office.body">让分组、场景和时序跟随空间使用变化。</p><span data-i18n="market.office.tag">Adaptive workspace</span></article>
+          <article class="market-card market-home"><span class="market-no">04</span><h3 data-i18n="market.home.title">家居 / 体验空间</h3><p data-i18n="market.home.body">把专业调光能力转化为直观、易用的日常体验。</p><span data-i18n="market.home.tag">Human scale</span></article>
+        </div>
+      </section>
+
+      <section class="future-band section-block" aria-labelledby="future-title">
+        <div class="section-shell future-layout"><div class="future-mark" aria-hidden="true">AI<br /><span>+</span></div><div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="future.eyebrow">THE NEXT LAYER</span></p><h2 id="future-title" data-i18n="future.title">今天把基础做好，<br /><em>明天让系统更懂现场。</em></h2><p data-i18n="future.body">面向未来的 AI 能力将建立在稳定的对象模型、工程快照和可追溯状态之上：从自然语言意图到场景建议，从异常信号到维护提示，逐步把经验变成可复用的系统能力。</p><div class="future-tags"><span data-i18n="future.tag1">Intent to scene</span><span data-i18n="future.tag2">Anomaly signals</span><span data-i18n="future.tag3">Guided commissioning</span></div></div><span class="roadmap-label" data-i18n="future.roadmap">ROADMAP / RESERVED</span></div>
+      </section>
+
+      <section id="platforms" class="platform-section section-shell section-block" aria-labelledby="platform-title">
+        <div class="section-heading split-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="platform.eyebrow">READY FOR YOUR ECOSYSTEM</span></p><h2 id="platform-title" data-i18n="platform.title">跨平台，<br /><em>为每一种交付方式留出位置。</em></h2></div><p data-i18n="platform.intro">从工程师桌面到现场移动设备，保持同一套产品语言。品牌 Logo、平台截图和下载入口可按发布阶段逐步补齐。</p></div>
+        <div class="platform-grid">
+          <article class="platform-card"><div class="platform-art platform-windows"><div class="device-frame device-desktop"><span data-i18n="platform.screenshotSlot">SCREENSHOT SLOT</span></div></div><strong>Windows</strong><small data-i18n="platform.windowsSub">桌面工程工作台截图</small></article>
+          <article class="platform-card"><div class="platform-art platform-macos"><div class="device-frame device-desktop device-mac"><span data-i18n="platform.screenshotSlot">SCREENSHOT SLOT</span></div></div><strong>Mac</strong><small data-i18n="platform.macSub">macOS 工程工作台截图</small></article>
+          <article class="platform-card"><div class="platform-art platform-ios"><div class="device-frame device-phone"><span data-i18n="platform.screenshotSlot">SCREENSHOT SLOT</span></div></div><strong>iPhone / iOS</strong><small data-i18n="platform.iphoneSub">iOS 移动现场截图</small></article>
+          <article class="platform-card"><div class="platform-art platform-ipad"><div class="device-frame device-tablet"><span data-i18n="platform.screenshotSlot">SCREENSHOT SLOT</span></div></div><strong>iPad / iPadOS</strong><small data-i18n="platform.ipadSub">iPad 现场工作台截图</small></article>
+          <article class="platform-card"><div class="platform-art platform-android"><div class="device-frame device-phone"><span data-i18n="platform.screenshotSlot">SCREENSHOT SLOT</span></div></div><strong>Android Phone</strong><small data-i18n="platform.androidPhoneSub">Android 手机现场截图</small></article>
+          <article class="platform-card"><div class="platform-art platform-android-pad"><div class="device-frame device-tablet"><span data-i18n="platform.screenshotSlot">SCREENSHOT SLOT</span></div></div><strong>Android Pad</strong><small data-i18n="platform.androidPadSub">Android 平板工作台截图</small></article>
+        </div>
+        <div class="brand-asset-row"><div class="logo-placeholder"><span data-i18n="placeholder.logoKicker">BRAND ASSET SLOT</span><strong data-i18n="placeholder.logoTitle">Add software logo</strong><small data-i18n="placeholder.logoBody">预留软件 Logo / 品牌识别</small></div><div><strong data-i18n="platform.brand">Your brand layer</strong><small data-i18n="platform.brandSub">可替换的品牌资产</small></div></div>
+      </section>
+
+      <section id="contact" class="contact-band section-block"><div class="section-shell contact-layout"><div><p class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="contact.eyebrow">START A CONVERSATION</span></p><h2 data-i18n="contact.title">让下一条 DALI Line，<br /><em>从更好的工程体验开始。</em></h2><p data-i18n="contact.body">面向系统集成商、照明 OEM、工程交付与渠道伙伴，获取产品资料、能力矩阵和合作讨论入口。</p></div><div class="contact-actions"><a class="button button-primary" href="mailto:hello@example.com" data-i18n="contact.primary">联系产品团队 <span aria-hidden="true">↗</span></a><a class="button button-quiet" href="#top" data-i18n="contact.secondary">返回顶部 <span aria-hidden="true">↑</span></a><small data-i18n="contact.note">静态展示页 · 邮箱与下载链接可在发布前替换</small></div></div></section>
+    </main>
+
+    <footer class="site-footer"><div class="section-shell footer-inner"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">D</span><div><strong>DALI Control Platform</strong><small data-i18n="footer.sub">Engineering clarity for every line.</small></div></div><div class="footer-meta"><span data-i18n="footer.standard">IEC 62386 aligned · Product capability overview</span><span>© 2026</span></div></div></footer>
+    <button class="back-to-top" id="back-to-top" type="button" data-i18n-aria="control.backToTop" aria-label="返回页面顶部" title="返回页面顶部"><span aria-hidden="true">↑</span></button>
+    <script src="locales.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
