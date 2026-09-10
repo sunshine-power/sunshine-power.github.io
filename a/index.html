@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#09131f" />
     <meta name="description" content="DALI control platform for commissioning, configuration and operation." />
     <title>DALI Control Platform | Engineering clarity for every line</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260909-1" />
   </head>
   <body data-theme="dark">
     <header class="site-header">
@@ -24,16 +24,35 @@
         <a href="#markets" data-i18n="nav.markets">行业场景</a>
       </nav>
       <div class="header-actions">
-        <label class="language-control">
-          <span class="sr-only" data-i18n="control.languageLabel">Language</span>
-          <select id="language-select" aria-label="Language">
-            <option value="zh-Hans">简体中文</option>
-            <option value="en">English</option>
-            <option value="ja">日本語</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-          </select>
-        </label>
+        <div class="language-control" id="language-control">
+          <button class="language-trigger" id="language-toggle" type="button" aria-expanded="false" aria-controls="language-panel" aria-haspopup="dialog" aria-label="Language">
+            <span class="language-trigger-copy"><strong id="language-current-native">简体中文</strong></span>
+            <span class="language-trigger-chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div class="language-panel" id="language-panel" role="dialog" aria-labelledby="language-panel-title" hidden>
+            <div class="language-panel-heading">
+              <strong id="language-panel-title" data-i18n="control.languageLabel">Language</strong>
+            </div>
+            <div class="language-grid">
+              <button class="language-option is-selected" type="button" data-locale="zh-Hans"><strong>简体中文</strong><small hidden>简体中文</small></button>
+              <button class="language-option" type="button" data-locale="en"><strong>English</strong><small>英语</small></button>
+              <button class="language-option" type="button" data-locale="ja"><strong>日本語</strong><small>日语</small></button>
+              <button class="language-option" type="button" data-locale="ko"><strong>한국어</strong><small>韩语</small></button>
+              <button class="language-option" type="button" data-locale="fr"><strong>Français</strong><small>法语</small></button>
+              <button class="language-option" type="button" data-locale="de"><strong>Deutsch</strong><small>德语</small></button>
+              <button class="language-option" type="button" data-locale="es"><strong>Español</strong><small>西班牙语</small></button>
+              <button class="language-option" type="button" data-locale="pt"><strong>Português</strong><small>葡萄牙语</small></button>
+              <button class="language-option" type="button" data-locale="nl"><strong>Nederlands</strong><small>荷兰语</small></button>
+              <button class="language-option" type="button" data-locale="it"><strong>Italiano</strong><small>意大利语</small></button>
+              <button class="language-option" type="button" data-locale="el"><strong>Ελληνικά</strong><small>希腊语</small></button>
+              <button class="language-option" type="button" data-locale="et"><strong>Eesti</strong><small>爱沙尼亚语</small></button>
+              <button class="language-option" type="button" data-locale="ms"><strong>Bahasa Melayu</strong><small>马来语</small></button>
+              <button class="language-option" type="button" data-locale="fil"><strong>Filipino</strong><small>菲律宾语</small></button>
+              <button class="language-option" type="button" data-locale="vi"><strong>Tiếng Việt</strong><small>越南语</small></button>
+              <button class="language-option" type="button" data-locale="tr"><strong>Türkçe</strong><small>土耳其语</small></button>
+            </div>
+          </div>
+        </div>
         <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch theme" title="Switch theme">◐</button>
         <a class="header-cta" href="#contact" data-i18n="nav.contact">联系团队 <span aria-hidden="true">↗</span></a>
       </div>
@@ -54,7 +73,7 @@
             <span data-i18n="hero.footnote">Built for commissioning teams, system integrators and lighting OEMs.</span>
           </div>
         </div>
-        <div class="hero-visual" aria-label="DALI software workspace preview">
+        <div class="hero-visual" data-i18n-aria="hero.visualLabel" aria-label="DALI software workspace preview">
           <div class="visual-label visual-label-top"><span data-i18n="hero.visualLabel">LIVE WORKSPACE PREVIEW</span><span class="live-badge"><span class="status-dot"></span><span data-i18n="common.online">在线</span></span></div>
           <div class="hero-frame">
             <img src="assets/screenshots/dashboard.png" alt="DALI software dashboard preview" />
@@ -171,7 +190,8 @@
 
     <footer class="site-footer"><div class="section-shell footer-inner"><div class="footer-brand"><span class="brand-mark" aria-hidden="true">D</span><div><strong>DALI Control Platform</strong><small data-i18n="footer.sub">Engineering clarity for every line.</small></div></div><div class="footer-meta"><span data-i18n="footer.standard">IEC 62386 aligned · Product capability overview</span><span>© 2026</span></div></div></footer>
     <button class="back-to-top" id="back-to-top" type="button" data-i18n-aria="control.backToTop" aria-label="返回页面顶部" title="返回页面顶部"><span aria-hidden="true">↑</span></button>
-    <script src="locales.js"></script>
-    <script src="app.js"></script>
+    <script src="locales.js?v=20260909-1"></script>
+    <script src="locales-expanded.js?v=20260909-1"></script>
+    <script src="app.js?v=20260909-1"></script>
   </body>
 </html>

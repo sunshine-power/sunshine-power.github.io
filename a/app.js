@@ -46,26 +46,97 @@ for (const [locale, additions] of Object.entries(globalThis.daliAdditionalMessag
 }
 
 const screens = {
-  dashboard: { image: 'assets/screenshots/dashboard.png', kicker: 'DALI WORKSPACE / DASHBOARD', key: 'screen.dashboard' },
-  control: { image: 'assets/screenshots/live-control.png', kicker: 'DALI WORKSPACE / LIVE CONTROL', key: 'screen.control' },
-  parameters: { image: 'assets/screenshots/parameters.png', kicker: 'DALI WORKSPACE / PARAMETERS', key: 'screen.parameters' },
-  scenes: { image: 'assets/screenshots/scenes.png', kicker: 'DALI WORKSPACE / SCENES', key: 'screen.scenes' }
+  dashboard: { image: 'assets/screenshots/dashboard.png', key: 'screen.dashboard' },
+  control: { image: 'assets/screenshots/live-control.png', key: 'screen.control' },
+  parameters: { image: 'assets/screenshots/parameters.png', key: 'screen.parameters' },
+  scenes: { image: 'assets/screenshots/scenes.png', key: 'screen.scenes' }
 };
 
 const themeOrder = ['dark', 'light', 'sky'];
 const themeIcons = { dark: '◐', light: '☼', sky: '◉' };
 const themeColors = { dark: '#09131f', light: '#f3f7f4', sky: '#f2f9fd' };
+const languageMeta = {
+  'zh-Hans': { native: '简体中文', english: 'Chinese (Simplified)' },
+  en: { native: 'English', english: 'English' },
+  ja: { native: '日本語', english: 'Japanese' },
+  ko: { native: '한국어', english: 'Korean' },
+  fr: { native: 'Français', english: 'French' },
+  de: { native: 'Deutsch', english: 'German' },
+  es: { native: 'Español', english: 'Spanish' },
+  pt: { native: 'Português', english: 'Portuguese' },
+  nl: { native: 'Nederlands', english: 'Dutch' },
+  it: { native: 'Italiano', english: 'Italian' },
+  el: { native: 'Ελληνικά', english: 'Greek' },
+  et: { native: 'Eesti', english: 'Estonian' },
+  ms: { native: 'Bahasa Melayu', english: 'Malay' },
+  fil: { native: 'Filipino', english: 'Filipino' },
+  vi: { native: 'Tiếng Việt', english: 'Vietnamese' },
+  tr: { native: 'Türkçe', english: 'Turkish' }
+};
+const documentLanguages = {
+  'zh-Hans': 'zh-CN', en: 'en', ja: 'ja-JP', ko: 'ko-KR', fr: 'fr-FR', de: 'de-DE', es: 'es-ES', pt: 'pt-PT',
+  nl: 'nl-NL', it: 'it-IT', el: 'el-GR', et: 'et-EE', ms: 'ms-MY', fil: 'fil-PH', vi: 'vi-VN', tr: 'tr-TR'
+};
+const languageNameOrder = ['zh-Hans', 'en', 'ja', 'ko', 'fr', 'de', 'es', 'pt', 'nl', 'it', 'el', 'et', 'ms', 'fil', 'vi', 'tr'];
+const localizedLanguageNames = {
+  'zh-Hans': ['简体中文', '英语', '日语', '韩语', '法语', '德语', '西班牙语', '葡萄牙语', '荷兰语', '意大利语', '希腊语', '爱沙尼亚语', '马来语', '菲律宾语', '越南语', '土耳其语'],
+  en: ['Simplified Chinese', 'English', 'Japanese', 'Korean', 'French', 'German', 'Spanish', 'Portuguese', 'Dutch', 'Italian', 'Greek', 'Estonian', 'Malay', 'Filipino', 'Vietnamese', 'Turkish'],
+  ja: ['簡体中国語', '英語', '日本語', '韓国語', 'フランス語', 'ドイツ語', 'スペイン語', 'ポルトガル語', 'オランダ語', 'イタリア語', 'ギリシャ語', 'エストニア語', 'マレー語', 'フィリピノ語', 'ベトナム語', 'トルコ語'],
+  ko: ['중국어(간체)', '영어', '일본어', '한국어', '프랑스어', '독일어', '스페인어', '포르투갈어', '네덜란드어', '이탈리아어', '그리스어', '에스토니아어', '말레이어', '필리핀어', '베트남어', '튀르키예어'],
+  fr: ['chinois simplifié', 'anglais', 'japonais', 'coréen', 'français', 'allemand', 'espagnol', 'portugais', 'néerlandais', 'italien', 'grec', 'estonien', 'malais', 'filipino', 'vietnamien', 'turc'],
+  de: ['Chinesisch (vereinfacht)', 'Englisch', 'Japanisch', 'Koreanisch', 'Französisch', 'Deutsch', 'Spanisch', 'Portugiesisch', 'Niederländisch', 'Italienisch', 'Griechisch', 'Estnisch', 'Malaiisch', 'Filipino', 'Vietnamesisch', 'Türkisch'],
+  es: ['chino simplificado', 'inglés', 'japonés', 'coreano', 'francés', 'alemán', 'español', 'portugués', 'neerlandés', 'italiano', 'griego', 'estonio', 'malayo', 'filipino', 'vietnamita', 'turco'],
+  pt: ['chinês simplificado', 'inglês', 'japonês', 'coreano', 'francês', 'alemão', 'espanhol', 'português', 'neerlandês', 'italiano', 'grego', 'estónio', 'malaio', 'filipino', 'vietnamita', 'turco'],
+  nl: ['Chinees (vereenvoudigd)', 'Engels', 'Japans', 'Koreaans', 'Frans', 'Duits', 'Spaans', 'Portugees', 'Nederlands', 'Italiaans', 'Grieks', 'Estisch', 'Maleis', 'Filipijns', 'Vietnamees', 'Turks'],
+  it: ['cinese semplificato', 'inglese', 'giapponese', 'coreano', 'francese', 'tedesco', 'spagnolo', 'portoghese', 'olandese', 'italiano', 'greco', 'estone', 'malese', 'filippino', 'vietnamita', 'turco'],
+  el: ['Απλοποιημένα Κινεζικά', 'Αγγλικά', 'Ιαπωνικά', 'Κορεατικά', 'Γαλλικά', 'Γερμανικά', 'Ισπανικά', 'Πορτογαλικά', 'Ολλανδικά', 'Ιταλικά', 'Ελληνικά', 'Εσθονικά', 'Μαλαισιανά', 'Φιλιππινικά', 'Βιετναμικά', 'Τουρκικά'],
+  et: ['lihtsustatud hiina', 'inglise', 'jaapani', 'korea', 'prantsuse', 'saksa', 'hispaania', 'portugali', 'hollandi', 'itaalia', 'kreeka', 'eesti', 'malai', 'filipiini', 'vietnami', 'türgi'],
+  ms: ['Cina Ringkas', 'Inggeris', 'Jepun', 'Korea', 'Perancis', 'Jerman', 'Sepanyol', 'Portugis', 'Belanda', 'Itali', 'Greek', 'Estonia', 'Melayu', 'Filipina', 'Vietnam', 'Turki'],
+  fil: ['Pinasimpleng Chinese', 'Ingles', 'Japanese', 'Korean', 'French', 'German', 'Spanish', 'Portuguese', 'Dutch', 'Italian', 'Greek', 'Estonian', 'Malay', 'Filipino', 'Vietnamese', 'Turkish'],
+  vi: ['Tiếng Trung (Giản thể)', 'Tiếng Anh', 'Tiếng Nhật', 'Tiếng Hàn', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Tây Ban Nha', 'Tiếng Bồ Đào Nha', 'Tiếng Hà Lan', 'Tiếng Italy', 'Tiếng Hy Lạp', 'Tiếng Estonia', 'Tiếng Mã Lai', 'Tiếng Philippines', 'Tiếng Việt', 'Tiếng Thổ Nhĩ Kỳ'],
+  tr: ['Basitleştirilmiş Çince', 'İngilizce', 'Japonca', 'Korece', 'Fransızca', 'Almanca', 'İspanyolca', 'Portekizce', 'Felemenkçe', 'İtalyanca', 'Yunanca', 'Estonca', 'Malayca', 'Filipince', 'Vietnamca', 'Türkçe']
+};
 const state = { locale: localStorage.getItem('dali-locale') || 'zh-Hans', theme: localStorage.getItem('dali-theme') || 'dark' };
+
+function getLanguageName(locale, displayLocale) {
+  const languageIndex = languageNameOrder.indexOf(locale);
+  return localizedLanguageNames[displayLocale]?.[languageIndex] || languageMeta[locale].english;
+}
+
+function updateLanguageControl() {
+  const meta = languageMeta[state.locale] || languageMeta['zh-Hans'];
+  const control = document.querySelector('#language-control');
+  const trigger = document.querySelector('#language-toggle');
+  document.querySelector('#language-current-native').textContent = meta.native;
+  trigger.setAttribute('aria-label', `${messages[state.locale]['control.languageLabel']}: ${meta.native}`);
+  document.querySelectorAll('.language-option').forEach((option) => {
+    const selected = option.dataset.locale === state.locale;
+    const localizedName = getLanguageName(option.dataset.locale, state.locale);
+    const localizedLabel = option.querySelector('small');
+    localizedLabel.textContent = localizedName;
+    localizedLabel.hidden = selected;
+    option.classList.toggle('is-selected', selected);
+    option.setAttribute('aria-pressed', String(selected));
+    option.setAttribute('aria-label', selected ? languageMeta[option.dataset.locale].native : `${languageMeta[option.dataset.locale].native} / ${localizedName}`);
+  });
+  trigger.setAttribute('aria-expanded', String(control.classList.contains('is-open')));
+}
+
+function setLanguagePanel(open) {
+  const control = document.querySelector('#language-control');
+  const panel = document.querySelector('#language-panel');
+  control.classList.toggle('is-open', open);
+  panel.hidden = !open;
+  updateLanguageControl();
+}
 
 function applyLocale(locale) {
   state.locale = messages[locale] ? locale : 'zh-Hans';
-  const documentLanguages = { 'zh-Hans': 'zh-CN', en: 'en', ja: 'ja-JP', fr: 'fr-FR', de: 'de-DE' };
   document.documentElement.lang = documentLanguages[state.locale];
   document.querySelectorAll('[data-i18n]').forEach((node) => {
     const value = messages[state.locale][node.dataset.i18n];
     if (value) node.innerHTML = value;
   });
-  document.querySelector('#language-select').value = state.locale;
   document.querySelectorAll('[data-i18n-aria]').forEach((node) => {
     const value = messages[state.locale][node.dataset.i18nAria];
     if (value) {
@@ -74,6 +145,7 @@ function applyLocale(locale) {
     }
   });
   localStorage.setItem('dali-locale', state.locale);
+  updateLanguageControl();
   updateThemeControl();
   updateScreen(document.querySelector('.software-tab.is-selected')?.dataset.screen || 'dashboard');
 }
@@ -103,14 +175,30 @@ function updateScreen(name) {
   const tab = document.querySelector(`[data-screen="${name}"]`);
   document.querySelectorAll('.software-tab').forEach((item) => { const selected = item === tab; item.classList.toggle('is-selected', selected); item.setAttribute('aria-selected', String(selected)); });
   document.querySelector('#screen-image').src = screen.image;
-  document.querySelector('#screen-image').alt = `${locale[`${screen.key}.title`]} screenshot`;
-  document.querySelector('#screen-kicker').textContent = screen.kicker;
+  document.querySelector('#screen-image').alt = locale[`${screen.key}.title`];
+  document.querySelector('#screen-kicker').textContent = `${locale['software.eyebrow']} / ${locale[`${screen.key}.title`]}`;
   document.querySelector('#screen-title').innerHTML = locale[`${screen.key}.title`];
   document.querySelector('#screen-description').innerHTML = locale[`${screen.key}.body`];
   document.querySelector('#screen-counter').textContent = `${String(Object.keys(screens).indexOf(name) + 1).padStart(2, '0')} / 04`;
 }
 
-document.querySelector('#language-select').addEventListener('change', (event) => applyLocale(event.target.value));
+document.querySelector('#language-toggle').addEventListener('click', () => {
+  setLanguagePanel(!document.querySelector('#language-control').classList.contains('is-open'));
+});
+document.querySelectorAll('.language-option').forEach((option) => option.addEventListener('click', () => {
+  applyLocale(option.dataset.locale);
+  setLanguagePanel(false);
+  document.querySelector('#language-toggle').focus();
+}));
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('#language-control')) setLanguagePanel(false);
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && document.querySelector('#language-control').classList.contains('is-open')) {
+    setLanguagePanel(false);
+    document.querySelector('#language-toggle').focus();
+  }
+});
 document.querySelector('#theme-toggle').addEventListener('click', () => {
   const nextIndex = (themeOrder.indexOf(state.theme) + 1) % themeOrder.length;
   applyTheme(themeOrder[nextIndex]);
