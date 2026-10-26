@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-core-scroll-container>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>DALI Control Platform Help</title>
+  <style>
+    :root {
+      --bg: #07131a;
+      --surface: rgba(15, 31, 40, .92);
+      --surface-strong: rgba(21, 43, 53, .96);
+      --line: rgba(151, 210, 225, .18);
+      --text: #eef8fa;
+      --muted: #a7c0c8;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, .13);
+      --shadow: 0 24px 70px rgba(0, 0, 0, .32);
+      --radius: 16px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html {
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-color: var(--accent) transparent;
+      scrollbar-width: thin;
+    }
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      overflow: visible;
+      touch-action: pan-x pan-y pinch-zoom;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 84% -10%, rgba(51, 191, 208, .16), transparent 38%),
+        linear-gradient(145deg, #07131a 0%, #0b1b25 58%, #102934 100%);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: 8px; background: color-mix(in srgb, var(--accent) 54%, transparent); background-clip: padding-box; }
+    ::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--accent) 74%, transparent); background-clip: padding-box; }
+    a { color: inherit; }
+    .page {
+      width: min(1120px, 100%);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .help-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 16px; align-items: start; }
+    .help-layout > * { min-width: 0; }
+    .toc {
+      position: sticky;
+      top: 24px;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .16);
+    }
+    .toc-head { padding: 15px 14px 11px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .025); }
+    .toc-title { display: block; font-size: 14px; line-height: 1.35; }
+    .toc-scope { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .toc-links { display: grid; gap: 5px; padding: 10px; }
+    .toc-link {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      min-height: 40px;
+      padding: 7px 8px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+    }
+    .toc-link:hover, .toc-link:focus-visible { color: var(--text); background: rgba(255, 255, 255, .05); outline: none; }
+    .toc-link.is-active { color: var(--text); border-color: color-mix(in srgb, var(--accent) 38%, transparent); background: var(--accent-soft); }
+    .toc-index {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .06);
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .toc-link.is-active .toc-index { background: var(--accent); color: #062328; box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 36%, transparent); }
+    .toc-label { min-width: 0; font-size: 11.5px; font-weight: 650; line-height: 1.35; }
+    .content { min-width: 0; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(31, 80, 91, .62), rgba(13, 29, 38, .82));
+      box-shadow: var(--shadow);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      right: -70px;
+      top: -100px;
+      border: 1px solid rgba(94, 234, 212, .28);
+      border-radius: 50%;
+      box-shadow: 0 0 0 22px rgba(94, 234, 212, .04), 0 0 0 44px rgba(94, 234, 212, .025);
+      pointer-events: none;
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 680px; margin-bottom: 10px; font-size: clamp(24px, 3vw, 34px); line-height: 1.15; letter-spacing: 0; }
+    .lead { max-width: 740px; margin-bottom: 0; color: var(--muted); font-size: 14px; }
+    main { display: grid; gap: 14px; margin-top: 14px; }
+    .section {
+      scroll-margin-top: 24px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .16);
+    }
+    .section h2 { margin-bottom: 6px; font-size: 18px; line-height: 1.25; }
+    .section-intro { margin-bottom: 14px; color: var(--muted); }
+    .hierarchy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .hierarchy-item {
+      min-height: 94px;
+      padding: 13px;
+      border: 1px solid rgba(151, 210, 225, .13);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .035);
+    }
+    .hierarchy-item h3 { margin-bottom: 5px; font-size: 14px; }
+    .hierarchy-item p { margin-bottom: 0; color: var(--muted); font-size: 12.5px; }
+    .status-list { display: grid; gap: 1px; overflow: hidden; border: 1px solid rgba(151, 210, 225, .13); border-radius: 12px; }
+    .status-row { display: grid; grid-template-columns: minmax(112px, .55fr) minmax(78px, .35fr) minmax(0, 1.55fr); gap: 12px; align-items: center; padding: 11px 13px; background: rgba(255, 255, 255, .035); }
+    .status-row + .status-row { border-top: 1px solid rgba(151, 210, 225, .11); }
+    .status-name { font-weight: 700; }
+    .status-color { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+    .dot { width: 9px; height: 9px; flex: 0 0 9px; border-radius: 50%; background: var(--state); box-shadow: 0 0 12px color-mix(in srgb, var(--state) 65%, transparent); }
+    .status-description { margin: 0; color: var(--muted); font-size: 12.5px; }
+    .note { margin-bottom: 0; padding: 12px 14px; border-left: 3px solid var(--accent); border-radius: 8px; background: var(--accent-soft); color: var(--muted); font-size: 12.5px; }
+    footer { padding: 20px 4px 0; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 900px) {
+      .page { padding: 18px 14px 24px; }
+      .help-layout { display: block; width: 100%; max-width: 100%; }
+      .content { width: 100%; max-width: 100%; margin-top: 12px; }
+      .toc { top: 0; z-index: 5; border-radius: 0 0 12px 12px; }
+      .toc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 10px 12px 8px; }
+      .toc-title { font-size: 13px; }
+      .toc-scope { margin-top: 0; font-size: 10px; }
+      .toc-links { display: flex; width: 100%; max-width: 100%; overflow-x: auto; gap: 6px; padding: 7px 9px 9px; scrollbar-width: none; }
+      .toc-links::-webkit-scrollbar { display: none; }
+      .toc-link { flex: 0 0 142px; min-height: 40px; padding: 6px 8px; }
+      .toc-index { width: 24px; height: 24px; }
+      .toc-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    }
+    @media (max-width: 620px) {
+      .page { padding: 18px 14px 24px; }
+      .hero, .section { padding: 18px; }
+      .hierarchy-grid { grid-template-columns: 1fr; }
+      .status-row { grid-template-columns: 1fr; gap: 4px; }
+      .status-color { font-size: 11px; }
+    }
+    @media (prefers-color-scheme: light) {
+      html[data-theme="auto"] {
+        --bg: #edf6f8; --surface: rgba(255, 255, 255, .9); --surface-strong: #fff;
+        --line: rgba(20, 72, 83, .16); --text: #10272f; --muted: #4d6871;
+        --accent: #087f86; --accent-soft: rgba(8, 127, 134, .1); --shadow: 0 18px 52px rgba(23, 69, 77, .14);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="help-layout">
+      <nav class="toc" aria-labelledby="tocTitle">
+        <div class="toc-head">
+          <strong class="toc-title" id="tocTitle">Help contents</strong>
+          <span class="toc-scope" id="tocScope">Project tree</span>
+        </div>
+        <div class="toc-links">
+          <a class="toc-link is-active" href="#hierarchy-section" data-section="hierarchy-section" aria-current="location">
+            <span class="toc-index">01</span><span class="toc-label" id="tocHierarchy">Read the tree</span>
+          </a>
+          <a class="toc-link" href="#status-section" data-section="status-section">
+            <span class="toc-index">02</span><span class="toc-label" id="tocStatus">Status colors</span>
+          </a>
+          <a class="toc-link" href="#repeated-status-section" data-section="repeated-status-section">
+            <span class="toc-index">03</span><span class="toc-label" id="tocRepeated">Repeated indicators</span>
+          </a>
+        </div>
+      </nav>
+      <div class="content">
+        <header class="hero">
+          <p class="eyebrow" id="eyebrow">IN-APP HELP</p>
+          <h1 id="title">Status indicators</h1>
+          <p class="lead" id="lead">The dots in the project tree describe the current state of each node. They are not hierarchy markers.</p>
+        </header>
+        <main>
+          <section class="section" id="hierarchy-section" tabindex="-1">
+            <h2 id="hierarchyTitle">Read the tree from summary to detail</h2>
+            <p class="section-intro" id="hierarchyIntro">A parent dot summarizes the visible business branch; a child dot describes its own connection or scan result.</p>
+            <div class="hierarchy-grid" id="hierarchy"></div>
+          </section>
+          <section class="section" id="status-section" tabindex="-1">
+            <h2 id="statusTitle">Status colors</h2>
+            <p class="section-intro" id="statusIntro">Colors follow the active application theme. The meaning stays the same in light and dark themes.</p>
+            <div class="status-list" id="statuses"></div>
+          </section>
+          <section class="section" id="repeated-status-section" tabindex="-1">
+            <h2 id="noteTitle">A note about repeated green dots</h2>
+            <p class="note" id="note">The connected-controller group and its controller children can both be green. The group means that at least one controller is online; the child means that this specific controller has a live session.</p>
+          </section>
+        </main>
+        <footer id="footer">DALI Control Platform · In-app reference · The help document can be expanded with more feature guides.</footer>
+      </div>
+    </div>
+  </div>
+  <script>
+    const packs = {
+      en: {
+        lang: 'en', eyebrow: 'IN-APP HELP', title: 'Status indicators', lead: 'The dots in the project tree describe the current state of each node. They are not hierarchy markers.', hierarchyTitle: 'Read the tree from summary to detail', hierarchyIntro: 'A parent dot summarizes the visible business branch; a child dot describes its own connection or scan result.', noteTitle: 'A note about repeated green dots', note: 'The connected-controller group and its controller children can both be green. The group means that at least one controller is online; the child means that this specific controller has a live session.', footer: 'DALI Control Platform · In-app reference · The help document can be expanded with more feature guides.', hierarchy: [['Connected controllers', 'Green means at least one recognized controller has an active session. The count shows connected / recognized.'], ['Controller', 'Green means this controller has a live connection session.'], ['DALI line', 'The dot reflects line discovery: waiting, scanning, complete, partial, failed or cancelled.'], ['Gear / device', 'Available means the scan is trusted; warning means the result needs review.'], ['Discovery result', 'USB or LAN results show whether a controller is available, provisional or offline.']], statuses: [['Connected', 'Green', 'A live controller session is present.'], ['Available', 'Theme color', 'The device or scan result is ready to use.'], ['Warning', 'Amber', 'Waiting, incomplete, provisional or needs review.'], ['Busy', 'Animated theme color', 'Scanning or another operation is in progress.'], ['Error', 'Red', 'The scan or operation failed.'], ['Offline', 'Gray', 'The endpoint is not currently reachable.'], ['Neutral', 'No dot', 'No status is asserted for this category or feature.']]
+      },
+      zh_Hans: {
+        lang: 'zh-CN', eyebrow: '软件内置帮助', title: '状态指示说明', lead: '工程对象树右侧的圆点用于表达当前节点状态，不是层级标识。', hierarchyTitle: '从汇总状态查看到具体节点', hierarchyIntro: '父级圆点汇总当前业务分支，子级圆点表达对应设备或扫描结果自身的状态。', noteTitle: '为什么会连续出现绿色圆点', note: '“已连接的控制器”和其下的控制器都可能显示绿色。父级表示至少有一个控制器在线，子级表示这一台具体控制器拥有有效连接会话。', footer: 'DALI Control Platform · 软件内帮助资料 · 后续可继续补充各功能的操作说明。', hierarchy: [['已连接的控制器', '绿色表示至少有一个已识别控制器建立了有效会话，右侧数量表示已连接数 / 已识别数。'], ['具体控制器', '绿色表示这一台控制器当前连接会话正常。'], ['DALI 线路', '圆点表达线路搜索状态：等待、搜索中、完成、部分完成、失败或取消。'], ['灯具 / 设备', '可用表示扫描结果可信；警告表示结果不完整或需要复核。'], ['搜索结果', 'USB 或局域网结果表达设备可用、待准入确认或离线状态。']], statuses: [['已连接', '绿色', '控制器连接会话正常。'], ['可用', '主题色', '设备或扫描结果已经可以使用。'], ['警告', '黄色', '等待、结果不完整、待确认或需要复核。'], ['处理中', '动态主题色', '正在搜索或执行其它操作。'], ['错误', '红色', '搜索或操作失败。'], ['离线', '灰色', '当前无法访问该接入端点。'], ['无状态', '不显示圆点', '该分类或功能没有声明状态。']]
+      },
+      zh_Hant: {
+        lang: 'zh-TW', eyebrow: '軟體內建說明', title: '狀態指示說明', lead: '工程物件樹右側的圓點用來表示目前節點狀態，不是層級標記。', hierarchyTitle: '從彙總狀態查看到具體節點', hierarchyIntro: '父層圓點彙總目前業務分支，子層圓點表示對應裝置或掃描結果本身的狀態。', noteTitle: '為什麼會連續出現綠色圓點', note: '「已連線的控制器」和其下的控制器都可能顯示綠色。父層表示至少有一台控制器在線，子層表示這台控制器擁有有效連線工作階段。', footer: 'DALI Control Platform · 軟體內說明資料 · 後續可繼續補充各功能的操作指南。', hierarchy: [['已連線的控制器', '綠色表示至少有一台已識別控制器建立有效工作階段，右側數量表示已連線數 / 已識別數。'], ['具體控制器', '綠色表示這台控制器目前連線工作階段正常。'], ['DALI 線路', '圓點表示線路搜尋狀態：等待、搜尋中、完成、部分完成、失敗或取消。'], ['燈具 / 裝置', '可用表示掃描結果可信；警告表示結果不完整或需要複核。'], ['搜尋結果', 'USB 或區域網路結果表示裝置可用、等待准入確認或離線。']], statuses: [['已連線', '綠色', '控制器連線工作階段正常。'], ['可用', '主題色', '裝置或掃描結果已可使用。'], ['警告', '黃色', '等待、結果不完整、待確認或需要複核。'], ['處理中', '動態主題色', '正在搜尋或執行其他操作。'], ['錯誤', '紅色', '搜尋或操作失敗。'], ['離線', '灰色', '目前無法存取此接入端點。'], ['無狀態', '不顯示圓點', '此分類或功能沒有宣告狀態。']]
+      },
+      ja: {
+        lang: 'ja', eyebrow: 'アプリ内ヘルプ', title: '状態インジケーター', lead: 'プロジェクトツリー右側のドットは、各ノードの現在の状態を示します。階層を示す記号ではありません。', hierarchyTitle: '概要から詳細へ状態を確認', hierarchyIntro: '親ノードは分岐全体を要約し、子ノードは自身の接続またはスキャン結果を示します。', noteTitle: '緑のドットが続けて表示される理由', note: '「接続済みコントローラー」とその子コントローラーの両方が緑になることがあります。親は少なくとも1台がオンラインであること、子はそのコントローラー自身の接続を示します。', footer: 'DALI Control Platform · アプリ内資料 · 今後、機能ごとの操作ガイドを追加できます。', hierarchy: [['接続済みコントローラー', '緑は、認識済みコントローラーの少なくとも1台に有効なセッションがあることを示します。'], ['コントローラー', '緑は、このコントローラーの接続セッションが有効であることを示します。'], ['DALI ライン', '待機、スキャン中、完了、一部完了、失敗、キャンセルなどの探索状態を示します。'], ['器具 / デバイス', '使用可能は信頼できる結果、警告は確認が必要な結果を示します。'], ['探索結果', 'USB または LAN の結果が使用可能、仮登録、オフラインのいずれかを示します。']], statuses: [['接続済み', '緑', 'コントローラーの接続セッションが有効です。'], ['使用可能', 'テーマ色', 'デバイスまたはスキャン結果を使用できます。'], ['警告', 'アンバー', '待機中、不完全、仮登録、または確認が必要です。'], ['処理中', '動的テーマ色', 'スキャンなどの処理中です。'], ['エラー', '赤', 'スキャンまたは操作に失敗しました。'], ['オフライン', 'グレー', '接続先に到達できません。'], ['状態なし', 'ドットなし', 'この分類または機能に状態はありません。']]
+      },
+      ko: {
+        lang: 'ko', eyebrow: '앱 내 도움말', title: '상태 표시', lead: '프로젝트 트리 오른쪽의 점은 각 노드의 현재 상태를 나타내며 계층 표시는 아닙니다.', hierarchyTitle: '요약 상태에서 세부 노드까지 확인', hierarchyIntro: '상위 노드는 업무 가지를 요약하고 하위 노드는 자체 연결 또는 검색 결과를 나타냅니다.', noteTitle: '녹색 점이 연속으로 표시되는 이유', note: '연결된 컨트롤러 그룹과 하위 컨트롤러가 모두 녹색일 수 있습니다. 상위는 하나 이상의 컨트롤러가 온라인임을, 하위는 해당 컨트롤러의 연결 세션을 뜻합니다.', footer: 'DALI Control Platform · 앱 내 자료 · 향후 기능별 사용 안내를 추가할 수 있습니다.', hierarchy: [['연결된 컨트롤러', '녹색은 인식된 컨트롤러 중 하나 이상에 활성 세션이 있음을 뜻합니다.'], ['컨트롤러', '녹색은 해당 컨트롤러의 연결 세션이 정상임을 뜻합니다.'], ['DALI 라인', '대기, 검색 중, 완료, 부분 완료, 실패 또는 취소된 검색 상태를 나타냅니다.'], ['기구 / 장치', '사용 가능은 신뢰할 수 있는 검색 결과, 경고는 검토가 필요한 결과입니다.'], ['검색 결과', 'USB 또는 LAN 장치가 사용 가능, 임시 확인 또는 오프라인인지 나타냅니다.']], statuses: [['연결됨', '녹색', '컨트롤러 연결 세션이 활성 상태입니다.'], ['사용 가능', '테마 색상', '장치 또는 검색 결과를 사용할 수 있습니다.'], ['경고', '황색', '대기, 불완전, 임시 확인 또는 검토가 필요합니다.'], ['처리 중', '동적 테마 색상', '검색 또는 다른 작업을 수행 중입니다.'], ['오류', '빨간색', '검색 또는 작업에 실패했습니다.'], ['오프라인', '회색', '현재 연결 대상에 접근할 수 없습니다.'], ['상태 없음', '점 없음', '이 분류 또는 기능에는 상태가 없습니다.']]
+      },
+      fr: {
+        lang: 'fr', eyebrow: 'AIDE INTÉGRÉE', title: 'Indicateurs d’état', lead: 'Les points à droite de l’arborescence décrivent l’état actuel de chaque nœud. Ils ne représentent pas la hiérarchie.', hierarchyTitle: 'Du résumé au détail', hierarchyIntro: 'Le point parent résume la branche visible ; le point enfant décrit sa connexion ou son résultat de recherche.', noteTitle: 'Pourquoi plusieurs points verts', note: 'Le groupe des contrôleurs connectés et ses contrôleurs enfants peuvent être verts. Le groupe indique qu’au moins un contrôleur est en ligne ; l’enfant indique la session de ce contrôleur.', footer: 'DALI Control Platform · Référence intégrée · Des guides par fonction pourront être ajoutés.', hierarchy: [['Contrôleurs connectés', 'Vert : au moins un contrôleur reconnu possède une session active.'], ['Contrôleur', 'Vert : la session de ce contrôleur est active.'], ['Ligne DALI', 'Indique l’attente, la recherche, la réussite, la réussite partielle, l’échec ou l’annulation.'], ['Appareil / équipement', 'Disponible : résultat fiable ; avertissement : vérification nécessaire.'], ['Résultat de recherche', 'Indique si l’appareil USB ou réseau est disponible, provisoire ou hors ligne.']], statuses: [['Connecté', 'Vert', 'Session du contrôleur active.'], ['Disponible', 'Couleur du thème', 'Appareil ou résultat prêt à être utilisé.'], ['Avertissement', 'Ambre', 'En attente, incomplet, provisoire ou à vérifier.'], ['En cours', 'Couleur animée', 'Recherche ou opération en cours.'], ['Erreur', 'Rouge', 'La recherche ou l’opération a échoué.'], ['Hors ligne', 'Gris', 'Le point d’accès est actuellement inaccessible.'], ['Neutre', 'Pas de point', 'Aucun état n’est déclaré pour cette catégorie.']]
+      },
+      de: {
+        lang: 'de', eyebrow: 'INTEGRIERTE HILFE', title: 'Statusanzeigen', lead: 'Die Punkte rechts im Projektbaum zeigen den aktuellen Status jedes Knotens. Sie sind keine Hierarchiezeichen.', hierarchyTitle: 'Vom Überblick zum Detail', hierarchyIntro: 'Der übergeordnete Punkt fasst den sichtbaren Zweig zusammen; der untergeordnete Punkt beschreibt seine Verbindung oder Suche.', noteTitle: 'Warum mehrere grüne Punkte erscheinen', note: 'Die Gruppe „Verbundene Controller“ und ihre Controller können beide grün sein. Die Gruppe bedeutet, dass mindestens ein Controller online ist; das Kind zeigt die Sitzung dieses Controllers.', footer: 'DALI Control Platform · Integrierte Referenz · Weitere Funktionsanleitungen können ergänzt werden.', hierarchy: [['Verbundene Controller', 'Grün bedeutet, dass mindestens ein erkannter Controller eine aktive Sitzung hat.'], ['Controller', 'Grün bedeutet, dass die Sitzung dieses Controllers aktiv ist.'], ['DALI-Linie', 'Zeigt Warten, Suche, Abschluss, Teilabschluss, Fehler oder Abbruch der Suche.'], ['Gerät / Leuchte', 'Verfügbar bedeutet vertrauenswürdiges Ergebnis; Warnung bedeutet Prüfbedarf.'], ['Suchergebnis', 'Zeigt, ob ein USB- oder LAN-Gerät verfügbar, vorläufig oder offline ist.']], statuses: [['Verbunden', 'Grün', 'Eine aktive Controller-Sitzung ist vorhanden.'], ['Verfügbar', 'Themefarbe', 'Gerät oder Suchergebnis kann verwendet werden.'], ['Warnung', 'Bernstein', 'Wartet, ist unvollständig, vorläufig oder muss geprüft werden.'], ['In Bearbeitung', 'Dynamische Themefarbe', 'Suche oder ein anderer Vorgang läuft.'], ['Fehler', 'Rot', 'Suche oder Vorgang ist fehlgeschlagen.'], ['Offline', 'Grau', 'Der Endpunkt ist derzeit nicht erreichbar.'], ['Neutral', 'Kein Punkt', 'Für diese Kategorie ist kein Status gesetzt.']]
+      },
+      es: {
+        lang: 'es', eyebrow: 'AYUDA INTEGRADA', title: 'Indicadores de estado', lead: 'Los puntos a la derecha del árbol del proyecto muestran el estado actual de cada nodo. No representan la jerarquía.', hierarchyTitle: 'Del resumen al detalle', hierarchyIntro: 'El punto padre resume la rama visible y el punto hijo describe su conexión o resultado de búsqueda.', noteTitle: 'Por qué aparecen varios puntos verdes', note: 'El grupo de controladores conectados y sus controladores pueden aparecer en verde. El grupo indica que al menos uno está en línea; el hijo indica la sesión de ese controlador.', footer: 'DALI Control Platform · Referencia integrada · Se pueden añadir guías de funciones más adelante.', hierarchy: [['Controladores conectados', 'Verde: al menos un controlador reconocido tiene una sesión activa.'], ['Controlador', 'Verde: la sesión de este controlador está activa.'], ['Línea DALI', 'Muestra espera, búsqueda, finalización, finalización parcial, error o cancelación.'], ['Dispositivo / luminaria', 'Disponible: resultado fiable; advertencia: se requiere revisión.'], ['Resultado de búsqueda', 'Indica si el dispositivo USB o LAN está disponible, provisional o sin conexión.']], statuses: [['Conectado', 'Verde', 'Hay una sesión activa del controlador.'], ['Disponible', 'Color del tema', 'El dispositivo o resultado está listo para usarse.'], ['Advertencia', 'Ámbar', 'Está esperando, incompleto, provisional o requiere revisión.'], ['En curso', 'Color dinámico', 'Se está realizando una búsqueda u operación.'], ['Error', 'Rojo', 'La búsqueda u operación ha fallado.'], ['Sin conexión', 'Gris', 'El punto de acceso no está disponible.'], ['Neutro', 'Sin punto', 'No se ha declarado un estado para esta categoría.']]
+      },
+      pt: {
+        lang: 'pt', eyebrow: 'AJUDA INTEGRADA', title: 'Indicadores de estado', lead: 'Os pontos à direita da árvore do projeto mostram o estado atual de cada nó. Não representam a hierarquia.', hierarchyTitle: 'Do resumo ao detalhe', hierarchyIntro: 'O ponto pai resume o ramo visível; o ponto filho descreve a sua ligação ou resultado de pesquisa.', noteTitle: 'Porque aparecem vários pontos verdes', note: 'O grupo de controladores ligados e os seus controladores podem estar verdes. O grupo indica que pelo menos um está online; o filho indica a sessão desse controlador.', footer: 'DALI Control Platform · Referência integrada · Poderão ser adicionados guias de funcionalidades.', hierarchy: [['Controladores ligados', 'Verde: pelo menos um controlador reconhecido tem uma sessão ativa.'], ['Controlador', 'Verde: a sessão deste controlador está ativa.'], ['Linha DALI', 'Mostra espera, pesquisa, conclusão, conclusão parcial, falha ou cancelamento.'], ['Dispositivo / luminária', 'Disponível: resultado fiável; aviso: é necessária revisão.'], ['Resultado da pesquisa', 'Indica se o dispositivo USB ou LAN está disponível, provisório ou offline.']], statuses: [['Ligado', 'Verde', 'Existe uma sessão ativa do controlador.'], ['Disponível', 'Cor do tema', 'O dispositivo ou resultado está pronto a utilizar.'], ['Aviso', 'Âmbar', 'A aguardar, incompleto, provisório ou a requerer revisão.'], ['Em curso', 'Cor dinâmica', 'Está a decorrer uma pesquisa ou operação.'], ['Erro', 'Vermelho', 'A pesquisa ou operação falhou.'], ['Offline', 'Cinzento', 'O ponto de acesso não está acessível.'], ['Neutro', 'Sem ponto', 'Não foi definido estado para esta categoria.']]
+      },
+      nl: {
+        lang: 'nl', eyebrow: 'INGEBOUWDE HULP', title: 'Statusindicatoren', lead: 'De punten rechts in de projectboom tonen de huidige status van elk knooppunt. Ze zijn geen hiërarchiemarkeringen.', hierarchyTitle: 'Van samenvatting naar detail', hierarchyIntro: 'Het bovenliggende punt vat de zichtbare tak samen; het onderliggende punt beschrijft de verbinding of zoekuitkomst.', noteTitle: 'Waarom meerdere groene punten verschijnen', note: 'De groep Verbonden controllers en de controllers daaronder kunnen beide groen zijn. De groep betekent dat minstens één controller online is; het kind toont de sessie van die controller.', footer: 'DALI Control Platform · Ingebouwde referentie · Later kunnen functiehandleidingen worden toegevoegd.', hierarchy: [['Verbonden controllers', 'Groen: minstens één herkende controller heeft een actieve sessie.'], ['Controller', 'Groen: de sessie van deze controller is actief.'], ['DALI-lijn', 'Toont wachten, zoeken, voltooid, gedeeltelijk voltooid, mislukt of geannuleerd.'], ['Apparaat / armatuur', 'Beschikbaar: betrouwbaar resultaat; waarschuwing: controle nodig.'], ['Zoekresultaat', 'Toont of een USB- of LAN-apparaat beschikbaar, voorlopig of offline is.']], statuses: [['Verbonden', 'Groen', 'Er is een actieve controllersessie.'], ['Beschikbaar', 'Themakleur', 'Apparaat of zoekresultaat kan worden gebruikt.'], ['Waarschuwing', 'Amber', 'Wacht, is onvolledig, voorlopig of moet worden gecontroleerd.'], ['Bezig', 'Dynamische themakleur', 'Er wordt gezocht of een andere bewerking uitgevoerd.'], ['Fout', 'Rood', 'Zoeken of de bewerking is mislukt.'], ['Offline', 'Grijs', 'Het eindpunt is momenteel niet bereikbaar.'], ['Neutraal', 'Geen punt', 'Voor deze categorie is geen status ingesteld.']]
+      },
+      it: {
+        lang: 'it', eyebrow: 'GUIDA INTEGRATA', title: 'Indicatori di stato', lead: 'I punti a destra dell’albero del progetto mostrano lo stato attuale di ogni nodo. Non indicano la gerarchia.', hierarchyTitle: 'Dal riepilogo al dettaglio', hierarchyIntro: 'Il punto padre riassume il ramo visibile; il punto figlio descrive la propria connessione o il risultato della ricerca.', noteTitle: 'Perché compaiono più punti verdi', note: 'Il gruppo dei controller connessi e i controller figli possono essere entrambi verdi. Il gruppo indica che almeno un controller è online; il figlio indica la sessione di quel controller.', footer: 'DALI Control Platform · Riferimento integrato · In seguito si potranno aggiungere guide per funzione.', hierarchy: [['Controller connessi', 'Verde: almeno un controller riconosciuto ha una sessione attiva.'], ['Controller', 'Verde: la sessione di questo controller è attiva.'], ['Linea DALI', 'Indica attesa, ricerca, completamento, completamento parziale, errore o annullamento.'], ['Dispositivo / apparecchio', 'Disponibile: risultato attendibile; avviso: serve una verifica.'], ['Risultato ricerca', 'Indica se il dispositivo USB o LAN è disponibile, provvisorio o offline.']], statuses: [['Connesso', 'Verde', 'È presente una sessione attiva del controller.'], ['Disponibile', 'Colore tema', 'Il dispositivo o il risultato è pronto all’uso.'], ['Avviso', 'Ambra', 'In attesa, incompleto, provvisorio o da verificare.'], ['In corso', 'Colore dinamico', 'È in corso una ricerca o un’operazione.'], ['Errore', 'Rosso', 'La ricerca o l’operazione non è riuscita.'], ['Offline', 'Grigio', 'L’endpoint non è raggiungibile.'], ['Neutro', 'Nessun punto', 'Nessuno stato è dichiarato per questa categoria.']]
+      },
+      el: {
+        lang: 'el', eyebrow: 'ΕΝΣΩΜΑΤΩΜΕΝΗ ΒΟΗΘΕΙΑ', title: 'Ενδείξεις κατάστασης', lead: 'Οι τελείες στα δεξιά του δέντρου έργου δείχνουν την τρέχουσα κατάσταση κάθε κόμβου. Δεν δηλώνουν την ιεραρχία.', hierarchyTitle: 'Από τη σύνοψη στη λεπτομέρεια', hierarchyIntro: 'Η γονική ένδειξη συνοψίζει τον ορατό κλάδο, ενώ η θυγατρική δείχνει τη δική της σύνδεση ή το αποτέλεσμα αναζήτησης.', noteTitle: 'Γιατί εμφανίζονται πολλές πράσινες τελείες', note: 'Η ομάδα συνδεδεμένων ελεγκτών και οι ελεγκτές της μπορούν να είναι πράσινοι. Η ομάδα δηλώνει ότι τουλάχιστον ένας ελεγκτής είναι online· η θυγατρική δηλώνει τη συνεδρία αυτού του ελεγκτή.', footer: 'DALI Control Platform · Ενσωματωμένη αναφορά · Μπορούν να προστεθούν οδηγοί λειτουργιών.', hierarchy: [['Συνδεδεμένοι ελεγκτές', 'Πράσινο: τουλάχιστον ένας αναγνωρισμένος ελεγκτής έχει ενεργή συνεδρία.'], ['Ελεγκτής', 'Πράσινο: η συνεδρία αυτού του ελεγκτή είναι ενεργή.'], ['Γραμμή DALI', 'Δείχνει αναμονή, αναζήτηση, ολοκλήρωση, μερική ολοκλήρωση, αποτυχία ή ακύρωση.'], ['Συσκευή / φωτιστικό', 'Διαθέσιμο: αξιόπιστο αποτέλεσμα· προειδοποίηση: απαιτείται έλεγχος.'], ['Αποτέλεσμα αναζήτησης', 'Δείχνει αν μια συσκευή USB ή LAN είναι διαθέσιμη, προσωρινή ή εκτός σύνδεσης.']], statuses: [['Συνδεδεμένο', 'Πράσινο', 'Υπάρχει ενεργή συνεδρία ελεγκτή.'], ['Διαθέσιμο', 'Χρώμα θέματος', 'Η συσκευή ή το αποτέλεσμα είναι έτοιμο για χρήση.'], ['Προειδοποίηση', 'Κεχριμπαρί', 'Αναμονή, ελλιπές, προσωρινό ή απαιτεί έλεγχο.'], ['Σε εξέλιξη', 'Δυναμικό χρώμα', 'Εκτελείται αναζήτηση ή άλλη λειτουργία.'], ['Σφάλμα', 'Κόκκινο', 'Η αναζήτηση ή η λειτουργία απέτυχε.'], ['Εκτός σύνδεσης', 'Γκρι', 'Το άκρο δεν είναι προσβάσιμο.'], ['Ουδέτερο', 'Χωρίς τελεία', 'Δεν έχει δηλωθεί κατάσταση για αυτή την κατηγορία.']]
+      },
+      et: {
+        lang: 'et', eyebrow: 'SISseehitatud ABI', title: 'Olekunäidikud', lead: 'Projektipuu paremal olevad punktid näitavad iga sõlme hetkeseisundit. Need ei tähista hierarhiat.', hierarchyTitle: 'Kokkuvõttest üksikasjadeni', hierarchyIntro: 'Ülemise taseme punkt võtab nähtava haru kokku; alam-punkt kirjeldab enda ühendust või otsingutulemust.', noteTitle: 'Miks kuvatakse mitu rohelist punkti', note: 'Ühendatud kontrollerite rühm ja selle kontrollerid võivad mõlemad olla rohelised. Rühm tähendab, et vähemalt üks kontroller on võrgus; alamüksus näitab selle konkreetse kontrolleri seanssi.', footer: 'DALI Control Platform · Rakendusesisene juhend · Hiljem saab lisada funktsioonipõhiseid juhiseid.', hierarchy: [['Ühendatud kontrollerid', 'Roheline: vähemalt ühel tuvastatud kontrolleril on aktiivne seanss.'], ['Kontroller', 'Roheline: selle kontrolleri seanss on aktiivne.'], ['DALI-liin', 'Näitab ootamist, otsingut, lõpetamist, osalist lõpetamist, tõrget või tühistamist.'], ['Seade / valgusti', 'Saadaval: usaldusväärne tulemus; hoiatus: vajab kontrolli.'], ['Otsingutulemus', 'Näitab, kas USB- või LAN-seade on saadaval, ajutine või ühenduseta.']], statuses: [['Ühendatud', 'Roheline', 'Kontrolleril on aktiivne seanss.'], ['Saadaval', 'Teemavärv', 'Seade või otsingutulemus on kasutamiseks valmis.'], ['Hoiatus', 'Merevaik', 'Ootel, puudulik, ajutine või vajab ülevaatust.'], ['Töös', 'Dünaamiline teemavärv', 'Otsing või muu toiming on käimas.'], ['Tõrge', 'Punane', 'Otsing või toiming ebaõnnestus.'], ['Ühenduseta', 'Hall', 'Lõpp-punkt pole praegu kättesaadav.'], ['Neutraalne', 'Punkt puudub', 'Selle kategooria olekut pole määratud.']]
+      },
+      ms: {
+        lang: 'ms', eyebrow: 'BANTUAN DALAMAN', title: 'Penunjuk status', lead: 'Titik di sebelah kanan pepohon projek menunjukkan status semasa setiap nod. Ia bukan penanda hierarki.', hierarchyTitle: 'Daripada ringkasan kepada butiran', hierarchyIntro: 'Titik induk meringkaskan cabang yang kelihatan; titik anak menerangkan sambungan atau hasil carian sendiri.', noteTitle: 'Mengapa terdapat beberapa titik hijau', note: 'Kumpulan pengawal yang bersambung dan pengawal anaknya boleh sama-sama hijau. Kumpulan bermaksud sekurang-kurangnya satu pengawal dalam talian; anak menunjukkan sesi pengawal tersebut.', footer: 'DALI Control Platform · Rujukan dalam aplikasi · Panduan fungsi boleh ditambah kemudian.', hierarchy: [['Pengawal bersambung', 'Hijau: sekurang-kurangnya satu pengawal yang dikenal pasti mempunyai sesi aktif.'], ['Pengawal', 'Hijau: sesi pengawal ini aktif.'], ['Laluan DALI', 'Menunjukkan menunggu, mencari, selesai, selesai sebahagian, gagal atau dibatalkan.'], ['Peranti / lampu', 'Tersedia: hasil dipercayai; amaran: perlu semakan.'], ['Hasil carian', 'Menunjukkan sama ada peranti USB atau LAN tersedia, sementara atau luar talian.']], statuses: [['Bersambung', 'Hijau', 'Sesi pengawal aktif.'], ['Tersedia', 'Warna tema', 'Peranti atau hasil sedia digunakan.'], ['Amaran', 'Ambar', 'Menunggu, tidak lengkap, sementara atau perlu semakan.'], ['Sedang diproses', 'Warna dinamik', 'Carian atau operasi sedang berjalan.'], ['Ralat', 'Merah', 'Carian atau operasi gagal.'], ['Luar talian', 'Kelabu', 'Titik akhir tidak boleh dicapai.'], ['Neutral', 'Tiada titik', 'Tiada status ditetapkan untuk kategori ini.']]
+      },
+      fil: {
+        lang: 'fil', eyebrow: 'BUILT-IN NA TULONG', title: 'Mga indicator ng status', lead: 'Ang mga tuldok sa kanan ng project tree ay nagpapakita ng kasalukuyang status ng bawat node. Hindi ito mga marker ng hierarchy.', hierarchyTitle: 'Mula buod hanggang detalye', hierarchyIntro: 'Binubuod ng parent dot ang nakikitang branch; inilalarawan ng child dot ang sarili nitong koneksyon o resulta ng paghahanap.', noteTitle: 'Bakit may magkakasunod na berdeng tuldok', note: 'Maaaring parehong berde ang pangkat ng mga nakakonektang controller at ang mga controller nito. Ibig sabihin ng pangkat ay may kahit isang controller na online; ipinapakita ng child ang session ng partikular na controller.', footer: 'DALI Control Platform · Gabay sa loob ng app · Maaaring dagdagan ng mga gabay sa feature sa hinaharap.', hierarchy: [['Mga nakakonektang controller', 'Berde: may aktibong session ang kahit isang nakilalang controller.'], ['Controller', 'Berde: aktibo ang koneksyon ng controller na ito.'], ['DALI line', 'Ipinapakita ang naghihintay, naghahanap, kumpleto, bahagyang kumpleto, nabigo o nakanselang paghahanap.'], ['Device / ilaw', 'Available: mapagkakatiwalaang resulta; warning: kailangan ng pagsusuri.'], ['Resulta ng paghahanap', 'Ipinapakita kung available, pansamantala o offline ang USB o LAN device.']], statuses: [['Nakakonekta', 'Berde', 'May aktibong session ang controller.'], ['Available', 'Kulay ng tema', 'Handa nang gamitin ang device o resulta.'], ['Babala', 'Amber', 'Naghihintay, hindi kumpleto, pansamantala o kailangan ng pagsusuri.'], ['Pinoproseso', 'Dynamic na kulay', 'May isinasagawang paghahanap o operasyon.'], ['Error', 'Pula', 'Nabigo ang paghahanap o operasyon.'], ['Offline', 'Abo', 'Hindi maabot ang endpoint.'], ['Neutral', 'Walang tuldok', 'Walang itinakdang status para sa kategoryang ito.']]
+      },
+      vi: {
+        lang: 'vi', eyebrow: 'TRỢ GIÚP TÍCH HỢP', title: 'Chỉ báo trạng thái', lead: 'Các chấm ở bên phải cây dự án cho biết trạng thái hiện tại của từng nút. Đây không phải ký hiệu cấp bậc.', hierarchyTitle: 'Từ tổng quan đến chi tiết', hierarchyIntro: 'Chấm ở nút cha tóm tắt nhánh đang hiển thị; chấm ở nút con mô tả kết nối hoặc kết quả quét của chính nút đó.', noteTitle: 'Vì sao có nhiều chấm màu xanh', note: 'Nhóm bộ điều khiển đã kết nối và các bộ điều khiển con đều có thể màu xanh. Nhóm cho biết có ít nhất một bộ điều khiển đang trực tuyến; nút con cho biết phiên kết nối của bộ điều khiển cụ thể đó.', footer: 'DALI Control Platform · Tài liệu trong ứng dụng · Có thể bổ sung hướng dẫn từng chức năng sau này.', hierarchy: [['Bộ điều khiển đã kết nối', 'Màu xanh: ít nhất một bộ điều khiển được nhận diện có phiên hoạt động.'], ['Bộ điều khiển', 'Màu xanh: phiên kết nối của bộ điều khiển này đang hoạt động.'], ['Đường DALI', 'Cho biết đang chờ, đang quét, hoàn tất, hoàn tất một phần, lỗi hoặc đã hủy.'], ['Thiết bị / đèn', 'Khả dụng: kết quả đáng tin cậy; cảnh báo: cần xem xét.'], ['Kết quả tìm kiếm', 'Cho biết thiết bị USB hoặc LAN khả dụng, tạm thời hoặc ngoại tuyến.']], statuses: [['Đã kết nối', 'Xanh', 'Có phiên kết nối bộ điều khiển đang hoạt động.'], ['Khả dụng', 'Màu chủ đề', 'Thiết bị hoặc kết quả đã sẵn sàng sử dụng.'], ['Cảnh báo', 'Hổ phách', 'Đang chờ, chưa đầy đủ, tạm thời hoặc cần xem xét.'], ['Đang xử lý', 'Màu động', 'Đang quét hoặc thực hiện thao tác khác.'], ['Lỗi', 'Đỏ', 'Tìm kiếm hoặc thao tác thất bại.'], ['Ngoại tuyến', 'Xám', 'Không thể truy cập điểm kết nối.'], ['Trung tính', 'Không có chấm', 'Không có trạng thái cho nhóm hoặc chức năng này.']]
+      },
+      tr: {
+        lang: 'tr', eyebrow: 'UYGULAMA İÇİ YARDIM', title: 'Durum göstergeleri', lead: 'Proje ağacının sağındaki noktalar her düğümün güncel durumunu gösterir. Hiyerarşi işareti değildir.', hierarchyTitle: 'Özetten ayrıntıya durumları okuyun', hierarchyIntro: 'Üst düğüm görünen dalı özetler; alt düğüm kendi bağlantısını veya tarama sonucunu gösterir.', noteTitle: 'Neden birden fazla yeşil nokta var', note: 'Bağlı denetleyiciler grubu ve altındaki denetleyiciler yeşil olabilir. Grup en az bir denetleyicinin çevrimiçi olduğunu, alt düğüm ise o denetleyicinin oturumunu gösterir.', footer: 'DALI Control Platform · Uygulama içi başvuru · İleride özellik kılavuzları eklenebilir.', hierarchy: [['Bağlı denetleyiciler', 'Yeşil: tanınan denetleyicilerden en az birinin etkin oturumu vardır.'], ['Denetleyici', 'Yeşil: bu denetleyicinin bağlantı oturumu aktiftir.'], ['DALI hattı', 'Bekleme, tarama, tamamlandı, kısmi tamamlandı, başarısız veya iptal durumlarını gösterir.'], ['Cihaz / armatür', 'Kullanılabilir: güvenilir sonuç; uyarı: inceleme gerekir.'], ['Arama sonucu', 'USB veya LAN cihazının kullanılabilir, geçici ya da çevrimdışı olduğunu gösterir.']], statuses: [['Bağlı', 'Yeşil', 'Etkin bir denetleyici oturumu var.'], ['Kullanılabilir', 'Tema rengi', 'Cihaz veya tarama sonucu kullanıma hazır.'], ['Uyarı', 'Amber', 'Bekliyor, eksik, geçici veya incelenmesi gerekiyor.'], ['İşleniyor', 'Dinamik tema rengi', 'Tarama ya da başka bir işlem sürüyor.'], ['Hata', 'Kırmızı', 'Arama veya işlem başarısız oldu.'], ['Çevrimdışı', 'Gri', 'Uç noktaya şu anda erişilemiyor.'], ['Nötr', 'Nokta yok', 'Bu kategori için durum bildirilmemiş.']]
+      }
+    };
+
+    const injected = '__DALI_LOCALE__';
+    const browserLocale = (navigator.language || 'en').replace('-', '_');
+    const languageCode = (injected === '__DALI_LOCALE__' ? browserLocale : injected).toLowerCase();
+    const key = Object.keys(packs).find((entry) => entry.toLowerCase() === languageCode) ||
+      Object.keys(packs).find((entry) => entry.toLowerCase().startsWith(languageCode.split('_')[0])) || 'en';
+    const copy = packs[key];
+    const directoryCopy = {
+      en: ['Help contents', 'Project tree'],
+      zh_Hans: ['帮助目录', '工程对象树'],
+      zh_Hant: ['說明目錄', '工程物件樹'],
+      ja: ['ヘルプ目次', 'プロジェクトツリー'],
+      ko: ['도움말 목차', '프로젝트 트리'],
+      fr: ['Sommaire de l’aide', 'Arborescence du projet'],
+      de: ['Hilfeinhalt', 'Projektbaum'],
+      es: ['Contenido de ayuda', 'Árbol del proyecto'],
+      pt: ['Conteúdo da ajuda', 'Árvore do projeto'],
+      nl: ['Helpinhoud', 'Projectstructuur'],
+      it: ['Indice della guida', 'Albero del progetto'],
+      el: ['Περιεχόμενα βοήθειας', 'Δέντρο έργου'],
+      et: ['Abi sisukord', 'Projektipuu'],
+      ms: ['Kandungan bantuan', 'Pepohon projek'],
+      fil: ['Mga nilalaman ng tulong', 'Project tree'],
+      vi: ['Mục lục trợ giúp', 'Cây dự án'],
+      tr: ['Yardım içeriği', 'Proje ağacı']
+    }[key] || ['Help contents', 'Project tree'];
+    const statusCopy = {
+      en: ['Status colors', 'Colors follow the active application theme. The meaning stays the same in light and dark themes.'],
+      zh_Hans: ['状态颜色', '颜色会跟随当前软件主题；浅色和深色主题下的含义保持一致。'],
+      zh_Hant: ['狀態顏色', '顏色會跟隨目前軟體主題；淺色與深色主題下的含義保持一致。'],
+      ja: ['状態の色', '色は現在のアプリテーマに従います。明るいテーマと暗いテーマで意味は変わりません。'],
+      ko: ['상태 색상', '색상은 현재 앱 테마를 따릅니다. 밝은 테마와 어두운 테마에서 의미는 같습니다.'],
+      fr: ['Couleurs d’état', 'Les couleurs suivent le thème actif. Leur signification reste identique en mode clair ou sombre.'],
+      de: ['Statusfarben', 'Die Farben folgen dem aktiven Theme. Ihre Bedeutung bleibt in hellen und dunklen Themes gleich.'],
+      es: ['Colores de estado', 'Los colores siguen el tema activo. Su significado es el mismo en temas claros y oscuros.'],
+      pt: ['Cores de estado', 'As cores seguem o tema ativo. O significado é o mesmo nos temas claro e escuro.'],
+      nl: ['Statuskleuren', 'De kleuren volgen het actieve thema. De betekenis blijft gelijk in lichte en donkere thema’s.'],
+      it: ['Colori di stato', 'I colori seguono il tema attivo. Il significato resta uguale nei temi chiari e scuri.'],
+      el: ['Χρώματα κατάστασης', 'Τα χρώματα ακολουθούν το ενεργό θέμα. Η σημασία παραμένει ίδια στα φωτεινά και σκοτεινά θέματα.'],
+      et: ['Olekuvärvid', 'Värvid järgivad aktiivset teemat. Tähendus on heledas ja tumedas teemas sama.'],
+      ms: ['Warna status', 'Warna mengikut tema aplikasi aktif. Maksudnya sama dalam tema cerah dan gelap.'],
+      fil: ['Mga kulay ng status', 'Sumusunod ang mga kulay sa aktibong tema ng app. Pareho ang kahulugan sa light at dark theme.'],
+      vi: ['Màu trạng thái', 'Màu sắc theo chủ đề ứng dụng đang dùng. Ý nghĩa không đổi giữa chủ đề sáng và tối.'],
+      tr: ['Durum renkleri', 'Renkler etkin uygulama temasını izler. Açık ve koyu temalarda anlam aynıdır.']
+    }[key] || ['Status colors', 'Colors follow the active application theme.'];
+    const text = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value; };
+    text('tocTitle', directoryCopy[0]); text('tocScope', directoryCopy[1]);
+    text('tocHierarchy', copy.hierarchyTitle); text('tocStatus', statusCopy[0]); text('tocRepeated', copy.noteTitle);
+    text('eyebrow', copy.eyebrow); text('title', copy.title); text('lead', copy.lead);
+    text('hierarchyTitle', copy.hierarchyTitle); text('hierarchyIntro', copy.hierarchyIntro);
+    text('statusTitle', statusCopy[0]);
+    text('statusIntro', statusCopy[1]);
+    text('noteTitle', copy.noteTitle); text('note', copy.note); text('footer', copy.footer);
+    document.title = copy.title;
+    document.documentElement.lang = copy.lang;
+    document.getElementById('hierarchy').innerHTML = copy.hierarchy.map(([title, description]) => `<article class="hierarchy-item"><h3>${title}</h3><p>${description}</p></article>`).join('');
+    document.getElementById('statuses').innerHTML = copy.statuses.map(([name, color, description], index) => `<div class="status-row"><strong class="status-name">${name}</strong><span class="status-color"><i class="dot" style="--state:${['#4ade80', '#22d3ee', '#fbbf24', '#a78bfa', '#fb7185', '#9ca3af', '#64748b'][index]}"></i>${color}</span><p class="status-description">${description}</p></div>`).join('');
+
+    const tocLinks = [...document.querySelectorAll('.toc-link')];
+    const sections = tocLinks.map((link) => document.getElementById(link.dataset.section)).filter(Boolean);
+    const selectSection = (sectionId) => {
+      tocLinks.forEach((link) => {
+        const active = link.dataset.section === sectionId;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    tocLinks.forEach((link) => link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const sectionId = link.dataset.section;
+      const section = document.getElementById(sectionId);
+      selectSection(sectionId);
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }));
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+      if (visible) selectSection(visible.target.id);
+    }, { rootMargin: '-12% 0px -58% 0px', threshold: [0, .2, .5] });
+    sections.forEach((section) => sectionObserver.observe(section));
+  </script>
+</body>
+</html>
