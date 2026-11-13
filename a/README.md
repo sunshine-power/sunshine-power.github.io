@@ -1,20 +1,24 @@
 # DALI Control Platform showcase
 
-更新时间：2026-10-26 CST
+更新时间：2026-10-27 CST
 
 这是面向国际市场的静态产品展示页，独立于 `pkg_bi_dali/dali_web` 工程工作台。产品入口为 `index.html`，隐私说明与关于产品页面分别为 `privacy.html`、`about.html`。三个页面共用语言面板样式、首次访问偏好初始化脚本 `site-preferences.js` 和当前阶段公开文案 `product-copy.js`；首页与信息页分别由 `app.js`、`info-pages.js` 渲染。基础及扩展语言资源位于 `locales.js`、`locales-expanded.js` 和 `info-pages-expanded.js`。
 
 ## 目录约定
 
-根目录保留可直接部署的页面入口，避免改变现有官网 URL；帮助文档 `help.html` 是软件内置帮助的单文件资产，暂不加入主站、关于或隐私页面的导航。其余文件按用途分为以下几组：
+根目录保留可直接部署的页面入口，避免改变现有官网 URL；`help.html` 保留原有的状态指示说明。`help_content.html` 是工作台“快速上手”和“DALI 术语”共用的离线帮助资源，来源是仓库 `doc/帮助文档/` 中的两份 Markdown，不加入主站、关于或隐私页面的导航。其余文件按用途分为以下几组：
 
-- 页面入口：`index.html`、`about.html`、`privacy.html`、`help.html`
+- 页面入口：`index.html`、`about.html`、`privacy.html`、`help.html`、`help_content.html`
 - 页面脚本：`app.js`、`info-pages.js`、`info-pages-expanded.js`、`locales.js`、`locales-expanded.js`、`site-preferences.js`、`product-copy.js`
 - 页面样式：`styles.css`、`info-pages.css`、`language-panel.css`
 - 展示资源：`assets/screenshots/`
 - 本地预览：`dev-server.mjs`、`package.json`
 
-`help.html` 不依赖其它文件，直接通过浏览器打开时根据浏览器语言选择文案；软件内打开时由 DALI Flutter 业务包注入当前软件语种。页面采用左侧目录、右侧章节正文结构，窄屏时目录转为顶部横向导航；后续帮助内容应继续使用稳定章节 ID 并同步增加目录项。该文件的状态说明对应工程对象树中的状态圆点，不是对外公开的产品功能导航。
+`help.html` 不依赖其它文件，直接通过浏览器打开时根据浏览器语言选择文案。该文件的状态说明对应工程对象树中的状态圆点，不是对外公开的产品功能导航。
+
+工作台帮助以 `doc/帮助文档/快速上手.md` 和 `doc/帮助文档/DALI术语.md` 为唯一可编辑正文。修改后在 `pkg_bi_dali` 目录运行 `dart run tool/generate_help_content.dart` 更新 `help_content.html`；运行 `dart run tool/generate_help_content.dart --check` 可检查生成资源是否与源稿一致。资源包含两个独立栏目、稳定章节目录和术语搜索；非简体中文界面目前也显示中文正文，待对应翻译完成后再扩展语言资源。当前开发构建仍打包该资源；待 GitHub Pages 帮助页发布并完成远程加载与失败状态验收后，改用远程页面并从安装包移除该资源，浮窗交互方式保持不变。
+
+帮助页的页头和章节目录保持在 WebView 可视区域内，正文使用独立滚动容器；窄屏时目录改为正文上方的横向菜单，并保持可见。原生 WebView 的滚轮后备滚动目标指向正文容器。目录点击定位章节，当前章节高亮；切换栏目或筛选术语时复位正文滚动位置。布局和交互统一在生成脚本 `tool/generate_help_content.dart` 中维护，不直接编辑生成的 HTML。
 
 ## 内容边界
 
@@ -40,6 +44,7 @@
 ## 可替换资产
 
 - `assets/screenshots/`：使用用户提供的上位机实际截图。首屏为 `welcome.png`（欢迎页）；软件展示依次为 `dashboard.png`（仪表盘）、`dali-bus.png`（DALI 总线）、`parameters.png`（参数信息）、`live-control.png`（实时控制）、`groups.png`（分组管理）、`scenes.png`（场景管理）。栏目名称与说明覆盖现有 17 种语言，图片完整显示，不裁切。静态部署时须将这七张图片随页面一起上传，保留相对路径。
+- 上述七张 PNG 已无损优化，总大小由 21.26 MiB 降至 13.57 MiB（减少 36.15%）；保留原始尺寸、逐像素 RGBA 值及 ICC 颜色配置，未缩放、降色或使用有损编码。后续替换图片时应以相同标准验证。
 - 硬件区域的 `PRODUCT IMAGE SLOT`：替换为控制器实拍或 3D 渲染图。
 - 平台截图区分为 Windows、Mac、iPhone / iOS、iPad / iPadOS、Android Phone 和 Android Pad 六类；每个 `SCREENSHOT SLOT` 可替换为对应画幅的正式运行截图。
 - 独立的 `BRAND ASSET SLOT`：替换为软件 Logo 或品牌识别，不与平台运行截图混用。

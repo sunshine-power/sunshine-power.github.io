@@ -240,7 +240,7 @@ function updateScreen(name) {
   const locale = messages[state.locale];
   const tab = document.querySelector(`[data-screen="${activeName}"]`);
   document.querySelectorAll('.software-tab').forEach((item) => { const selected = item === tab; item.classList.toggle('is-selected', selected); item.setAttribute('aria-selected', String(selected)); });
-  document.querySelector('#screen-image').src = `${screen.image}?v=20261026-3`;
+  document.querySelector('#screen-image').src = `${screen.image}?v=20261027-1`;
   document.querySelector('#screen-image').alt = locale[`${screen.key}.title`];
   document.querySelector('#screen-kicker').textContent = `${locale['software.eyebrow']} / ${locale[`${screen.key}.title`]}`;
   document.querySelector('#screen-title').innerHTML = locale[`${screen.key}.title`];

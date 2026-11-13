@@ -1,0 +1,583 @@
+<!doctype html>
+<!-- Generated from doc/帮助文档. Edit the Markdown, then run generate_help_content.dart. -->
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DALI 帮助</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: 0; --bg:#f4f7f6; --paper:#ffffff; --ink:#182d32; --muted:#536971; --line:#d3dfdc; --accent:#087d72; --accent-soft:#e2f2ef; --warm:#b35e38; }
+    * { box-sizing:border-box; }
+    html,body { width:100%; height:100%; overflow:hidden; }
+    body { margin:0; min-width:0; background:var(--bg); color:var(--ink); font-size:14px; line-height:1.65; touch-action:pan-x pan-y pinch-zoom; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    a { color:var(--accent); }
+    a:focus-visible,button:focus-visible,input:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+    .shell { display:flex; flex-direction:column; width:100%; max-width:1160px; height:100vh; height:100dvh; margin:auto; padding:20px 24px 24px; overflow:hidden; }
+    .masthead { display:flex; justify-content:space-between; align-items:end; gap:18px; border-bottom:1px solid var(--line); padding-bottom:17px; }
+    .masthead strong { display:block; font-size:18px; line-height:1.3; }
+    .masthead small { color:var(--muted); }
+    .switcher { display:inline-flex; flex-shrink:0; border:1px solid var(--line); padding:3px; background:var(--paper); border-radius:6px; }
+    .switcher button { border:0; background:none; color:var(--muted); padding:8px 12px; border-radius:4px; white-space:nowrap; }
+    .switcher button[aria-selected="true"] { background:var(--accent); color:white; }
+    .layout { display:grid; grid-template-columns:210px minmax(0,1fr); gap:24px; flex:1; min-height:0; padding-top:18px; }
+    .toc { display:flex; flex-direction:column; min-height:0; padding:12px 8px; border:1px solid var(--line); border-radius:6px; background:var(--paper); }
+    .toc strong { display:block; flex:none; font-size:11px; text-transform:uppercase; color:var(--muted); margin:0 6px 8px; }
+    .toc-links { min-height:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:thin; }
+    .toc a { display:flex; gap:7px; padding:7px 6px; text-decoration:none; color:var(--muted); border-radius:4px; line-height:1.35; font-size:12px; }
+    .toc a span { flex:0 0 35px; color:var(--accent); font-size:10px; font-weight:700; padding-top:2px; }
+    .toc a:hover,.toc a:focus-visible,.toc a[aria-current="location"] { background:var(--accent-soft); color:var(--ink); }
+    .content-scroll { flex:1; min-width:0; min-height:0; overflow-y:auto; overscroll-behavior:contain; scroll-behavior:smooth; scrollbar-width:thin; }
+    .document { min-width:0; }
+    .doc-body { max-width:780px; padding:0 12px 20px 0; overflow-wrap:anywhere; }
+    .doc-body h1 { font-size:28px; line-height:1.22; margin:0 0 13px; }
+    .doc-body h1 + p { color:var(--muted); font-size:14px; }
+    .doc-body h2 { font-size:19px; line-height:1.35; margin:36px 0 13px; padding:0 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:16px; }
+    .doc-body h3 { font-size:15px; line-height:1.4; margin:23px 0 8px; color:var(--ink); scroll-margin-top:16px; }
+    .doc-body p { margin:0 0 13px; }
+    .doc-body ol,.doc-body ul { margin:7px 0 16px; padding-left:23px; }
+    .doc-body li { margin:4px 0; }
+    .doc-body strong { font-weight:680; }
+    .doc-body code { padding:1px 4px; border-radius:3px; background:var(--accent-soft); font-size:12px; }
+    .doc-body pre { max-width:100%; overflow-x:auto; padding:13px; background:#e9efed; border-radius:4px; }
+    .doc-body pre code { padding:0; background:none; }
+    .doc-body table { width:100%; border-collapse:collapse; display:block; overflow-x:auto; margin:12px 0 20px; font-size:12px; }
+    .doc-body th,.doc-body td { border-bottom:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; min-width:115px; }
+    .doc-body th { background:var(--accent-soft); white-space:nowrap; }
+    .search { display:flex; align-items:center; gap:10px; max-width:380px; margin:0 0 20px; }
+    .search input { min-width:0; width:100%; border:1px solid var(--line); background:var(--paper); color:var(--ink); border-radius:4px; padding:9px 10px; }
+    .search-count { color:var(--muted); font-size:12px; white-space:nowrap; }
+    [hidden] { display:none !important; }
+    @media (max-width:760px) {
+      .shell { padding:12px 16px 16px; }
+      .masthead { align-items:start; flex-direction:column; gap:12px; }
+      .layout { display:flex; flex-direction:column; gap:14px; padding-top:14px; }
+      .toc { flex:none; flex-direction:row; align-items:center; gap:10px; min-width:0; padding:6px 8px; }
+      .toc strong { white-space:nowrap; margin:0 0 0 4px; }
+      .toc-links { display:flex; gap:5px; min-width:0; overflow-x:auto; overflow-y:hidden; }
+      .toc a { white-space:nowrap; padding:7px 9px; }
+      .toc a span { flex:none; padding:0; }
+      .doc-body h1 { font-size:24px; }
+      .doc-body h2 { font-size:18px; }
+    }
+    @media (prefers-color-scheme:dark) {
+      :root { --bg:#151e21; --paper:#1c292c; --ink:#e8f0ee; --muted:#b0c3c1; --line:#405254; --accent:#71d5c6; --accent-soft:#25433e; --warm:#e6a077; }
+      .switcher button[aria-selected="true"] { color:#112421; }
+      .doc-body pre { background:#233236; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="masthead">
+      <div><strong>DALI 帮助</strong><small>操作指南与专业术语</small></div>
+      <div class="switcher" role="tablist" aria-label="帮助栏目">
+        <button type="button" id="quick-tab" role="tab" aria-controls="quick" aria-selected="true">快速上手</button>
+        <button type="button" id="terms-tab" role="tab" aria-controls="terms" aria-selected="false">DALI 术语</button>
+      </div>
+    </header>
+    <div class="layout">
+      <nav class="toc" aria-label="章节目录">
+        <strong>章节</strong>
+        <div class="toc-links" id="quick-toc"><a href="#qs-01"><span>QS-01</span>开始前：明确设备和影响范围</a>
+<a href="#qs-02"><span>QS-02</span>发现并连接控制器</a>
+<a href="#qs-03"><span>QS-03</span>认识工作台和目标层级</a>
+<a href="#qs-04"><span>QS-04</span>扫描 DALI 总线并识别灯具</a>
+<a href="#qs-05"><span>QS-05</span>完成第一次照明控制</a>
+<a href="#qs-06"><span>QS-06</span>在明确目标后修改配置</a>
+<a href="#qs-07"><span>QS-07</span>管理控制器资料与软件设置</a>
+<a href="#qs-08"><span>QS-08</span>理解反馈、日志与协议工具</a>
+<a href="#qs-09"><span>QS-09</span>常见问题与排查顺序</a></div>
+        <div class="toc-links" id="terms-toc" hidden><a href="#t-01"><span>T-01</span>标准、版本与认证</a>
+<a href="#t-02"><span>T-02</span>系统、总线与设备角色</a>
+<a href="#t-03"><span>T-03</span>寻址、发现与配置范围</a>
+<a href="#t-04"><span>T-04</span>命令、数据寄存器与操作结果</a>
+<a href="#t-05"><span>T-05</span>控制装置类型、调光与颜色</a>
+<a href="#t-06"><span>T-06</span>存储体、DALI Data 与 D4i</a>
+<a href="#t-07"><span>T-07</span>DALI-2 输入设备、传感器与事件</a>
+<a href="#t-08"><span>T-08</span>DALI+ 与其他网络互联</a>
+<a href="#t-09"><span>T-09</span>本软件中的状态与证据用语</a>
+<a href="#t-10"><span>T-10</span>资料来源与维护边界</a></div>
+      </nav>
+      <main class="content-scroll" data-core-scroll-container>
+        <article id="quick" class="document" role="tabpanel" aria-labelledby="quick-tab"><div class="doc-body"><h1 id="">快速上手</h1>
+<p>本指南面向首次使用 DALI 上位机的调试和维护人员。按一次实际工作顺序组织：找到控制器，确认会话，选定总线与地址，执行控制或配置，再核对结果。标题中的 <code>QS</code> 编号是后续帮助页面的稳定章节标识；二级标题对应页面章节，三级标题对应可独立展开的段落。</p>
+<p>界面可见的功能取决于控制器固件、当前会话、所选对象和设备能力。本文描述当前上位机已有的操作入口；涉及真实灯具、固件烧录和不同平台的操作，仍应以现场反馈为准。术语可跳转到 <a href="#terms">DALI术语</a>。</p>
+<h2 id="qs-01-">QS-01 开始前：明确设备和影响范围</h2>
+<h3 id="qs-011-">QS-01.1 准备控制器、总线和主机</h3>
+<p>准备受支持的自研 DALI 控制器、稳定供电、USB 数据线或可通信的局域网、DALI 总线电源和待调试的灯具驱动。由具备相应资质的人员确认总线接线、电源容量和现场用电安全。USB 接入还需确认系统设备权限；局域网接入需确认主机与控制器能互通。</p>
+<p>本软件通过 USB/串口或局域网接入<strong>自研控制器</strong>，再由控制器访问其 DALI 总线。上位机的局域网连接是控制器传输方式，不能据此认定整套系统已经支持 DALI+。控制器与 DALI 灯具驱动是两种对象；控制器列表中的一台设备不等于一台灯具。</p>
+<h3 id="qs-012-">QS-01.2 先选现场，再选动作</h3>
+<p>对现场灯具的广播、分组、编址、参数写入和场景操作可能立即影响照明或改变设备配置。开始前确认目标控制器、总线、影响到的灯具及可接受的施工时段。首次熟悉界面可先完成连接、扫描和只读查询，再做单个短地址的基础控制。</p>
+<h3 id="qs-013-">QS-01.3 一条最短上手路径</h3>
+<ol>
+<li>启动软件，在欢迎页搜索并连接控制器。</li>
+<li>进入工作台，核对控制器身份、连接会话和 DALI 总线。</li>
+<li>扫描总线，选择一个有应答的短地址。</li>
+<li>在实时控制中执行一次单灯开/关或亮度操作。</li>
+<li>观察操作反馈，并在“信息 · 参数”或查询入口回读相关状态。</li>
+</ol>
+<p>完成第 4 步只说明已发起操作；第 5 步用于确认控制器响应和设备实际状态。若现场灯具没有变化，转到 <a href="#qs-09">QS-09</a>。</p>
+<h2 id="qs-02-">QS-02 发现并连接控制器</h2>
+<h3 id="qs-021-">QS-02.1 从欢迎页搜索</h3>
+<p>欢迎页提供 USB/串口、局域网和全部设备的搜索路径。选择实际接线方式后等待结果；搜索不到时先查供电、线缆、权限、同网段或网络路由，不把无结果直接解释为 DALI 总线故障。当前正式进入工作台的路径要求本次启动发现并验证控制器，历史缓存不代表控制器当前在线。</p>
+<h3 id="qs-022-">QS-02.2 核对候选与实体</h3>
+<p>搜索结果中的“端点”是接入位置，例如一个串口或网络地址；同一控制器可能有不止一个端点。连接前优先核对产品身份、MAC、固件版本、传输方式和端点。仅靠显示名称或网络 IP 无法可靠判定是否为同一台实体。发现的候选数、已验证控制器数和已连接会话数是不同统计口径。</p>
+<h3 id="qs-023-">QS-02.3 建立并观察会话</h3>
+<p>选择有效控制器连接，等会话进入可操作状态后再执行总线命令。工作台中的控制器详情和检查器可查看连接、会话、能力与占用信息。已发现但未连接、连接中、握手中、会话就绪、挂起、重连中、超时或错误不能统称为“在线可控”。另一主机占用或能力未上报时，按钮可能保持禁用。</p>
+<p>断线后先核对物理链路和占用状态，再使用重连。必要时断开当前会话并重新选择端点；不要把本次会话编号当成控制器的永久编号。</p>
+<h2 id="qs-03-">QS-03 认识工作台和目标层级</h2>
+<h3 id="qs-031-">QS-03.1 仪表盘、工作台和工作模式</h3>
+<p>“仪表盘”用于汇总和进入功能，“工作台”用于围绕当前对象操作；顶部视图菜单也可切换主界面。“标准模式/现场模式”是工作模式，不是另一套控制器或总线。窄屏会把部分入口收进菜单，业务目标和操作结果仍以当前选中的对象为准。</p>
+<h3 id="qs-032-">QS-03.2 从对象树读取当前范围</h3>
+<p>工作台对象树按“连接与控制器 / 已连接控制器 → 控制器 → DALI 总线 → 广播或短地址”展开。左侧导航切换功能，中部呈现对象操作，右侧检查器显示身份、会话、能力和常用动作；手机布局将对象树与功能入口分步呈现。每次操作前先查看当前控制器、总线和目标标题，避免在切换页面后沿用上一个地址的判断。</p>
+<p>“广播”只作用于<strong>当前选定总线</strong>中的相应设备，不是对所有控制器同时发送。短地址是该总线上控制装置的 <code>0..63</code> 地址；树中列表序号、组号和场景号都不是短地址。</p>
+<h3 id="qs-033-">QS-03.3 正确看待状态圆点和计数</h3>
+<p>树节点旁的圆点表示该节点自己的业务状态：父级可汇总连接情况，控制器节点表示会话，总线节点表示扫描，设备节点表示结果可信度。父子节点同时显示绿色不代表有两次连接。桌面端可悬停读取具体提示；触屏端结合节点文字、详情和状态面板判断。</p>
+<p>“可用”“警告”“处理中”“错误”“离线”应结合所在节点解释。没有圆点或显示“未知”表示尚无足够证据，不能当作正常。状态栏的候选数、可用数和警告数也不等于总线上的灯具台数。</p>
+<h2 id="qs-04--dali-">QS-04 扫描 DALI 总线并识别灯具</h2>
+<h3 id="qs-041-">QS-04.1 执行一次扫描</h3>
+<ol>
+<li>在“已连接控制器”中选择目标控制器下的 DALI 总线，确认会话和扫描能力可用。</li>
+<li>启动总线扫描，观察地址范围、进度和当前已识别数量；扫描期间不要同时对该总线执行互相干扰的配置任务。</li>
+<li>等待终态，查看短地址列表。若取消、失败或结果不完整，先处理原因，再重新扫描形成新的结果。</li>
+<li>选择短地址，进入设备信息或参数查询，核对类型、响应和可用能力。</li>
+</ol>
+<p>当前扫描主要识别有应答的<strong>已分配短地址控制装置</strong>。它不能凭一次查询直接证明每个地址只有一台物理设备，也不能自动计入未编址设备或 DALI-2 传感器。一个短地址得到肯定应答，仍不等于已排除同址冲突。</p>
+<h3 id="qs-042-">QS-04.2 区分扫描的四类终态</h3>
+<table>
+<thead>
+<tr>
+<th>终态</th>
+<th>应如何使用结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完成</td>
+<td>该次扫描按计划结束；仍要结合应答与实际灯具核对唯一性和数量。</td>
+</tr>
+<tr>
+<td>部分完成</td>
+<td>可供排查的地址可能保留，但不可当作全线完整清单。</td>
+</tr>
+<tr>
+<td>失败</td>
+<td>查看总线、会话、超时或协议错误，再重新执行。</td>
+</tr>
+<tr>
+<td>已取消</td>
+<td>操作未完成；保留已观察信息只作线索。</td>
+</tr>
+</tbody>
+</table>
+<p>“已识别短地址数”是本次有应答的不同地址数量；“上次编址分配数”是另一次任务的历史结果，不能相减推导未编址台数。地址变化后应重新扫描。</p>
+<h3 id="qs-043-">QS-04.3 先只读核对设备</h3>
+<p>选中短地址后，先读取状态、设备类型、当前电平及可用参数。设备类型或 DT8 色彩能力未读取到时保持“未知”，不要从商品名猜测。只读页面显示的是读取时刻的快照；切换目标后先确认标题和刷新结果，再解释值。</p>
+<h2 id="qs-05-">QS-05 完成第一次照明控制</h2>
+<h3 id="qs-051-">QS-05.1 选择单灯、分组或广播目标</h3>
+<p>日常控制可选单个短地址、某一组或当前总线广播。首次操作优先选一个已验证响应的短地址；组和广播的影响范围更大。组是设备侧的成员关系，控制器部署资料中的“楼层/区域”和控制器集群都不会自动变成 DALI 组。</p>
+<h3 id="qs-052-">QS-05.2 执行控制并核对</h3>
+<p>在实时控制或检查器中按当前目标执行开灯、关灯、调亮、调暗或设定亮度。色温和其他颜色控制仅在目标设备类型、能力以及固件路径支持时使用。操作结束先看发送或事务反馈，再结合实际灯效与必要的状态查询验证。发送成功不保证灯具已经达到预期亮度；灯具故障、物理限值和外部控制都可能影响结果。</p>
+<p>亮度控制值不是照度 <code>lx</code>，也不能简单当成灯具功率百分比。若当前目标显示“广播”，请再次确认总线；若显示短地址，请再次确认数字与实际灯具一致。</p>
+<h2 id="qs-06-">QS-06 在明确目标后修改配置</h2>
+<h3 id="qs-061-">QS-06.1 编址与重新编址</h3>
+<p>未编址设备需要通过总线编址流程获得短地址。开始前区分“保留已有地址、仅处理未编址设备”与“对全部设备重新编址”；后者可能使既有组、场景和工程记录失去对应关系。阅读界面风险确认，观察作业进度、取消或失败终态，结束后重新扫描并逐项核对。</p>
+<p>对已知短地址的日常改址，使用对象树或总线短地址表中的“重新编址”受控入口。清除短地址会使目标设备从普通短地址扫描列表中消失，需重新分配地址才能按地址访问；它不是恢复出厂设置。同址设备可能同时受到定向命令影响，扫描不能保证仅改动一台物理设备。协议工具中的裸命令只供专家联调，不作为完整改址流程。</p>
+<h3 id="qs-062-">QS-06.2 设置通用参数</h3>
+<p>“DALI 参数设置”面板覆盖渐变时间、扩展渐变时间、渐变速率、最大亮度、最小亮度、上电亮度和系统故障亮度。先确认目标是短地址、组还是广播，再选择要写入的项目、输入合法值并执行。移动滑块或编辑数字只是准备待发送值；写入后查看结果，对可查询的单个设备再做回读。组或广播写入要验证每个成员，不能由一次发送反馈推断全体成功。</p>
+<p>渐变时间和扩展渐变时间不能作为两套有效设置同时提交。上电亮度中的 <code>255</code> 表示记忆亮度；系统故障亮度中的 <code>255</code> 表示维持当前亮度，二者含义不同。具体可用值和扩展渐变时间支持以当前面板与设备能力为准。</p>
+<h3 id="qs-063-">QS-06.3 配置组与场景</h3>
+<p>DALI 组号和场景号均为 <code>0..15</code>。先读取单设备的组成员关系，修改后看差异并回读；一个控制装置可以属于多个组。场景是各设备保存的同号槽位值，调用场景与存入场景是不同操作。设置组场景时按成员分别确认写入和回读；读取到 <code>MASK/未存储</code> 不应按有效亮度使用。组和场景的现场灯效仍需结合实际设备验收。</p>
+<h3 id="qs-064-">QS-06.4 查看高级设备能力</h3>
+<p>设备详情可按实际读到的能力展示 DT8 色彩和 D4i 数据等分区。色温 Tc、xy、RGBWAF 不是同一控制方式；只读数据存在不表示对应写入已经开放。D4i 的数据、供电和认证要求不能仅由一个设备类型编号推断；未经完整证据不要标记“D4i 设备”。传感器、按键及其事件处理属于后续 DALI-2 控制设备能力，不能用当前控制装置扫描结果代替。</p>
+<h2 id="qs-07-">QS-07 管理控制器资料与软件设置</h2>
+<h3 id="qs-071-">QS-07.1 记录控制器部署信息</h3>
+<p>控制器个性化资料可记录名称、使用场景、场所、楼栋、楼层、区域、位置和备注。保存前核对稳定身份，保存后重新选中同一控制器确认内容。本地保存的是上位机资料；固件资料同步有独立的支持条件和结果。换机或清理应用数据前应备份需要保留的本地资料。</p>
+<p>资料管理提供导出、导入预览和冲突处理。导入前确认控制器身份、覆盖字段和备份范围。个性化资料包不等于整条 DALI 总线的完整配置备份，也不能代替未来工程文件、批量恢复或报告功能。</p>
+<h3 id="qs-072-">QS-07.2 区分本地设置与控制器维护</h3>
+<p>语言、主题、字体和显示偏好属于本地软件设置；网络、固件和控制器存储属于控制器维护。操作前看清保存位置和当前设备，不能把更换主题当作修改硬件状态。维护入口可能因固件能力、连接方式和会话状态而不可用。</p>
+<h2 id="qs-08-">QS-08 理解反馈、日志与协议工具</h2>
+<h3 id="qs-081-">QS-08.1 按证据层级判断结果</h3>
+<p>界面预览表示<strong>准备发送</strong>，事务发送完成表示控制器执行器已处理前向命令，查询应答表示设备返回了数据，写后回读及实际灯效才进一步证明配置或照明效果。任何一层都不能自动替代下一层。无应答可能是某些 YES/NO 查询的正常“否”，也可能由断线、错误目标或设备不支持造成；需结合具体命令判断。</p>
+<h3 id="qs-082-">QS-08.2 用日志定位问题</h3>
+<p>日志页用于查看操作、传输和错误线索。反馈问题时记录时间、控制器身份、连接方式、总线、短地址、动作、终态和固件版本；必要时导出日志。日志可能包含 MAC、端点和主机信息，分享前检查内容。当前日志不是原始 DALI 总线监视抓包，也不是工程备份。</p>
+<h3 id="qs-083-">QS-08.3 协议工具的适用人员</h3>
+<p>“协议工具”面向研发、联调和售后技术人员，按当前控制器与总线提供受控命令及预计帧、实际终态。首次上手使用正式的扫描、控制、参数、编址和组场景页面即可。协议工具显示的“预计 DALI 发送”不是实测波形；<code>commandSent</code> 不是灯具效果确认。需要用工具定位问题时参阅 <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">短地址协议工具使用说明</a>。</p>
+<h2 id="qs-09-">QS-09 常见问题与排查顺序</h2>
+<h3 id="qs-091-">QS-09.1 找不到控制器或无法连接</h3>
+<p>先确认供电和数据线；USB 检查设备枚举及系统权限，局域网检查网卡、地址和可达性。再看搜索结果是候选、已验证实体还是已连接会话；占用、挂起、会话超时与身份校验失败有不同处理方式。连接问题未解决前，不进入 DALI 总线故障判断。</p>
+<h3 id="qs-092-">QS-09.2 能连接但无法扫描或按钮不可用</h3>
+<p>检查当前控制器和总线是否选定、会话是否可操作、固件是否报告相应能力、是否已有互斥作业进行。禁用或“未知”不是可通过反复点击消除的状态。若扫描中断，查看终态和完整性提示后重新执行。</p>
+<h3 id="qs-093-">QS-09.3 扫描数量与现场不符</h3>
+<p>先确定所看的是“已连接控制器”“已识别短地址”还是“上次编址分配数”。未编址、不应答、同址冲突、扫描取消或总线故障都可能使短地址结果与物理灯具台数不一致。现有扫描不能直接给出未编址台数、同址台数或超出地址上限的设备总数。</p>
+<h3 id="qs-094-">QS-09.4 命令已发送但灯未变化</h3>
+<p>依次确认目标地址与总线、控制器会话、设备应答、实际灯具和供电；再检查灯具故障、最小/最大电平、场景是否存储、组成员是否正确，以及外部主控是否同时操作。对写入动作读取对应参数，对亮度动作读取实际电平，必要时结合现场观察。</p>
+<h3 id="qs-095-">QS-09.5 信息显示为未知、未支持或不完整</h3>
+<p>“未知”表示缺少可靠数据，“未支持”表示当前能力或协议路径不可用，“不完整”表示任务或读取未形成完整结果。三者都不能改写成零值、关闭或成功。保留原始终态和日志，核对固件版本、目标设备能力及命令来源后再继续。</p>
+</div></article>
+        <article id="terms" class="document" role="tabpanel" aria-labelledby="terms-tab" hidden>
+          <label class="search"><input id="term-search" type="search" placeholder="搜索术语或解释" aria-label="搜索 DALI 术语"><span class="search-count" id="search-count"></span></label>
+          <div class="doc-body"><h1 id="dali">DALI术语</h1>
+<p>本词汇表按“标准与认证 → 系统角色 → 寻址与控制 → 帧和结果 → 设备类型与颜色 → 数据与 D4i → DALI-2 输入设备 → DALI+ → 本软件状态”的认知顺序编排。<code>T</code> 编号是稳定的内容标识：二级标题为页面章节，三级标题为可独立索引的术语条目；不要用术语在表格中的行号作页面锚点。中文名称优先采用 DALI Alliance 的<a href="https://www.dali-alliance.org/about-us/terms.html">推荐术语</a>，英文保留在首次出现处，便于与证书、标准和协议命令对应。</p>
+<p>“本软件”指当前 Flutter 上位机，不代表连接的任意控制器或设备都具备相同能力。术语是概念解释，不构成产品认证声明。官方网页会更新；本稿于 <strong>2026-11-10</strong> 核对 <a href="https://www.dali-alliance.org/">DALI Alliance</a> 页面。具体标准版本和可认证的 Part 应以官方 <a href="https://www.dali-alliance.org/dali2/status.html">DALI-2 Parts Available</a> 与产品数据库当时记录为准。<code>[S]</code> 是官方资料，<code>[P]</code> 是本项目当前实现依据；文末列出完整来源。</p>
+<h2 id="t-01-">T-01 标准、版本与认证</h2>
+<h3 id="t-01-01-dali">T-01-01 DALI</h3>
+<p><strong>Digital Addressable Lighting Interface，数字可寻址照明接口</strong>：用于照明设备之间的双向数字通信，支持控制、配置和查询。DALI 既指通信技术，也常被用作行业统称；讨论正式标准时应写明 IEC 62386 分册，讨论产品资格时应写明实际认证项目。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a></p>
+<h3 id="t-01-02-iec-62386">T-01-02 IEC 62386</h3>
+<p>规定 DALI 通信与设备要求的多部分国际标准。Part 101/102/103 分别覆盖系统、控制装置和控制设备的通用要求；设备特定功能由其他 Part 扩展。标准发布、DALI Alliance 的补充规范和某一 Part 是否已有认证测试是三种不同状态。<a href="https://www.dali-alliance.org/standards/IEC62386.html">S4</a> <a href="https://www.dali-alliance.org/dali2/status.html">S12</a></p>
+<h3 id="t-01-03-dali-alliance--diia">T-01-03 DALI Alliance / DiiA</h3>
+<p><strong>Digital Illumination Interface Alliance</strong>，DALI 联盟；DiiA 是其组织名称/缩写。联盟维护 DALI-2、D4i 等认证、测试流程、推荐术语与产品数据库；IEC 62386 由 IEC 发布。不能把“采用了 DALI 命令”自动表述为“获得联盟认证”。<a href="https://www.dali-alliance.org/">S0</a> <a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a></p>
+<h3 id="t-01-04-dali-version-1">T-01-04 DALI version-1</h3>
+<p>早期 DALI 产品登记体系，范围限于控制装置；控制设备及总线电源不在其登记范围。与 DALI-2 的差别不只是通信速度或界面版本。官方已关闭新增 version-1 控制装置登记。<a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a></p>
+<h3 id="t-01-05-dali-2">T-01-05 DALI-2</h3>
+<p>基于较新 DALI 规范的联盟认证项目，覆盖控制装置、控制设备和其他适用产品类别，强调经验证的互操作性。产品标注 DALI-2 应有对应认证和数据库记录；上位机能查询一台 DALI-2 设备，并不使上位机或自研控制器自动成为 DALI-2 认证产品。<a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a> <a href="https://www.dali-alliance.org/dali2/status.html">S12</a></p>
+<h3 id="t-01-06-diia-specification">T-01-06 DiiA Specification</h3>
+<p>DALI 联盟发布的规范，补充 IEC 62386，包括 D4i 数据/电源相关 Part 和 DALI+ 的 Part 104 Changes &amp; Additions。实现某份规范与该功能已可参加认证是不同结论，需查当期官方状态表。<a href="https://www.dali-alliance.org/standards/IEC62386.html">S4</a> <a href="https://www.dali-alliance.org/dali2/status.html">S12</a></p>
+<h3 id="t-01-07-">T-01-07 认证与互操作性</h3>
+<p><strong>Certification / interoperability</strong>：认证针对具体产品及适用功能和标准版次，测试通过后可在联盟产品数据库核对。不同厂商产品共同运行还需符合部署条件；一次本地联调或某条命令有响应均不能代替认证。<a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a> <a href="https://www.dali-alliance.org/dali2/status.html">S12</a></p>
+<h2 id="t-02-">T-02 系统、总线与设备角色</h2>
+<h3 id="t-02-01-dali---">T-02-01 DALI 总线 / 子网</h3>
+<p><strong>DALI bus / subnet</strong>：传统有线 DALI 在同一对线缆上传送通信数据与总线电源。一个 DALI-2 子网最多有 <strong>64 个控制装置地址和 64 个控制设备地址</strong>，两类地址分别管理，不是共用一组“总共 64 台”的地址。实际可接入数量还受供电、电流预算、线缆和设备能力限制。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="https://www.dali-alliance.org/dali/systems.html">S5</a></p>
+<p>本软件以“控制器 → DALI 总线”组织目标；当前固件发布的线路能力不能据此推断为多条实体总线。<a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-02-02-bps">T-02-02 总线电源（BPS）</h3>
+<p><strong>Bus Power Supply</strong>：给 DALI 总线上的通信电路供电，可独立设置，也可集成在控制装置或控制设备中。常见标称约 16 V；总线最大供电电流约束为 250 mA，设计时须按设备保证供电电流和最大消耗电流核算，不能把“多接一个电源”当成无限扩容。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/dali/systems.html">S5</a></p>
+<h3 id="t-02-03-control-gear">T-02-03 控制装置（control gear）</h3>
+<p>通常直接控制光源输出的设备，典型实例是 LED 驱动器，也包括镇流器、转换器和继电器开关设备。<strong>Control gear 不是 DALI-2 control device</strong>。本软件当前短地址扫描主要生成此类对象，界面可能用“灯具驱动/电源”帮助识别。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/dali/systems.html">S5</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-02-04-led-driver">T-02-04 LED 驱动器（driver）</h3>
+<p>控制 LED 光源的控制装置；“驱动器”是设备形态，“控制装置”是 DALI 协议角色。不要把驱动器与上位机连接的自研 DALI 控制器混称。灯具中可能还含有独立的传感器、控制设备和总线电源。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/dali/systems.html">S5</a></p>
+<h3 id="t-02-05-control-device">T-02-05 控制设备（control device）</h3>
+<p>发送控制指令或提供输入信息的 DALI-2 设备，主要分为应用控制器和输入设备。它有区别于控制装置的寻址/分组语义，不能把传感器强行塞入现有的 Gear 短地址扫描结果。本软件当前仅预留模型与能力边界，传感器闭环尚未交付。<a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a> <a href="https://www.dali-alliance.org/dali/systems.html">S5</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-02-06-application-controller">T-02-06 应用控制器（application controller）</h3>
+<p>使用输入、状态或外部系统信息作决定并向控制装置发命令的 DALI-2 控制设备。可为单主控或多主控；多主控场景需考虑事件与总线共享。它是<strong>DALI 总线上的协议角色</strong>，不等同于本软件通过 USB/LAN 接入的“自研控制器/网关”产品名称。<a href="https://www.dali-alliance.org/dali/systems.html">S5</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-02-07-input-device">T-02-07 输入设备（input device）</h3>
+<p>提供用户操作或环境信息的控制设备，包括按键、滑动/旋转输入、占用传感器和照度传感器。通常通过事件传递变化，也可轮询；是否能在本软件配置事件及绑定灯具，取决于未来控制设备与自动化功能的实际接入。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-02-08-luminaire">T-02-08 灯具（luminaire）</h3>
+<p>完整的照明产品或安装单元，可包含一个或多个控制装置、光源、传感器和供电部件。一个扫描到的控制装置地址不能无条件等同于“现场一套灯具”；灯具资产信息与 DALI 总线地址也不是同一编号。<a href="https://www.dali-alliance.org/dali/systems.html">S5</a> <a href="https://www.dali-alliance.org/dali/data.html">S7</a></p>
+<h3 id="t-02-09-">T-02-09 本软件的控制器、端点与会话</h3>
+<p><strong>Controller / endpoint / session</strong>：自研控制器是上位机连接的实体网关；端点是 USB/串口或网络接入位置；会话是一次有效通信上下文。同一实体可能有多个端点，IP 和会话 ID 都不是永久设备身份。此三词是本项目产品对象，不应与 IEC 的 application controller 混同。<a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-02-10-">T-02-10 有线总线的极性、拓扑与长度</h3>
+<p>联盟的系统资料说明传统 DALI 两线通信无须区分接线极性，可采用自由拓扑；所述典型两芯线缆条件下，最远设备间距离上限为 300 m。实际工程还要结合线径、电压降、总电流与现场规范校核，不能仅凭“300 m”判断可运行。<a href="https://www.dali-alliance.org/dali/systems.html">S5</a></p>
+<h2 id="t-03-">T-03 寻址、发现与配置范围</h2>
+<h3 id="t-03-01-short-address">T-03-01 短地址（short address）</h3>
+<p>在一条 DALI 总线内标识单个协议目标的地址。控制装置的短地址为 <code>0..63</code>；DALI-2 控制设备也有独立地址域。扫描到一个有应答的短地址只能确认该地址收到过应答，不能证明没有两台设备共用该地址。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a> <a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-02-unaddressed-device">T-03-02 未编址设备（unaddressed device）</h3>
+<p>尚未分配短地址的设备，不会因普通短地址查询而出现在已识别地址清单中。未编址数量不能由“现场灯具数减去扫描地址数”可靠得出；需使用合适的编址和验证流程。<a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-03---addressing--commissioning">T-03-03 编址 / 调试投运（addressing / commissioning）</h3>
+<p>为设备分配可管理地址并核对响应的过程。保留已有地址、仅处理未编址设备与全量重新编址有不同影响。改址后应重新扫描，并核对组、场景和工程引用；写入命令发送完成并不证明新地址唯一。<a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-04-random-address">T-03-04 随机地址（random address）</h3>
+<p>编址流程中用于搜索和区分设备的内部地址，不是用户日常控制使用的短地址，也不是商品序列号。运行编址相关命令可能改变设备侧随机地址，不能把它当作完全无副作用的“只读 ID”。<a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-05-duplicate-short-address">T-03-05 同址冲突（duplicate short address）</h3>
+<p>两台或多台物理设备使用同一个短地址，可能使单地址控制同时影响多台设备。普通扫描、一条肯定应答或一条总线错误都不足以给出同址物理台数或唯一性结论；需要专门的证据与实机验证。本软件尚未交付逐地址同址诊断闭环。<a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-06-group">T-03-06 组（group）</h3>
+<p>DALI 逻辑控制目标，控制装置可属于 <code>0..15</code> 中的多个组。组成员资格保存在设备侧；组号不是楼栋区域、控制器集群或广播。改变成员关系后应逐台回读或核对灯效。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-07-scene">T-03-07 场景（scene）</h3>
+<p>设备侧预存的 <code>0..15</code> 号照明状态槽位。一次“调用场景”命令可令不同设备调用各自同号槽位的预设电平/颜色；“存储场景”“移除场景”和“调用场景”是不同操作。当前项目的基础场景值读写以相应设备与协议能力为边界。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-03-08-broadcast">T-03-08 广播（broadcast）</h3>
+<p>对当前 DALI 总线内相应设备共同寻址。它扩大当前命令目标范围，但不自动跨越多条总线或多台上位机控制器。现场执行广播参数写入前须确认作用范围；单次发送不能证明每个接收设备都已生效。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-03-09-mask--">T-03-09 MASK / 未存储</h3>
+<p>某些 DALI 配置和场景查询中的特殊值，表达未设置、忽略或保持的语义，含义须按具体命令判断。场景槽位回读为 <code>0xFF</code> 时，本项目显示 <code>MASK/未存储</code>，不把 255 当成有效亮度。<a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h2 id="t-04-">T-04 命令、数据寄存器与操作结果</h2>
+<h3 id="t-04-01-">T-04-01 前向帧与后向帧</h3>
+<p><strong>Forward frame / backward frame。<strong>前向帧由控制侧发送命令或数据，后向帧是目标对查询的响应。有些 YES/NO 查询以</strong>无后向帧</strong>表达“否”；另一些查询无应答可能是错误，必须结合命令定义和会话/总线状态判断。<a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-04-02-dapc">T-04-02 直接弧光功率控制（DAPC）</h3>
+<p><strong>Direct Arc Power Control</strong>：按控制值请求目标达到相应光输出电平，是 DALI 基础调光路径。控制值不是实测光通量、功率百分比或环境照度；最小/最大电平、曲线和设备故障会影响效果。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-04-03-">T-04-03 当前电平与亮度参数</h3>
+<p><strong>Actual level / maximum level / minimum level。</strong>“当前电平”是查询得到的设备状态快照；最大/最小电平是配置边界。修改待设值、发送命令、读回值和实际灯效是不同证据阶段。本软件的“信息 · 参数”只读区与“DALI 参数设置”写入面板也应分开理解。<a href="../../pkg_bi_dali/doc/README.md">P1</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-04-04-">T-04-04 渐变时间、扩展渐变时间与渐变速率</h3>
+<p><strong>Fade time / extended fade time / fade rate</strong>：前两者描述到达目标电平的渐变时长配置，渐变速率描述步进调光速度；扩展渐变时间属于 DALI-2 后续能力。本软件面板限制普通与扩展渐变时间同时作为有效配置提交；扩展路径仍须看固件和设备支持。<a href="https://www.dali-alliance.org/dali2/comparison.html">S3</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-04-05-">T-04-05 上电电平与系统故障电平</h3>
+<p><strong>Power-on level / system-failure level</strong>：前者作用于上电后的亮度恢复，后者用于系统通信故障情形。本软件七项通用参数中都可配置，但相同的数值 <code>255</code> 具有不同语义：上电电平为记忆亮度，系统故障电平为维持当前亮度；不应解释成最高亮度。<a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-04-06-dtr0--dtr1--dtr2">T-04-06 DTR0 / DTR1 / DTR2</h3>
+<p><strong>Data Transfer Register</strong>：设备的临时 8 位数据寄存器，供后续命令取参；它不是短地址，也不自动等于已写入的永久参数。16 位色彩值等会用多个 DTR 组合，顺序与意义随命令变化。联调时应核对 DTR 装载、目标命令及必要的重复发送要求。<a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-04-07-queryreadback">T-04-07 查询（query）与回读（readback）</h3>
+<p>查询请求设备返回当前状态或参数；回读是写入后再次查询，以检查配置是否落在预期值。返回数据必须按目标、命令、时间和完整性解释；一次成功回读仍不能代替灯效或多成员逐台核对。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-04-08-">T-04-08 发送完成、超时与总线错误</h3>
+<p>本软件协议工具中的 <code>commandSent</code> 表示控制器执行器已发送前向命令，<strong>不是设备已生效</strong>；<code>backwardResponse</code> 表示收到应答；<code>responseTimeout</code> 表示窗口内无后向帧；<code>busError</code> 表示总线/帧错误，不能单凭它判定同址。Memory Bank 聚合读取还应核对状态与返回字节数。<a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-04-09-">T-04-09 预计帧与实测总线帧</h3>
+<p>“预计 DALI 发送”是上位机根据所选命令推算的帧序列；Product/Bridge 返回值是控制器事务结果。二者都不是独立硬件总线监视器采集的实际波形。当前日志和协议工具不等于完整的原始 DALI Monitor。<a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h2 id="t-05-">T-05 控制装置类型、调光与颜色</h2>
+<h3 id="t-05-01-dt">T-05-01 设备类型（DT）</h3>
+<p><strong>Device Type</strong>：IEC 62386 的特定控制装置功能类别，不能与控制设备的“输入设备类型”混用。设备可能报告多个功能或扩展能力；应以查询与适用 Part 为依据，不靠型号名推断。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/standards/IEC62386.html">S4</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-05-02-dt1">T-05-02 DT1：自容式应急照明</h3>
+<p>对应 IEC 62386-202，电池在灯具内或邻近灯具；可支持功能测试、持续时间测试和状态报告。看到 DT1 不代表本软件已经提供法定巡检与报告工作流，部署仍须遵循当地应急照明法规。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/dali/emergency.html">S8</a></p>
+<h3 id="t-05-03-dt6led-">T-05-03 DT6：LED 控制装置</h3>
+<p>对应 IEC 62386-207，用于 LED 灯的控制装置。DT6 与 DT8 都是控制装置的设备类型；拥有 DT6 不能据此推断具备色温或 RGB 控制。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/standards/IEC62386.html">S4</a></p>
+<h3 id="t-05-04-dt8">T-05-04 DT8：颜色控制装置</h3>
+<p>对应 IEC 62386-209。DT8 可涉及 Tc、RGBWAF、xy 等颜色类型；报告 DT8 不意味着每一种颜色类型均实现。本软件须按设备读取到的类型和能力显示操作入口。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/dali/colour.html">S9</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-05-05-tc--cct--mirek">T-05-05 Tc / CCT / mirek</h3>
+<p><strong>Tc</strong> 是 DT8 的可调白色色温类型；<strong>CCT</strong> 是相关色温概念，通常以 K 表达。DALI 的 Tc 指令使用 mirek（百万倒数开尔文，<code>mirek = 1,000,000 / K</code>）表示，不应把开尔文整数直接装入 DTR。设备的物理冷暖限值与可写工作限值还应分开核对。<a href="https://www.dali-alliance.org/dali/colour.html">S9</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-05-06-xy-">T-05-06 xy 色坐标</h3>
+<p>使用 CIE 1931 色度图上的 <code>x,y</code> 坐标选择颜色，属于 DT8 的另一颜色类型。坐标不是 RGB 三通道百分比；设备色域和精度决定可达到的实际颜色。本软件现有 DT8 查询/配置仅按已实现的能力与受控服务开放。<a href="https://www.dali-alliance.org/dali/colour.html">S9</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-05-07-rgbwaf">T-05-07 RGBWAF</h3>
+<p>DT8 的多通道颜色类型：Red、Green、Blue、White、Amber、Free-colour，最多六个通道。它不保证每个产品都装有六种物理 LED；通道分配及支持情况需查询。不要将 RGBWAF 三通道命令与 Tc 或 xy 的数值单位混用。<a href="https://www.dali-alliance.org/dali/colour.html">S9</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-05-08-dimming-curve">T-05-08 调光曲线（dimming curve）</h3>
+<p>控制值到光输出的映射。经 DALI-2 认证的控制装置须满足相关标准化调光曲线与测试要求；实际光感和设备物理最小值仍需以产品与现场为准。DT6 的对数/线性曲线选择是特定功能，不能推广到所有控制装置。<a href="https://www.dali-alliance.org/dali/keyfeatures.html">S2</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-05-09-dt19">T-05-09 DT19：集中供电应急照明</h3>
+<p>联盟推荐术语将 DT19 对应于 IEC 62386-220 的集中供电应急照明控制装置，与自带电池的 DT1 不同。两者都不能仅因设备类型可识别，就推断本软件已经提供对应的应急测试、维护计划和合规报告。<a href="https://www.dali-alliance.org/about-us/terms.html">S1</a> <a href="https://www.dali-alliance.org/dali/emergency.html">S8</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h2 id="t-06-dali-data--d4i">T-06 存储体、DALI Data 与 D4i</h2>
+<h3 id="t-06-01-memory-bank">T-06-01 Memory Bank（存储体）</h3>
+<p>设备内部按 Bank 和 offset 组织可查询数据的空间，DALI Data 在规定 Bank 中以标准格式提供。读取 Bank 字节与理解字段含义是两步；必须检查有效性、版本、长度和目标支持情况。本软件协议工具提供受控的 Bank 读取，不开放通用 Bank 写入。<a href="https://www.dali-alliance.org/dali/data.html">S7</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-06-02-dali-data">T-06-02 DALI Data</h3>
+<p>用于灯具资料、能耗和诊断的标准化数据集合，主要关联 Part 251、252、253。它利用双向 DALI 通信提供设备侧数据；是否有某项值取决于设备实现，未读到不能填写零值。<a href="https://www.dali-alliance.org/dali/data.html">S7</a></p>
+<h3 id="t-06-03-part-251">T-06-03 Part 251：灯具资料</h3>
+<p><strong>Luminaire Data / Memory Bank 1 Extension</strong>：描述灯具额定供电、光输出、色温、显色性等资产信息，可由灯具制造商写入驱动器。它是灯具资料，不等于上位机本地记录的“控制器位置/备注”。<a href="https://www.dali-alliance.org/dali/data.html">S7</a></p>
+<h3 id="t-06-04-part-252">T-06-04 Part 252：能耗数据</h3>
+<p><strong>Energy Reporting</strong>：定义驱动器可报告的能量/功率相关数据，供监测和分析。读取数据不等于本软件已有长期曲线、计费级计量或能耗报告；这些需要采集周期、存储、单位和精度的独立验证。<a href="https://www.dali-alliance.org/dali/data.html">S7</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-06-05-part-253">T-06-05 Part 253：诊断与维护</h3>
+<p><strong>Diagnostics &amp; Maintenance</strong>：定义用于维护的设备运行与故障数据。设备没有相应字段或查询失败时应保留未知/不支持状态，不能推断设备健康。本软件已形成部分只读解析，完整业务与实机验证仍有边界。<a href="https://www.dali-alliance.org/dali/data.html">S7</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-06-06-part-250">T-06-06 Part 250：集成总线电源</h3>
+<p><strong>Integrated Bus Power Supply</strong>：D4i LED 驱动器的总线供电相关要求。它描述驱动器集成的 DALI 总线电源，不能仅凭界面看到某个状态字段就认定该设备满足整个 D4i 认证组合。<a href="https://www.dali-alliance.org/d4i/">S10</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-06-07-d4i">T-06-07 D4i</h3>
+<p>DALI-2 认证的扩展，面向具备标准数据和供电能力的智能灯具生态。D4i 驱动器要求 Part 251/252/253 和 Part 250；Part 150 辅助电源可选。<strong>D4i 不是一个新的 DT 编号</strong>，也不能由“读到一个 Memory Bank”推断通过认证；认证产品须查联盟数据库。<a href="https://www.dali-alliance.org/d4i/">S10</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-06-08-part-351--zhaga-d4i">T-06-08 Part 351 与 Zhaga-D4i</h3>
+<p>Part 351 定义灯具内/灯具上安装的 D4i 控制设备及其供电和优先级等要求；<strong>Zhaga-D4i</strong> 是与 Zhaga 接口相关的联合灯具认证。它们与本软件 USB/LAN 控制器资料管理不是同一功能。<a href="https://www.dali-alliance.org/d4i/">S10</a></p>
+<h2 id="t-07-dali-2-">T-07 DALI-2 输入设备、传感器与事件</h2>
+<h3 id="t-07-01-instance">T-07-01 Instance（实例）</h3>
+<p>同一个 DALI-2 输入设备可在一个控制设备地址下包含多个输入实例，例如占用传感实例加照度实例。实例用于区分同一产品内的输入功能，不能直接当作新的控制装置短地址。联盟传感器资料说明一个产品可有最多 32 个实例。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a></p>
+<h3 id="t-07-02-event">T-07-02 Event（事件）</h3>
+<p>输入设备报告状态变化或用户动作的消息，例如按键短按、占用变化或照度变化。应用控制器需要决定如何响应，事件本身不是灯具执行命令。未来接入时需区分事件来源、实例、类型、时序和绑定规则。<a href="https://www.dali-alliance.org/dali/systems.html">S5</a> <a href="https://www.dali-alliance.org/dali/sensors.html">S6</a></p>
+<h3 id="t-07-03-part-301">T-07-03 Part 301：按键</h3>
+<p>DALI-2 输入设备类别，描述按下、释放、短按、长按、双击等事件。按键可以触发调光或场景逻辑，但事件到灯具命令的映射由应用控制器/系统配置完成。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a></p>
+<h3 id="t-07-04-part-302">T-07-04 Part 302：绝对输入</h3>
+<p>覆盖开关、档位、模拟输入、滑杆或旋钮等能报告位置/数值的输入装置。其事件值不自动等于 DALI 弧功率值；需要业务映射及范围校验。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a></p>
+<h3 id="t-07-05-part-303">T-07-05 Part 303：占用传感器</h3>
+<p>用于报告有人、无人、移动或无移动等状态/事件。占用传感器不直接保证灯会熄灭或点亮；延时、优先级和场景需由控制逻辑定义。当前上位机尚无正式的传感器事件绑定工作流。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-07-06-part-304">T-07-06 Part 304：照度传感器</h3>
+<p>用于测量并报告照度；可借助滞回或周期上报减少总线事件。<strong>照度（lx）</strong>，是环境光测量，不是某个驱动器的亮度设置值。恒照度控制需要采样、目标值和应用控制器闭环，当前本软件未交付该自动化流程。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a> <a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-07-07-part-305--part-306">T-07-07 Part 305 / Part 306</h3>
+<p>分别面向颜色传感器和通用传感器。联盟传感器页在本次核对时将二者列为规范开发中；发布和认证状态会变化，后续页面应从官方状态表更新，不能提前显示为本软件已支持。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a> <a href="https://www.dali-alliance.org/dali2/status.html">S12</a></p>
+<h3 id="t-07-08-">T-07-08 轮询与事件驱动</h3>
+<p><strong>Polling / event-driven</strong>：轮询是控制侧主动查询，事件驱动是输入设备在变化时主动报告；传感器还可周期上报。DALI-2 输入设备通常使用事件驱动模式，多主控部署需要明确谁处理事件和如何避免重复动作。<a href="https://www.dali-alliance.org/dali/sensors.html">S6</a></p>
+<h2 id="t-08-dali-">T-08 DALI+ 与其他网络互联</h2>
+<h3 id="t-08-01-dali">T-08-01 DALI+</h3>
+<p>在无线或 IP 网络承载上使用 DALI 命令的体系，不是“DALI-2 的下一代版本号”。其规范关联 IEC 62386-104 及联盟的 <strong>Part 104 Changes &amp; Additions</strong>；具体承载、桥接和认证范围应查当期官方资料。<a href="https://www.dali-alliance.org/daliplus/">S11</a> <a href="https://www.dali-alliance.org/dali2/status.html">S12</a></p>
+<h3 id="t-08-02-dali-with-thread">T-08-02 DALI+ with Thread</h3>
+<p>使用 Thread 低功耗 IP Mesh 作为承载的 DALI+ 方向。Thread 是承载网络，DALI 命令和对象语义仍属 DALI+；是否可认证及支持哪些设备以联盟当期发布的测试项目为准。<a href="https://www.dali-alliance.org/daliplus/">S11</a></p>
+<h3 id="t-08-03-bridge--dali-">T-08-03 Bridge / DALI+ 桥</h3>
+<p>在 DALI+ 网络与传统有线 DALI 子网之间连接的系统构件。DALI+ 的桥是跨承载互联概念；本项目协议工具中的 <strong>DALI Bridge 事务</strong>是自研控制器 Host 与固件之间的命令封装，二者同名但层次不同。<a href="https://www.dali-alliance.org/daliplus/">S11</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-08-04--dali-">T-08-04 无线到 DALI 网关</h3>
+<p><strong>Wireless-to-DALI gateway</strong>：在无线生态协议与有线 DALI 之间翻译的网关；与端到端使用 DALI 命令的 DALI+ 不同。使用 BLE、Wi-Fi 或以太网接入控制器，只说明存在网络链路，不足以判定属于 DALI+。<a href="https://www.dali-alliance.org/daliplus/">S11</a></p>
+<h3 id="t-08-05--usblan-">T-08-05 本软件的 USB/LAN 连接</h3>
+<p>上位机通过 USB CDC 或局域网向自研控制器发送 Product/Bridge 事务，再由控制器操作<strong>有线 DALI 总线</strong>。它是主机接入与网关转发路径，不是 DALI+ over IP 实现或 DALI+ 认证声明。<a href="../../pkg_bi_dali/doc/README.md">P1</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h2 id="t-09-">T-09 本软件中的状态与证据用语</h2>
+<h3 id="t-09-01-">T-09-01 已发现、已连接与会话就绪</h3>
+<p>“已发现”只表示有接入候选；“已连接”表示物理/传输链路建立；“会话就绪”还要求业务握手和当前能力可用。选择目标时应同时检查控制器身份、会话和总线。候选端点数不可当成已连接实体数。<a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h3 id="t-09-02-">T-09-02 扫描完成、部分完成、失败、取消</h3>
+<p>这是一次扫描任务的四种终态。“部分完成”可能保留排查线索，但不应提供完整清单的承诺；失败和取消也不能被重新命名为零设备。可信结果还需事件流完整且无完整性问题。<a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-09-03-">T-09-03 未知、未支持与待验证</h3>
+<p>“未知”是没有可靠数据，“未支持”是当前设备/固件/协议路径不具备该能力，“待验证”是软件路径或候选协议已有基础但尚无目标固件与实机证据。三者不能合并为“关闭”“故障”或“已完成”。<a href="../../pkg_bi_dali/doc/README.md">P1</a> <a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">P3</a></p>
+<h3 id="t-09-04-">T-09-04 快照与缓存</h3>
+<p>快照是某次查询或扫描在特定控制器、总线、地址和时间点的结果；缓存是为显示和继续操作保存的已知资料。它们都不是持续实时测量，也不能在目标切换后作为新目标的当前值。重新扫描或回读应生成新的证据上下文。<a href="../../pkg_bi_dali/doc/README.md">P1</a> <a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">P2</a></p>
+<h3 id="t-09-05-">T-09-05 本地资料与设备侧配置</h3>
+<p>控制器名称、部署位置等可保存在上位机本地；DALI 短地址、组成员和场景槽位属于设备侧配置。完成本地资料保存，不等于已同步固件或写入灯具；导入控制器资料也不是整线配置恢复。<a href="../../pkg_bi_dali/doc/README.md">P1</a></p>
+<h2 id="t-10-">T-10 资料来源与维护边界</h2>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>来源</th>
+<th>本稿主要核对内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S0</td>
+<td><a href="https://www.dali-alliance.org/">DALI Alliance 首页</a></td>
+<td>联盟与官方入口</td>
+</tr>
+<tr>
+<td>S1</td>
+<td><a href="https://www.dali-alliance.org/about-us/terms.html">Recommended terms</a></td>
+<td>中英名称、BPS、control gear、DT1/6/8</td>
+</tr>
+<tr>
+<td>S2</td>
+<td><a href="https://www.dali-alliance.org/dali/keyfeatures.html">DALI key features</a></td>
+<td>地址、控制/配置/查询、组、场景与调光</td>
+</tr>
+<tr>
+<td>S3</td>
+<td><a href="https://www.dali-alliance.org/dali2/comparison.html">DALI-2 versus version-1</a></td>
+<td>DALI-2 认证、控制设备与混合系统</td>
+</tr>
+<tr>
+<td>S4</td>
+<td><a href="https://www.dali-alliance.org/standards/IEC62386.html">IEC 62386 standard</a></td>
+<td>分册体系；该页面部分状态表更新较慢，认证状态另查 S12</td>
+</tr>
+<tr>
+<td>S5</td>
+<td><a href="https://www.dali-alliance.org/dali/systems.html">DALI-2 systems &amp; components</a></td>
+<td>64+64、设备角色、总线电源和布线</td>
+</tr>
+<tr>
+<td>S6</td>
+<td><a href="https://www.dali-alliance.org/dali/sensors.html">DALI sensors and input devices</a></td>
+<td>Part 301-306、实例、事件和传感器</td>
+</tr>
+<tr>
+<td>S7</td>
+<td><a href="https://www.dali-alliance.org/dali/data.html">DALI Data</a></td>
+<td>Part 251/252/253 与 Memory Bank</td>
+</tr>
+<tr>
+<td>S8</td>
+<td><a href="https://www.dali-alliance.org/dali/emergency.html">DALI Emergency</a></td>
+<td>DT1 与应急测试</td>
+</tr>
+<tr>
+<td>S9</td>
+<td><a href="https://www.dali-alliance.org/dali/colour.html">DALI Colour Control</a></td>
+<td>DT8、Tc、RGBWAF、xy</td>
+</tr>
+<tr>
+<td>S10</td>
+<td><a href="https://www.dali-alliance.org/d4i/">D4i overview</a></td>
+<td>D4i 组合、Part 150/250/251/252/253/351</td>
+</tr>
+<tr>
+<td>S11</td>
+<td><a href="https://www.dali-alliance.org/daliplus/">DALI+ overview</a></td>
+<td>Part 104、Thread、桥与无线网关区别</td>
+</tr>
+<tr>
+<td>S12</td>
+<td><a href="https://www.dali-alliance.org/dali2/status.html">DALI-2 certification status</a></td>
+<td>当前可认证 Part 与版次追踪入口</td>
+</tr>
+<tr>
+<td>P1</td>
+<td><a href="../../pkg_bi_dali/doc/README.md">业务总纲</a>、<a href="../../pkg_bi_dali/doc/DALI_STAGE_INDEX.md">阶段状态</a></td>
+<td>本软件对象命名、能力和交付边界</td>
+</tr>
+<tr>
+<td>P2</td>
+<td><a href="../../pkg_bi_dali/doc/DALI_B5_DESIGN.md">B5 编址/组场景设计</a>、<a href="../../pkg_bi_dali/lib/src/domain/line/dali_scan_snapshot.dart">扫描模型</a></td>
+<td>地址与扫描终态、组场景、同址证据</td>
+</tr>
+<tr>
+<td>P3</td>
+<td><a href="../../pkg_bi_dali/doc/DALI_PROTOCOL_TOOLS_GUIDE.md">协议工具说明</a></td>
+<td>DTR、帧结果、查询和当前工具边界</td>
+</tr>
+</tbody>
+</table>
+<p>官方资料用于定义专业术语，项目资料用于描述<strong>本软件当前</strong>提供的入口和证据。涉及 DALI-2、DALI+、D4i 或传感器的新增页面，应分别更新实现状态并重核官方认证/Part 状态；不要从术语条目推断产品已支持或已认证。</p>
+</div>
+        </article>
+      </main>
+    </div>
+  </div>
+  <script>
+    const initialTopic = new URLSearchParams(window.location.search).get('topic');
+    const documents = {quick:document.getElementById('quick'),terms:document.getElementById('terms')};
+    const tabs = {quick:document.getElementById('quick-tab'),terms:document.getElementById('terms-tab')};
+    const toc = {quick:document.getElementById('quick-toc'),terms:document.getElementById('terms-toc')};
+    const content = document.querySelector('.content-scroll');
+    for (const heading of document.querySelectorAll('.doc-body h2, .doc-body h3')) {
+      const code = heading.textContent.match(/^((?:QS-\d{2}(?:\.\d+)?|T-\d{2}(?:-\d{2})?))\b/);
+      if (code) heading.id = code[1].toLowerCase().replace('.', '-');
+    }
+    function selectTopic(topic) {
+      for (const key of Object.keys(documents)) {
+        const active = key === topic;
+        documents[key].hidden = !active;
+        toc[key].hidden = !active;
+        tabs[key].setAttribute('aria-selected', String(active));
+        tabs[key].tabIndex = active ? 0 : -1;
+      }
+      document.title = topic === 'terms' ? 'DALI 术语' : '快速上手';
+      content.style.scrollBehavior = 'auto';
+      content.scrollTop = 0;
+      content.style.scrollBehavior = '';
+      toc[topic].scrollTo(0,0);
+      updateActiveChapter();
+    }
+    tabs.quick.addEventListener('click', () => selectTopic('quick'));
+    tabs.terms.addEventListener('click', () => selectTopic('terms'));
+    document.querySelector('.switcher').addEventListener('keydown', event => {
+      const key = event.key;
+      if (!['ArrowLeft','ArrowRight','Home','End'].includes(key)) return;
+      event.preventDefault();
+      const next = key === 'ArrowLeft' || key === 'Home' ? 'quick' : 'terms';
+      selectTopic(next);
+      tabs[next].focus();
+    });
+    document.querySelectorAll('a[href="#terms"]').forEach(link => link.addEventListener('click', event => {event.preventDefault();selectTopic('terms');}));
+    for (const links of Object.values(toc)) {
+      links.addEventListener('click', event => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+        const heading = document.getElementById(link.hash.slice(1));
+        if (!heading || heading.hidden) return;
+        event.preventDefault();
+        heading.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    }
+    function updateActiveChapter() {
+      const topic = documents.terms.hidden ? 'quick' : 'terms';
+      const links = [...toc[topic].querySelectorAll('a:not([hidden])')];
+      let active = links[0];
+      for (const link of links) {
+        const heading = document.getElementById(link.hash.slice(1));
+        if (heading && heading.getBoundingClientRect().top <= content.getBoundingClientRect().top + 24) active = link;
+      }
+      for (const link of toc[topic].querySelectorAll('a')) {
+        if (link === active) link.setAttribute('aria-current','location');
+        else link.removeAttribute('aria-current');
+      }
+    }
+    content.addEventListener('scroll', updateActiveChapter, {passive:true});
+    document.querySelectorAll('.doc-body a[href]').forEach(link => {
+      if (!link.getAttribute('href').split('#')[0].endsWith('.md')) return;
+      const label = document.createElement('code');
+      label.textContent = link.textContent;
+      label.title = link.getAttribute('href');
+      link.replaceWith(label);
+    });
+    const search = document.getElementById('term-search');
+    const termHeadings = [...document.querySelectorAll('#terms .doc-body h3')];
+    function filterTerms() {
+      const query = search.value.trim().toLocaleLowerCase();
+      let visible = 0;
+      for (const heading of termHeadings) {
+        const blocks = [];
+        let next = heading.nextElementSibling;
+        while (next && next.tagName !== 'H2' && next.tagName !== 'H3') {blocks.push(next);next = next.nextElementSibling;}
+        const matches = !query || [heading,...blocks].some(node => node.textContent.toLocaleLowerCase().includes(query));
+        heading.hidden = !matches;
+        for (const block of blocks) block.hidden = !matches;
+        if (matches) visible++;
+      }
+      for (const chapter of document.querySelectorAll('#terms .doc-body h2')) {
+        let next = chapter.nextElementSibling;
+        let hasMatch = false;
+        const blocks = [];
+        while (next && next.tagName !== 'H2') {
+          blocks.push(next);
+          if (next.tagName === 'H3' && !next.hidden) hasMatch = true;
+          next = next.nextElementSibling;
+        }
+        const hideChapter = !!query && !hasMatch;
+        chapter.hidden = hideChapter;
+        if (!blocks.some(block => block.tagName === 'H3')) {
+          for (const block of blocks) block.hidden = hideChapter;
+        }
+      }
+      for (const link of toc.terms.querySelectorAll('a')) {
+        const target = document.getElementById(link.hash.slice(1));
+        link.hidden = !!query && !!target && target.hidden;
+      }
+      document.getElementById('search-count').textContent = query ? visible + ' 条' : '';
+      content.style.scrollBehavior = 'auto';
+      content.scrollTop = 0;
+      content.style.scrollBehavior = '';
+      updateActiveChapter();
+    }
+    search.addEventListener('input', filterTerms);
+    selectTopic(initialTopic === 'terms' ? 'terms' : 'quick');
+  </script>
+</body>
+</html>
