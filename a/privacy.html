@@ -1,24 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f3f7f4" />
+    <script src="site-preferences.js?v=20261121-1"></script>
     <meta name="description" content="Privacy notice for the DALI Control Platform engineering software." />
     <title>Privacy Notice | DALI Control Platform</title>
-    <link rel="stylesheet" href="language-panel.css?v=20260915-6" />
-    <link rel="stylesheet" href="info-pages.css?v=20260915-7" />
+    <link rel="stylesheet" href="language-panel.css?v=20261120-3" />
+    <link rel="stylesheet" href="info-pages.css?v=20261121-1" />
+    <link rel="stylesheet" href="site-theme.css?v=20261121-1" />
   </head>
-  <body data-theme="light" data-page="privacy">
+  <body data-page="privacy">
     <header class="info-header">
       <a class="info-brand" href="index.html" aria-label="DALI Control Platform product page">
         <span class="brand-mark" aria-hidden="true">D</span>
         <span><strong>DALI</strong><small data-info="brandSub">CONTROL PLATFORM</small></span>
       </a>
-      <nav class="info-nav" aria-label="Information pages">
-        <a class="is-active" href="privacy.html" data-info="navPrivacy">Privacy</a>
+      <nav class="info-nav" aria-label="Product pages">
+        <a href="index.html" data-info="navProduct">Home</a>
+        <a href="downloads.html" data-info="navDownloads">Downloads</a>
         <a href="about.html" data-info="navAbout">About</a>
-        <a href="index.html" data-info="navProduct">Product</a>
+        <a class="is-active" aria-current="page" href="privacy.html" data-info="navPrivacy">Privacy</a>
       </nav>
       <div class="info-actions">
         <div class="language-control" id="info-language-control">
@@ -35,7 +38,7 @@
         <h1 data-info="privacyTitle">Privacy Notice</h1>
         <p class="info-lead" data-info="privacyLead">This notice explains the information the DALI controller engineering software may process during commissioning, configuration, diagnostics and support, and the boundaries we apply to that data.</p>
         <dl class="info-meta">
-          <div><dt data-info="effectiveLabel">Last updated</dt><dd>2026-10-26</dd></div>
+          <div><dt data-info="effectiveLabel">Last updated</dt><dd>2026-11-21</dd></div>
           <div><dt data-info="scopeLabel">Scope</dt><dd data-info="privacyScopeValue">DALI Control Platform software and companion controllers</dd></div>
         </dl>
       </section>
@@ -53,21 +56,21 @@
 
         <div class="policy-content">
           <section class="release-note" aria-labelledby="release-note-title">
-            <span data-info="releaseStatus">Required before release</span>
-            <h2 id="release-note-title" data-info="releaseTitle">Operator details will be completed before public release</h2>
-            <p data-info="releaseBody">This page is a product-level notice aligned with the current product scope. Before public release, the actual operator must add its legal name, contact address, privacy email, regional terms and effective date, followed by legal review.</p>
+            <span data-info="releaseStatus">Preview data notice</span>
+            <h2 id="release-note-title" data-info="releaseTitle">The formal privacy policy will accompany the full software release</h2>
+            <p data-info="releaseBody">This page describes how the current product handles data. The operator, privacy contact and regional terms will be published with the full software release. For product inquiries, use the official Suretron website.</p>
           </section>
 
           <section id="scope">
             <h2 data-info="privacyScopeTitle">Scope</h2>
-            <p data-info="privacyScopeBody">This notice describes current software workflows and planned desktop and mobile engineering use with companion DALI controllers or gateways. Platform availability and feature scope depend on the released version. Customer-built platforms, third-party operating systems and external services follow their own terms.</p>
+            <p data-info="privacyScopeBody">This notice covers connections, configuration, diagnostics and support between the current desktop engineering software and companion DALI controllers or gateways. Data practices for future platforms will be explained when those versions are released. Third-party systems and services follow their own terms.</p>
           </section>
 
           <section id="principles">
             <h2 data-info="privacyPrinciplesTitle">Our principles</h2>
             <ul>
               <li data-info="privacyPrinciple1">Limit processing to the information needed to complete professional lighting tasks.</li>
-              <li data-info="privacyPrinciple2">Prefer processing on the user device and within controlled local networks.</li>
+              <li data-info="privacyPrinciple2">Prefer processing engineering data on the user device and within controlled local networks.</li>
               <li data-info="privacyPrinciple3">Explain purpose, scope and controls before introducing cloud, remote or AI capabilities.</li>
             </ul>
           </section>
@@ -75,8 +78,8 @@
           <section id="data">
             <h2 data-info="privacyDataTitle">Information we may process</h2>
             <div class="data-table">
-              <div><strong data-info="privacyDataProjectTitle">Project and configuration data</strong><p data-info="privacyDataProjectBody">Controller and line identifiers, short addresses, groups, scenes and parameters. Project-file export and snapshots are still in development.</p></div>
-              <div><strong data-info="privacyDataDeviceTitle">Device and connection data</strong><p data-info="privacyDataDeviceBody">Local network addresses, connection state, software and firmware versions, device capabilities, operation times and update results.</p></div>
+              <div><strong data-info="privacyDataProjectTitle">Project and configuration data</strong><p data-info="privacyDataProjectBody">Engineering configuration data such as controller and line identifiers, short addresses, groups, scenes and parameters. Project-file export and snapshots are not available in the current version.</p></div>
+              <div><strong data-info="privacyDataDeviceTitle">Device and connection data</strong><p data-info="privacyDataDeviceBody">Local network addresses, connection state, software and firmware versions, device capabilities and relevant operation records.</p></div>
               <div><strong data-info="privacyDataLogTitle">Diagnostic information</strong><p data-info="privacyDataLogBody">Operation events, communication status, errors and fault context used for on-site assessment and troubleshooting.</p></div>
               <div><strong data-info="privacyDataSupportTitle">Support material</strong><p data-info="privacyDataSupportBody">Contact details, project extracts, logs or attachments are processed only when you actively request support.</p></div>
             </div>
@@ -85,17 +88,17 @@
 
           <section id="purpose">
             <h2 data-info="privacyPurposeTitle">Why information is processed</h2>
-            <p data-info="privacyPurposeBody">Information is used to discover and connect controllers, perform available configuration and control tasks, display status, diagnose faults and provide requested support. Future project-file and backup functions will be documented when released. It is not used for selling personal information or advertising profiles.</p>
+            <p data-info="privacyPurposeBody">Information is used to discover and connect controllers, perform currently available configuration and control, show status, diagnose issues and provide support you request. We do not sell personal information or use it for advertising profiles.</p>
           </section>
 
           <section id="local">
             <h2 data-info="privacyLocalTitle">Local processing and storage</h2>
-            <p data-info="privacyLocalBody">Current workflows centre on Type-C, controlled local networks and on-device diagnostics. Project-file export and backup are still in development. This website stores only language and theme preferences in your browser and currently uses no analytics or advertising trackers.</p>
+            <p data-info="privacyLocalBody">Current workflows use Type-C, controlled local networks and on-device diagnostics without requiring a cloud account. This website stores only language and theme preferences in your browser and uses no analytics or advertising trackers.</p>
           </section>
 
           <section id="permissions">
             <h2 data-info="privacyPermissionsTitle">System permissions</h2>
-            <p data-info="privacyPermissionsBody">Depending on the platform and feature, the software may request local network access, companion device connections or update package selection. File permissions will apply when related functions are released. Permissions can be managed in operating system settings; denying access may prevent the related function from working.</p>
+            <p data-info="privacyPermissionsBody">Depending on the feature in use, the software may request local network or companion-device access. You can manage permissions in your operating system; denying them may prevent related functions from working. File permissions will be explained if file features are released.</p>
           </section>
 
           <section id="sharing">
@@ -105,17 +108,17 @@
 
           <section id="ai">
             <h2 data-info="privacyAiTitle">Future AI capabilities</h2>
-            <p data-info="privacyAiBody">AI content on this site describes a roadmap and does not mean project data is currently uploaded. If cloud analysis, natural-language control or model services are introduced, we will separately explain the data used, processing location, retention, human review and opt-out controls.</p>
+            <p data-info="privacyAiBody">AI assistance is not yet available, and the AI information on this site does not mean engineering data is currently uploaded. If cloud analysis or model services are introduced, we will explain the data scope, processing location, retention and available choices before activation.</p>
           </section>
 
           <section id="rights">
             <h2 data-info="privacyRightsTitle">Your controls and rights</h2>
-            <p data-info="privacyRightsBody">You can manage available local data and permissions through the software and operating system. Project-file export and deletion controls are not yet complete. Applicable access, deletion or restriction requests will use the official privacy channel once the operator details are published.</p>
+            <p data-info="privacyRightsBody">You can manage currently available local data and permissions through the software and operating system. Project-file export and related deletion controls are not yet available. For personal-data questions or applicable rights requests, use the contact details on the official Suretron website.</p>
           </section>
 
           <section id="security">
             <h2 data-info="privacySecurityTitle">Security and responsibility</h2>
-            <p data-info="privacySecurityBody">Controlled connections and data minimisation can reduce risk. Customers remain responsible for protecting networks, device credentials and any exported records, and for limiting unauthorised access to control systems. No technical measure can guarantee absolute security.</p>
+            <p data-info="privacySecurityBody">Local processing and controlled networks help limit data exposure. Protect devices, networks and system access, and share diagnostic material carefully. No technical measure can guarantee absolute security.</p>
           </section>
 
           <section id="children">
@@ -130,7 +133,7 @@
 
           <section id="contact">
             <h2 data-info="privacyContactTitle">Contact and release details</h2>
-            <p data-info="privacyContactBody">The operator name, privacy contact, email address, postal address and regional rights information will be configured before product release. The current showcase must not use a sample email address for genuine privacy requests.</p>
+            <p><span data-info="privacyContactBody">For questions about product data practices, use the contact details on the official Suretron website. A dedicated privacy contact will be published with the full software release.</span> <a href="https://www.suretron.com/" target="_blank" rel="noopener noreferrer">suretron.com ↗</a></p>
           </section>
         </div>
       </article>
@@ -139,9 +142,10 @@
     <footer class="info-footer">
       <div class="info-shell"><span>DALI Control Platform</span><span data-info="footerNote">Product and data practice information</span><span>© 2026</span></div>
     </footer>
-    <script src="info-pages-expanded.js?v=20260915-4"></script>
-    <script src="site-preferences.js?v=20261026-1"></script>
+    <script src="info-pages-expanded.js?v=20261121-1"></script>
+
     <script src="product-copy.js?v=20261026-1"></script>
-    <script src="info-pages.js?v=20261026-1"></script>
+    <script src="customer-copy.js?v=20261121-1"></script>
+    <script src="info-pages.js?v=20261121-2"></script>
   </body>
 </html>

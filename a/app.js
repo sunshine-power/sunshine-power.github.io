@@ -5,7 +5,7 @@ const messages = {
     'metric.lineLabel': 'DALI LINE', 'metric.lineSub': 'Ready to commission', 'metric.signalLabel': 'BUS SIGNAL', 'metric.signalSub': 'Stable link',
     'standards.lead': 'Designed around the standards your projects already trust.', 'proof.platforms': '覆盖平台', 'proof.platformsSub': 'Windows · macOS · iOS · Android', 'proof.workflow': '条完整工程路径', 'proof.workflowSub': '从发现到交付，减少工具切换', 'proof.scenes': '场景位', 'proof.scenesSub': '让空间逻辑可复用、可维护', 'proof.addresses': '短地址视图', 'proof.addressesSub': '以总线对象为中心组织工作',
     'capabilities.eyebrow': 'ONE SYSTEM / MANY MOMENTS', 'capabilities.title': '把工程复杂度，<br /><em>交给一套清晰的工作台。</em>', 'capabilities.intro': '从首次发现设备，到项目交付后的维护，产品能力沿着工程团队真实的工作顺序展开。每一步都有明确对象、状态和结果。',
-    'capability.discovery.title': '发现与识别', 'capability.discovery.body': '快速建立控制器与 DALI Line 视图，支持全新搜索、扩展搜索和连接状态确认。', 'capability.discovery.tag': 'Commissioning start', 'capability.address.title': '地址与拓扑', 'capability.address.body': '读取、设定与重分配短地址，按地址、群组和总线对象组织现场工作。', 'capability.address.tag': 'Addressing', 'capability.scene.title': '分组与场景', 'capability.scene.body': '把空间意图沉淀为可读取、可复用的分组与场景逻辑。', 'capability.scene.tag': 'Space logic', 'capability.parameters.title': '参数与批量配置', 'capability.parameters.body': '围绕亮度、渐变、范围和设备参数，提供清晰的读取、设定和批量运维入口。', 'capability.parameters.tag': 'Fleet ready', 'capability.control.title': '实时调光与色彩', 'capability.control.body': '支持广播、组与单地址控制，覆盖开关、亮度、色温及 RGBWAF 彩色应用。', 'capability.control.tag': 'DT8 control', 'capability.lifecycle.title': '连接、升级与交付', 'capability.lifecycle.body': 'Type-C 与 LAN 接入，配合固件升级和工程快照，让项目从现场调试走向长期运维。', 'capability.lifecycle.tag': 'Lifecycle',
+    'capability.discovery.title': '发现与识别', 'capability.discovery.body': '快速建立控制器与 DALI Line 视图，支持全新搜索、扩展搜索和连接状态确认。', 'capability.discovery.tag': 'Commissioning start', 'capability.address.title': '地址与拓扑', 'capability.address.body': "读取与重分配短地址，并可清除单个、已扫描或整条总线的地址。疑似同址是排查线索；实机验收待完成。", 'capability.address.tag': 'Addressing', 'capability.scene.title': '分组与场景', 'capability.scene.body': '把空间意图沉淀为可读取、可复用的分组与场景逻辑。', 'capability.scene.tag': 'Space logic', 'capability.parameters.title': '参数与批量配置', 'capability.parameters.body': '围绕亮度、渐变、范围和设备参数，提供清晰的读取、设定和批量运维入口。', 'capability.parameters.tag': 'Fleet ready', 'capability.control.title': '实时调光与色彩', 'capability.control.body': '支持广播、组与单地址控制，覆盖开关、亮度、色温及 RGBWAF 彩色应用。', 'capability.control.tag': 'DT8 control', 'capability.lifecycle.title': '连接、升级与交付', 'capability.lifecycle.body': 'Type-C 与 LAN 接入，配合固件升级和工程快照，让项目从现场调试走向长期运维。', 'capability.lifecycle.tag': 'Lifecycle',
     'workflow.eyebrow': 'FROM FIRST SCAN TO LASTING VALUE', 'workflow.title': '一条可交付的<br /><em>工程节奏。</em>', 'workflow.intro': '把“能控制”推进到“能复制、能交付、能持续维护”。每个阶段都围绕现场团队最关心的下一步动作。', 'workflow.discover.title': 'Discover', 'workflow.discover.body': '发现控制器与总线设备', 'workflow.address.title': 'Address', 'workflow.address.body': '建立清晰的地址与拓扑', 'workflow.compose.title': 'Compose', 'workflow.compose.body': '配置分组与场景逻辑', 'workflow.tune.title': 'Tune', 'workflow.tune.body': '批量设定关键参数', 'workflow.operate.title': 'Operate', 'workflow.operate.body': '现场调光与状态确认', 'workflow.maintain.title': 'Maintain', 'workflow.maintain.body': '升级、诊断与持续交付',
     'software.eyebrow': 'SOFTWARE EXPERIENCE', 'software.title': '让现场团队，<br /><em>一眼看懂。</em>', 'software.intro': '专业能力不应被复杂界面遮蔽。工作台围绕线路、对象、状态和下一步操作组织信息，让工程团队快速判断并持续推进。', 'screen.dashboard.title': '工程总览', 'screen.dashboard.sub': '快速掌握项目状态', 'screen.dashboard.body': '设备、在线状态、故障与常用区域集中在同一视图中。', 'screen.control.title': '实时控制', 'screen.control.sub': '开关、亮度与色温', 'screen.control.body': '从广播到单地址，每一次现场操作都清晰可见。', 'screen.parameters.title': '参数配置', 'screen.parameters.sub': '批量维护与精细设置', 'screen.parameters.body': '在聚焦的流程中读取、设定并维护关键参数。', 'screen.scenes.title': '场景编排', 'screen.scenes.sub': '可复用的空间逻辑', 'screen.scenes.body': '针对空间中的不同时刻保存、调用并复用场景。',
     'hardware.eyebrow': 'THE CONTROLLER LAYER', 'hardware.title': '稳住现场连接，<br /><em>再把能力交给软件。</em>', 'hardware.body': 'DALI 电源控制器 / 网关是项目的可靠入口：向上连接工程工作台，向下管理 DALI Line。通过 Type-C 或 LAN 接入，保持部署灵活，也为后续产品形态留出空间。', 'hardware.point1': 'Type-C 直连', 'hardware.point2': 'LAN 局域网', 'hardware.point3': '可选外部总线电源', 'hardware.note': 'Controller / Gateway / DALI Line',
@@ -19,7 +19,7 @@ const messages = {
     'brand.sub': 'CONTROL PLATFORM', 'nav.capabilities': 'Capabilities', 'nav.workflow': 'Workflow', 'nav.software': 'Software', 'nav.markets': 'Markets', 'nav.contact': 'Talk to us ↗', 'control.languageLabel': 'Language',
     'hero.eyebrow': 'DALI CONTROL PLATFORM / V1.0', 'hero.title': 'Make every line <em>ready for the next scene.</em>', 'hero.description': 'A controller and engineering workspace for professional lighting projects. Built around international standards, it brings discovery, addressing, grouping, scenes, parameters and control into one deliverable path.', 'hero.primary': 'Explore capabilities ↓', 'hero.secondary': 'Get the partner brief ↗', 'hero.footnote': 'Built for commissioning teams, system integrators and lighting OEMs.', 'hero.visualLabel': 'LIVE WORKSPACE PREVIEW', 'hero.visualCaption': 'Engineering home · status overview', 'common.online': 'Online',
     'metric.lineLabel': 'DALI LINE', 'metric.lineSub': 'Ready to commission', 'metric.signalLabel': 'BUS SIGNAL', 'metric.signalSub': 'Stable link', 'standards.lead': 'Designed around the standards your projects already trust.', 'proof.platforms': 'supported platforms', 'proof.platformsSub': 'Windows · macOS · iOS · Android', 'proof.workflow': 'end-to-end workflow', 'proof.workflowSub': 'Less tool switching from scan to delivery', 'proof.scenes': 'scene slots', 'proof.scenesSub': 'Reusable spatial logic', 'proof.addresses': 'short-address view', 'proof.addressesSub': 'Organized around bus objects',
-    'capabilities.eyebrow': 'ONE SYSTEM / MANY MOMENTS', 'capabilities.title': 'Give complexity <em>a clear place to work.</em>', 'capabilities.intro': 'From first device discovery to post-delivery maintenance, capabilities follow the real sequence of an engineering team. Every step has a clear object, state and outcome.', 'capability.discovery.title': 'Discovery & identity', 'capability.discovery.body': 'Build a controller and DALI Line view quickly, with fresh and extended scans plus connection state confirmation.', 'capability.discovery.tag': 'Commissioning start', 'capability.address.title': 'Addressing & topology', 'capability.address.body': 'Read, set and reassign short addresses while organizing work by address, group and bus object.', 'capability.address.tag': 'Addressing', 'capability.scene.title': 'Groups & scenes', 'capability.scene.body': 'Turn spatial intent into group and scene logic that can be read, reused and maintained.', 'capability.scene.tag': 'Space logic', 'capability.parameters.title': 'Parameters & batch setup', 'capability.parameters.body': 'Keep brightness, fade, range and device parameters in a clear read, set and batch-maintenance flow.', 'capability.parameters.tag': 'Fleet ready', 'capability.control.title': 'Live dimming & colour', 'capability.control.body': 'Control broadcast, groups or single addresses with switching, level, colour temperature and RGBWAF workflows.', 'capability.control.tag': 'DT8 control', 'capability.lifecycle.title': 'Connect, upgrade & deliver', 'capability.lifecycle.body': 'Type-C and LAN access, firmware upgrades and project snapshots carry the work from site commissioning into operations.', 'capability.lifecycle.tag': 'Lifecycle',
+    'capabilities.eyebrow': 'ONE SYSTEM / MANY MOMENTS', 'capabilities.title': 'Give complexity <em>a clear place to work.</em>', 'capabilities.intro': 'From first device discovery to post-delivery maintenance, capabilities follow the real sequence of an engineering team. Every step has a clear object, state and outcome.', 'capability.discovery.title': 'Discovery & identity', 'capability.discovery.body': 'Build a controller and DALI Line view quickly, with fresh and extended scans plus connection state confirmation.', 'capability.discovery.tag': 'Commissioning start', 'capability.address.title': 'Addressing & topology', 'capability.address.body': "Read and reassign short addresses; clear one, scanned addresses or the whole bus. Suspected conflicts are a troubleshooting clue; hardware validation is pending.", 'capability.address.tag': 'Addressing', 'capability.scene.title': 'Groups & scenes', 'capability.scene.body': 'Turn spatial intent into group and scene logic that can be read, reused and maintained.', 'capability.scene.tag': 'Space logic', 'capability.parameters.title': 'Parameters & batch setup', 'capability.parameters.body': 'Keep brightness, fade, range and device parameters in a clear read, set and batch-maintenance flow.', 'capability.parameters.tag': 'Fleet ready', 'capability.control.title': 'Live dimming & colour', 'capability.control.body': 'Control broadcast, groups or single addresses with switching, level, colour temperature and RGBWAF workflows.', 'capability.control.tag': 'DT8 control', 'capability.lifecycle.title': 'Connect, upgrade & deliver', 'capability.lifecycle.body': 'Type-C and LAN access, firmware upgrades and project snapshots carry the work from site commissioning into operations.', 'capability.lifecycle.tag': 'Lifecycle',
     'workflow.eyebrow': 'FROM FIRST SCAN TO LASTING VALUE', 'workflow.title': 'A deliverable <em>engineering rhythm.</em>', 'workflow.intro': 'Move from “it controls” to “it can be repeated, delivered and maintained”. Every stage keeps the next field action visible.', 'workflow.discover.title': 'Discover', 'workflow.discover.body': 'Find controllers and bus devices', 'workflow.address.title': 'Address', 'workflow.address.body': 'Build a clear address topology', 'workflow.compose.title': 'Compose', 'workflow.compose.body': 'Configure groups and scenes', 'workflow.tune.title': 'Tune', 'workflow.tune.body': 'Set key parameters in batches', 'workflow.operate.title': 'Operate', 'workflow.operate.body': 'Control and confirm on site', 'workflow.maintain.title': 'Maintain', 'workflow.maintain.body': 'Upgrade, diagnose and deliver',
     'software.eyebrow': 'SOFTWARE EXPERIENCE', 'software.title': 'Designed for field teams to <em>understand at a glance.</em>', 'software.intro': 'Professional capability should not disappear behind a complicated interface. The workspace organizes information around lines, objects, states and the next action.', 'screen.dashboard.title': 'Project overview', 'screen.dashboard.sub': 'Read project status fast', 'screen.dashboard.body': 'Devices, online state, faults and common zones come together in one view.', 'screen.control.title': 'Live control', 'screen.control.sub': 'Switch, level and colour temperature', 'screen.control.body': 'From broadcast to single address, every field action stays visible.', 'screen.parameters.title': 'Parameter setup', 'screen.parameters.sub': 'Batch maintenance and depth', 'screen.parameters.body': 'Read, set and maintain key parameters in one focused workflow.', 'screen.scenes.title': 'Scene composition', 'screen.scenes.sub': 'Reusable spatial logic', 'screen.scenes.body': 'Save, recall and reuse scenes for different spatial moments.',
     'hardware.eyebrow': 'THE CONTROLLER LAYER', 'hardware.title': 'Hold the field connection, <em>then let software scale the capability.</em>', 'hardware.body': 'The DALI power controller / gateway is the reliable project entry point: the engineering workspace above, the DALI Line below. Type-C and LAN keep deployment flexible while leaving room for future product forms.', 'hardware.point1': 'Direct Type-C', 'hardware.point2': 'LAN access', 'hardware.point3': 'Optional bus power', 'hardware.note': 'Controller / Gateway / DALI Line', 'placeholder.hardwareKicker': 'PRODUCT IMAGE SLOT', 'placeholder.hardwareTitle': 'Add controller render', 'placeholder.hardwareBody': 'Reserved for product photography / 3D render',
@@ -31,7 +31,7 @@ const messages = {
     'brand.sub': 'CONTROL PLATFORM', 'nav.capabilities': '機能', 'nav.workflow': '工程', 'nav.software': 'ソフトウェア', 'nav.markets': '用途', 'nav.contact': 'お問い合わせ ↗', 'control.languageLabel': '言語',
     'hero.eyebrow': 'DALI CONTROL PLATFORM / V1.0', 'hero.title': 'すべてのラインを、<em>次のシーンへ。</em>', 'hero.description': 'プロフェッショナル照明向けのコントローラーとエンジニアリングワークスペース。国際標準を軸に、検出、アドレス、グループ、シーン、パラメータ、制御を一つの運用フローへまとめます。', 'hero.primary': '機能を見る ↓', 'hero.secondary': '資料を入手 ↗', 'hero.footnote': 'コミッショニングチーム、システムインテグレーター、照明 OEM のために設計。', 'hero.visualLabel': 'LIVE WORKSPACE PREVIEW', 'hero.visualCaption': 'エンジニアリングホーム · 状態一覧', 'common.online': 'オンライン',
     'metric.lineLabel': 'DALI LINE', 'metric.lineSub': 'Ready to commission', 'metric.signalLabel': 'BUS SIGNAL', 'metric.signalSub': 'Stable link', 'standards.lead': '信頼される標準を中心に設計。', 'proof.platforms': '対応プラットフォーム', 'proof.platformsSub': 'Windows · macOS · iOS · Android', 'proof.workflow': '一つの工程フロー', 'proof.workflowSub': '検出から納品まで操作を集約', 'proof.scenes': 'シーンスロット', 'proof.scenesSub': '再利用できる空間ロジック', 'proof.addresses': 'ショートアドレス', 'proof.addressesSub': 'バスオブジェクトを中心に管理',
-    'capabilities.eyebrow': 'ONE SYSTEM / MANY MOMENTS', 'capabilities.title': '複雑な工程を、<em>明快なワークスペースへ。</em>', 'capabilities.intro': '初回のデバイス検出から納品後の保守まで、現場チームの実際の順序に沿って機能を配置。各ステップに対象、状態、結果があります。', 'capability.discovery.title': '検出と識別', 'capability.discovery.body': 'コントローラーと DALI Line をすばやく可視化。新規検索、拡張検索、接続状態の確認に対応。', 'capability.discovery.tag': 'Commissioning start', 'capability.address.title': 'アドレスとトポロジー', 'capability.address.body': 'ショートアドレスの読み取り、設定、再割り当てを行い、アドレス、グループ、バスオブジェクトで整理。', 'capability.address.tag': 'Addressing', 'capability.scene.title': 'グループとシーン', 'capability.scene.body': '空間の意図を読み取り、再利用、保守できるグループとシーンへ。', 'capability.scene.tag': 'Space logic', 'capability.parameters.title': 'パラメータと一括設定', 'capability.parameters.body': '明るさ、フェード、範囲、デバイスパラメータを読み取り、設定、一括保守。', 'capability.parameters.tag': 'Fleet ready', 'capability.control.title': 'リアルタイム調光とカラー', 'capability.control.body': 'ブロードキャスト、グループ、単一アドレスで、オンオフ、レベル、色温度、RGBWAF を制御。', 'capability.control.tag': 'DT8 control', 'capability.lifecycle.title': '接続、更新、納品', 'capability.lifecycle.body': 'Type-C と LAN、ファームウェア更新、プロジェクトスナップショットで現場から運用へ。', 'capability.lifecycle.tag': 'Lifecycle',
+    'capabilities.eyebrow': 'ONE SYSTEM / MANY MOMENTS', 'capabilities.title': '複雑な工程を、<em>明快なワークスペースへ。</em>', 'capabilities.intro': '初回のデバイス検出から納品後の保守まで、現場チームの実際の順序に沿って機能を配置。各ステップに対象、状態、結果があります。', 'capability.discovery.title': '検出と識別', 'capability.discovery.body': 'コントローラーと DALI Line をすばやく可視化。新規検索、拡張検索、接続状態の確認に対応。', 'capability.discovery.tag': 'Commissioning start', 'capability.address.title': 'アドレスとトポロジー', 'capability.address.body': "ショートアドレスの読み取り・再割り当てと、単一・スキャン済み・全バスの消去に対応。同一アドレスの疑いは調査の手掛かりで、実機検証は未完了です。", 'capability.address.tag': 'Addressing', 'capability.scene.title': 'グループとシーン', 'capability.scene.body': '空間の意図を読み取り、再利用、保守できるグループとシーンへ。', 'capability.scene.tag': 'Space logic', 'capability.parameters.title': 'パラメータと一括設定', 'capability.parameters.body': '明るさ、フェード、範囲、デバイスパラメータを読み取り、設定、一括保守。', 'capability.parameters.tag': 'Fleet ready', 'capability.control.title': 'リアルタイム調光とカラー', 'capability.control.body': 'ブロードキャスト、グループ、単一アドレスで、オンオフ、レベル、色温度、RGBWAF を制御。', 'capability.control.tag': 'DT8 control', 'capability.lifecycle.title': '接続、更新、納品', 'capability.lifecycle.body': 'Type-C と LAN、ファームウェア更新、プロジェクトスナップショットで現場から運用へ。', 'capability.lifecycle.tag': 'Lifecycle',
     'workflow.eyebrow': 'FROM FIRST SCAN TO LASTING VALUE', 'workflow.title': '納品できる<em>エンジニアリングリズム。</em>', 'workflow.intro': '「制御できる」から「再現できる、納品できる、保守できる」へ。各段階で次の現場アクションを明確にします。', 'workflow.discover.title': 'Discover', 'workflow.discover.body': 'コントローラーとデバイスを検出', 'workflow.address.title': 'Address', 'workflow.address.body': 'アドレスとトポロジーを構築', 'workflow.compose.title': 'Compose', 'workflow.compose.body': 'グループとシーンを設定', 'workflow.tune.title': 'Tune', 'workflow.tune.body': '主要パラメータを一括設定', 'workflow.operate.title': 'Operate', 'workflow.operate.body': '現場で制御と確認', 'workflow.maintain.title': 'Maintain', 'workflow.maintain.body': '更新、診断、納品',
     'software.eyebrow': 'SOFTWARE EXPERIENCE', 'software.title': '現場チームが、<em>ひと目で理解できる設計。</em>', 'software.intro': '専門的な機能を複雑な画面の奥に隠しません。ライン、オブジェクト、状態、次の操作を軸に情報を整理し、現場の判断を支えます。', 'screen.dashboard.title': 'プロジェクト概要', 'screen.dashboard.sub': '状態をすばやく把握', 'screen.dashboard.body': 'デバイス、オンライン状態、障害、主要エリアを一つの画面に集約します。', 'screen.control.title': 'リアルタイム制御', 'screen.control.sub': 'オンオフ、レベル、色温度', 'screen.control.body': 'ブロードキャストから単一アドレスまで、現場操作を明確に表示します。', 'screen.parameters.title': 'パラメータ設定', 'screen.parameters.sub': '一括保守と詳細設定', 'screen.parameters.body': '主要パラメータを一つの流れで読み取り、設定、保守できます。', 'screen.scenes.title': 'シーン構成', 'screen.scenes.sub': '再利用できる空間ロジック', 'screen.scenes.body': '空間のさまざまな場面に合わせて、シーンを保存、呼び出し、再利用できます。',
     'hardware.eyebrow': 'THE CONTROLLER LAYER', 'hardware.title': '現場の接続を支え、<em>ソフトウェアへ能力を渡す。</em>', 'hardware.body': 'DALI 電源コントローラー / ゲートウェイは信頼できる入口。上位のワークスペースと下位の DALI Line をつなぎ、Type-C と LAN で柔軟な導入を支えます。', 'hardware.point1': 'Type-C 直結', 'hardware.point2': 'LAN 接続', 'hardware.point3': '外部バス電源（選択）', 'hardware.note': 'Controller / Gateway / DALI Line', 'placeholder.hardwareKicker': 'PRODUCT IMAGE SLOT', 'placeholder.hardwareTitle': 'Add controller render', 'placeholder.hardwareBody': '製品写真 / 3D レンダリング用の予約枠',
@@ -86,18 +86,22 @@ Object.assign(messages.en, {
   'platform.intro': 'These six formats reserve space for future platform screenshots. Availability will be confirmed per release; these placeholders are not evidence of shipped applications.'
 });
 
+for (const [locale, localized] of Object.entries(globalThis.daliCustomerCopy || {})) {
+  Object.assign(messages[locale], localized.home, { 'platform.eyebrow': 'PLATFORM EXPERIENCE' });
+}
+
 const screens = {
-  dashboard: { image: 'assets/screenshots/dashboard.png', key: 'screen.dashboard' },
-  bus: { image: 'assets/screenshots/dali-bus.png', key: 'screen.bus' },
+  dashboard: { image: 'assets/screenshots/studio/studio-dashboard.png', key: 'screen.dashboard' },
+  bus: { image: 'assets/screenshots/studio/studio-dali-bus.png', key: 'screen.bus' },
   parameters: { image: 'assets/screenshots/parameters.png', key: 'screen.parameters' },
-  control: { image: 'assets/screenshots/live-control.png', key: 'screen.control' },
+  control: { image: 'assets/screenshots/studio/studio-live-control-detail.png', key: 'screen.control' },
   groups: { image: 'assets/screenshots/groups.png', key: 'screen.groups' },
   scenes: { image: 'assets/screenshots/scenes.png', key: 'screen.scenes' }
 };
 
-const themeOrder = ['dark', 'graphite', 'light', 'sky'];
-const themeIcons = { dark: '◐', graphite: '◑', light: '☼', sky: '◉' };
-const themeColors = { dark: '#0c1921', graphite: '#191e1d', light: '#f3f7f4', sky: '#f2f9fd' };
+const preferences = globalThis.DaliSitePreferences;
+const themeOrder = preferences.themes;
+const themeIcons = preferences.themeIcons;
 const graphiteThemeNames = {
   'zh-Hans': '石墨深色', 'zh-Hant': '石墨深色', en: 'Graphite dark', ja: 'グラファイト', ko: '그래파이트', fr: 'Graphite', de: 'Graphit', es: 'Grafito', pt: 'Grafite', nl: 'Grafiet', it: 'Grafite', el: 'Γραφίτης', et: 'Grafiit', ms: 'Grafit', fil: 'Graphite', vi: 'Than chì', tr: 'Grafit'
 };
@@ -144,15 +148,28 @@ const localizedLanguageNames = {
   vi: ['Tiếng Trung (Giản thể)', 'Tiếng Trung (Phồn thể)', 'Tiếng Anh', 'Tiếng Nhật', 'Tiếng Hàn', 'Tiếng Pháp', 'Tiếng Đức', 'Tiếng Tây Ban Nha', 'Tiếng Bồ Đào Nha', 'Tiếng Hà Lan', 'Tiếng Italy', 'Tiếng Hy Lạp', 'Tiếng Estonia', 'Tiếng Mã Lai', 'Tiếng Philippines', 'Tiếng Việt', 'Tiếng Thổ Nhĩ Kỳ'],
   tr: ['Basitleştirilmiş Çince', 'Geleneksel Çince', 'İngilizce', 'Japonca', 'Korece', 'Fransızca', 'Almanca', 'İspanyolca', 'Portekizce', 'Felemenkçe', 'İtalyanca', 'Yunanca', 'Estonca', 'Malayca', 'Filipince', 'Vietnamca', 'Türkçe']
 };
-const state = { locale: localStorage.getItem('dali-locale') || 'en', theme: localStorage.getItem('dali-theme') || 'light' };
+const state = { locale: preferences.locale, theme: preferences.theme };
 const footerLinkLabels = {
-  'zh-Hans': ['隐私说明', '关于产品'], 'zh-Hant': ['隱私說明', '關於產品'], en: ['Privacy', 'About'],
-  ja: ['プライバシー', '製品について'], ko: ['개인정보 보호', '제품 소개'], fr: ['Confidentialité', 'À propos'],
-  de: ['Datenschutz', 'Über das Produkt'], es: ['Privacidad', 'Acerca del producto'], pt: ['Privacidade', 'Sobre o produto'],
-  nl: ['Privacy', 'Over het product'], it: ['Privacy', 'Informazioni sul prodotto'], el: ['Απόρρητο', 'Σχετικά με το προϊόν'],
-  et: ['Privaatsus', 'Tootest'], ms: ['Privasi', 'Mengenai produk'], fil: ['Privacy', 'Tungkol sa produkto'],
-  vi: ['Quyền riêng tư', 'Về sản phẩm'], tr: ['Gizlilik', 'Ürün hakkında']
+  'zh-Hans': ['隐私说明', '关于产品', '软件下载'], 'zh-Hant': ['隱私說明', '關於產品', '軟件下載'], en: ['Privacy', 'About', 'Downloads'],
+  ja: ['プライバシー', '製品について', 'ダウンロード'], ko: ['개인정보 보호', '제품 소개', '다운로드'], fr: ['Confidentialité', 'À propos', 'Téléchargements'],
+  de: ['Datenschutz', 'Über das Produkt', 'Downloads'], es: ['Privacidad', 'Acerca del producto', 'Descargas'], pt: ['Privacidade', 'Sobre o produto', 'Downloads'],
+  nl: ['Privacy', 'Over het product', 'Downloads'], it: ['Privacy', 'Informazioni sul prodotto', 'Download'], el: ['Απόρρητο', 'Σχετικά με το προϊόν', 'Λήψεις'],
+  et: ['Privaatsus', 'Tootest', 'Allalaadimised'], ms: ['Privasi', 'Mengenai produk', 'Muat turun'], fil: ['Privacy', 'Tungkol sa produkto', 'Downloads'],
+  vi: ['Quyền riêng tư', 'Về sản phẩm', 'Tải xuống'], tr: ['Gizlilik', 'Ürün hakkında', 'İndirmeler']
 };
+const productNavLabels = {
+  'zh-Hans': '首页', 'zh-Hant': '首頁', en: 'Home', ja: 'ホーム', ko: '홈', fr: 'Accueil',
+  de: 'Startseite', es: 'Inicio', pt: 'Início', nl: 'Home', it: 'Home', el: 'Αρχική',
+  et: 'Avaleht', ms: 'Laman utama', fil: 'Home', vi: 'Trang chủ', tr: 'Ana sayfa'
+};
+const downloadNavLabels = {
+  'zh-Hans': '软件下载', 'zh-Hant': '軟件下載', en: 'Downloads', ja: 'ダウンロード', ko: '다운로드', fr: 'Téléchargements',
+  de: 'Downloads', es: 'Descargas', pt: 'Downloads', nl: 'Downloads', it: 'Download', el: 'Λήψεις', et: 'Allalaadimised',
+  ms: 'Muat turun', fil: 'Downloads', vi: 'Tải xuống', tr: 'İndirmeler'
+};
+for (const [locale, label] of Object.entries(downloadNavLabels)) {
+  if (messages[locale]) messages[locale]['nav.download'] = label;
+}
 
 function getLanguageName(locale, displayLocale) {
   const languageIndex = languageNameOrder.indexOf(locale);
@@ -181,12 +198,13 @@ function updateLanguageControl() {
 function setLanguagePanel(open) {
   const control = document.querySelector('#language-control');
   const panel = document.querySelector('#language-panel');
+  if (open) panel.style.setProperty('--home-header-bottom', `${document.querySelector('.site-header').getBoundingClientRect().bottom}px`);
   control.classList.toggle('is-open', open);
   panel.hidden = !open;
   updateLanguageControl();
 }
 
-function applyLocale(locale) {
+function applyLocale(locale, persist = true) {
   state.locale = messages[locale] ? locale : 'en';
   document.documentElement.lang = documentLanguages[state.locale];
   document.querySelectorAll('[data-i18n]').forEach((node) => {
@@ -204,21 +222,22 @@ function applyLocale(locale) {
     node.alt = messages[state.locale][node.dataset.i18nAlt] || '';
   });
   const footerLabels = footerLinkLabels[state.locale] || footerLinkLabels.en;
+  document.querySelector('#nav-product').textContent = productNavLabels[state.locale] || productNavLabels.en;
   document.querySelector('#nav-about').textContent = footerLabels[1];
+  document.querySelector('#nav-privacy').textContent = footerLabels[0];
   document.querySelector('#footer-privacy').textContent = footerLabels[0];
   document.querySelector('#footer-about').textContent = footerLabels[1];
-  localStorage.setItem('dali-locale', state.locale);
+  document.querySelector('#footer-download').textContent = footerLabels[2];
+  preferences.setLocale(state.locale, { persist });
   updateLanguageControl();
   updateThemeControl();
   updateScreen(document.querySelector('.software-tab.is-selected')?.dataset.screen || 'dashboard');
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, persist = true) {
   state.theme = themeOrder.includes(theme) ? theme : 'light';
-  document.body.dataset.theme = state.theme;
-  document.querySelector('meta[name="theme-color"]').content = themeColors[state.theme];
   updateThemeControl();
-  localStorage.setItem('dali-theme', state.theme);
+  preferences.setTheme(state.theme, { persist });
 }
 
 function updateThemeControl() {
@@ -240,7 +259,7 @@ function updateScreen(name) {
   const locale = messages[state.locale];
   const tab = document.querySelector(`[data-screen="${activeName}"]`);
   document.querySelectorAll('.software-tab').forEach((item) => { const selected = item === tab; item.classList.toggle('is-selected', selected); item.setAttribute('aria-selected', String(selected)); });
-  document.querySelector('#screen-image').src = `${screen.image}?v=20261027-1`;
+  document.querySelector('#screen-image').src = `${screen.image}?v=20261120-1`;
   document.querySelector('#screen-image').alt = locale[`${screen.key}.title`];
   document.querySelector('#screen-kicker').textContent = `${locale['software.eyebrow']} / ${locale[`${screen.key}.title`]}`;
   document.querySelector('#screen-title').innerHTML = locale[`${screen.key}.title`];
@@ -266,6 +285,9 @@ document.addEventListener('keydown', (event) => {
     document.querySelector('#language-toggle').focus();
   }
 });
+window.addEventListener('resize', () => {
+  if (document.querySelector('#language-control').classList.contains('is-open')) setLanguagePanel(true);
+});
 document.querySelector('#theme-toggle').addEventListener('click', () => {
   const nextIndex = (themeOrder.indexOf(state.theme) + 1) % themeOrder.length;
   applyTheme(themeOrder[nextIndex]);
@@ -282,6 +304,10 @@ function updateBackToTop() {
 window.addEventListener('scroll', updateBackToTop, { passive: true });
 window.addEventListener('resize', updateBackToTop);
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-applyTheme(state.theme);
-applyLocale(state.locale);
+window.addEventListener('dali-preferences-change', () => {
+  if (state.locale !== preferences.locale) applyLocale(preferences.locale, false);
+  if (state.theme !== preferences.theme) applyTheme(preferences.theme, false);
+});
+applyTheme(state.theme, false);
+applyLocale(state.locale, false);
 updateBackToTop();

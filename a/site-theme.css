@@ -1,0 +1,75 @@
+:root {
+  color-scheme: light;
+  --ink: #102128;
+  --muted: #425a5f;
+  --soft: #5d7478;
+  --line: rgba(24, 65, 68, .18);
+  --surface: #f5faf6;
+  --surface-2: #eaf4ef;
+  --canvas: #f3f7f4;
+  --accent: #117c6b;
+  --accent-2: #416cb5;
+  --warm: #a76b1b;
+  --danger: #c24d4b;
+  --on-accent: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --bg: var(--canvas);
+  --paper: var(--surface);
+  --text: var(--ink);
+  --surface-strong: var(--surface-2);
+  --shadow: 0 12px 36px rgba(2, 13, 19, .08);
+  --radius: 6px;
+  --transition: 180ms ease;
+  --site-font: 'Manrope', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans', sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+}
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --ink: #f4f8f5; --muted: #bdcbcc; --soft: #9bafb2; --line: rgba(164, 194, 190, .26);
+  --surface: #13252e; --surface-2: #19313b; --canvas: #0c1921; --accent: #69e6cb;
+  --accent-2: #74a8ff; --warm: #e5bc79; --danger: #ff7a78; --on-accent: #06131a;
+}
+html[data-theme='graphite'] {
+  color-scheme: dark;
+  --ink: #f5f4ef; --muted: #c7c9c3; --soft: #a5aaa5; --line: rgba(207, 213, 204, .22);
+  --surface: #242a28; --surface-2: #2e3633; --canvas: #191e1d; --accent: #e4c46f;
+  --accent-2: #78d6bf; --warm: #e4c46f; --danger: #ff8b7b; --on-accent: #211b0c;
+}
+html[data-theme='sky'] {
+  color-scheme: light;
+  --ink: #102735; --muted: #365a6a; --soft: #557481; --line: rgba(23, 92, 126, .2);
+  --surface: #ffffff; --surface-2: #e7f4fb; --canvas: #f2f9fd; --accent: #1478ad;
+  --accent-2: #3f67b5; --warm: #a66a20; --danger: #bc4d55; --on-accent: #ffffff;
+}
+html[lang='zh-Hant'] { --site-font: 'Manrope', 'PingFang TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans', sans-serif; }
+html[data-site-loading] body { visibility: hidden; }
+body {
+  font-family: var(--site-font);
+  font-size: 15px;
+  line-height: 1.65;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, select { font: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.icon-button, .theme-button, .site-theme-toggle {
+  display: inline-grid; place-items: center; flex: 0 0 38px; width: 38px; height: 38px; padding: 0;
+  border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: transparent; font-size: 19px; line-height: 1; cursor: pointer;
+}
+.icon-button:hover, .theme-button:hover, .site-theme-toggle:hover { color: var(--ink); border-color: var(--accent); background: var(--surface); }
+.site-preferences-controls { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.help-header-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; }
+.help-page-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.help-page-header strong { font-size: 16px; letter-spacing: .12em; }
+.content-language-note { flex: none; margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+@media (max-width: 760px) {
+  .site-preferences-controls .language-trigger { min-width: 120px; }
+  .site-preferences-controls .language-panel { position: fixed; top: var(--site-language-top, 72px); right: 16px; left: 16px; width: auto; max-height: calc(100vh - var(--site-language-top, 72px) - 16px); overflow-y: auto; }
+  .site-preferences-controls .language-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .help-header-actions { width: 100%; justify-content: flex-start; gap: 10px; }
+  .help-header-actions .switcher { flex: 1 1 100%; min-width: 0; }
+  .help-header-actions .switcher button { flex: 1; min-width: 0; white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0s !important; animation-duration: 0s !important; } }

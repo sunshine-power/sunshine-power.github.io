@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f7f4" />
+    <script src="site-preferences.js?v=20261121-1"></script>
+    <meta name="description" content="Desktop releases and download access for Suretron Studio." />
+    <title>Downloads | DALI Control Platform</title>
+    <link rel="stylesheet" href="language-panel.css?v=20261120-3" />
+    <link rel="stylesheet" href="info-pages.css?v=20261121-1" />
+    <link rel="stylesheet" href="downloads.css?v=20261121-2" />
+    <link rel="stylesheet" href="site-theme.css?v=20261121-1" />
+  </head>
+  <body data-page="downloads">
+    <header class="info-header">
+      <a class="info-brand" href="index.html" aria-label="DALI Control Platform product page">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span><strong>DALI</strong><small data-download="brandSub">CONTROL PLATFORM</small></span>
+      </a>
+      <nav class="info-nav" aria-label="Product pages">
+        <a href="index.html" data-download="navProduct">Home</a>
+        <a class="is-active" aria-current="page" href="downloads.html" data-download="navDownload">Downloads</a>
+        <a href="about.html" data-download="navAbout">About</a>
+        <a href="privacy.html" data-download="navPrivacy">Privacy</a>
+      </nav>
+      <div class="info-actions">
+        <div class="language-control" id="download-language-control">
+          <button class="language-trigger" id="download-language-toggle" type="button" aria-expanded="false" aria-controls="download-language-panel" aria-haspopup="dialog"><span class="language-trigger-copy"><strong id="download-language-current">English</strong></span><span class="language-trigger-chevron" aria-hidden="true">⌄</span></button>
+          <div class="language-panel" id="download-language-panel" role="dialog" aria-labelledby="download-language-panel-title" hidden><div class="language-panel-heading"><strong id="download-language-panel-title" data-download="languageLabel">Language</strong></div><div class="language-grid" id="download-language-options"></div></div>
+        </div>
+        <button class="theme-button" id="download-theme-toggle" type="button" aria-label="Switch colour theme">☀</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="download-hero info-shell">
+        <div class="download-hero-copy">
+          <p class="info-kicker" data-download="eyebrow">DESKTOP RELEASES / SURETRON STUDIO</p>
+          <h1 data-download="title">A focused workspace for the next field action.</h1>
+          <p class="info-lead" data-download="lead">The Windows preview is available to download. The macOS download is not yet open; mobile store releases are planned for later.</p>
+          <div class="download-release-line"><span class="release-pulse"></span><strong data-download="releaseLabel">CURRENT PREVIEW</strong><span data-download="version">Preview build</span><small data-download="releaseState">Windows download available · macOS pending</small></div>
+        </div>
+        <div class="download-hero-visual">
+          <div class="hero-visual-top"><span>SC-DALI SURETRON STUDIO</span><span>DESKTOP / 01</span></div>
+          <figure><img src="assets/screenshots/studio/studio-dashboard.png?v=20261120-1" alt="Suretron Studio dashboard" /><figcaption>Desktop workspace / dashboard preview</figcaption></figure>
+          <div class="hero-visual-foot"><span>Controller context</span><span>DALI line</span><span>Field-ready workflow</span></div>
+        </div>
+      </section>
+
+      <section class="download-section info-shell" aria-labelledby="download-section-title">
+        <div class="download-heading"><div><p class="info-kicker">01 / DESKTOP CHANNELS</p><h2 id="download-section-title" data-download="downloadSectionTitle">Choose your desktop workspace</h2></div><p data-download="downloadSectionIntro">The Windows preview is available now; the macOS download is not yet open.</p></div>
+        <div class="download-grid">
+          <article class="download-card download-card-macos is-unavailable">
+            <div class="download-card-top"><span class="platform-icon platform-icon-apple" aria-hidden="true">⌘</span><span class="download-status" data-download="macUnavailable">NOT YET AVAILABLE</span></div>
+            <h3 data-download="macTitle">macOS</h3><p data-download="macBody">A native desktop workspace for commissioning, device context and field maintenance.</p>
+            <div class="download-card-meta"><span data-download="macMeta">Apple silicon / Intel · 64-bit</span></div>
+            <button class="download-button is-disabled" type="button" disabled><span data-download="macAction">Download not yet available</span><b aria-hidden="true">—</b></button>
+          </article>
+          <article class="download-card download-card-windows">
+            <div class="download-card-top"><span class="platform-icon platform-icon-windows" aria-hidden="true">⊞</span><span class="download-status" data-download="windowsAvailable">DOWNLOAD AVAILABLE</span></div>
+            <h3 data-download="windowsTitle">Windows</h3><p data-download="windowsBody">A desktop workspace for controller discovery, DALI addressing and target-aware control.</p>
+            <div class="download-card-meta"><span data-download="windowsMeta">Windows 10 / 11 · 64-bit</span><span data-download="version">Preview build</span></div>
+            <a class="download-button" href="https://www.scpower.net/phoenix/admin/download?fileId=tkpKDdAiwMny"><span data-download="windowsAction">Download for Windows</span><b aria-hidden="true">↓</b></a>
+          </article>
+          <article class="download-card download-card-mobile is-reserved">
+            <div class="download-card-top"><span class="platform-icon platform-icon-mobile" aria-hidden="true">▦</span><span class="download-status" data-download="mobileDisabled">APP-STORE RELEASE TO FOLLOW</span></div>
+            <h3 data-download="mobileTitle">iOS &amp; Android</h3><p data-download="mobileBody">Please wait for a later app-store release for the mobile companion experience.</p>
+            <div class="download-card-meta"><span data-download="mobileMeta">App Store / Google Play · planned</span><span data-download="mobileDisabled">APP-STORE RELEASE TO FOLLOW</span></div>
+            <button class="download-button is-disabled" type="button" disabled><span data-download="mobileAction">Coming later</span><b aria-hidden="true">—</b></button>
+          </article>
+        </div>
+      </section>
+
+      <section class="compatibility-section" aria-labelledby="compatibility-title">
+        <div class="info-shell">
+          <div class="download-heading"><div><p class="info-kicker">02 / SYSTEM FIT</p><h2 id="compatibility-title" data-download="compatibilityTitle">Compatibility at a glance</h2></div></div>
+          <div class="compatibility-grid">
+            <article><span class="compatibility-mark">⌘</span><h3>macOS</h3><p data-download="macCompatibility">macOS 12 Monterey or later · Apple silicon and Intel · network or USB access as supported by the controller package</p></article>
+            <article><span class="compatibility-mark">⊞</span><h3>Windows</h3><p data-download="windowsCompatibility">Windows 10 version 22H2 or later · Windows 11 · 64-bit desktop · local network or USB access as supported by the controller package</p></article>
+            <article><span class="compatibility-mark">▦</span><h3>Mobile stores</h3><p class="compatibility-minimum" data-download="mobileMinimumVersion">Planned minimum OS: iOS / iPadOS 15 or later; Android 7.0 or later (API 24).</p><p data-download="mobileCompatibility">iOS / iPadOS and Android support will be published with the store release and device matrix.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="release-section info-shell" aria-labelledby="release-history-title">
+        <div class="download-heading"><div><p class="info-kicker">03 / RELEASE NOTES</p><h2 id="release-history-title" data-download="releaseHistoryTitle">Release updates</h2></div></div>
+        <div class="release-timeline">
+          <article><span class="timeline-index">01</span><div><strong data-download="releaseNowLabel">NOW · DESKTOP PREVIEW</strong><p data-download="releaseNowBody">The current Windows preview includes controller discovery, DALI line scanning and addressing, device information, groups, scenes and lighting control where supported by the device.</p></div></article>
+          <article><span class="timeline-index">02</span><div><strong data-download="releaseNextLabel">NEXT · BROADER DISTRIBUTION</strong><p data-download="releaseNextBody">macOS distribution, release notes and a validated compatibility matrix will follow. Mobile store entries have a separate release cycle.</p></div></article>
+        </div>
+      </section>
+
+      <section class="download-access-section" aria-labelledby="access-title">
+        <div class="info-shell download-access-inner"><div><p class="info-kicker">04 / ACCESS</p><h2 id="access-title" data-download="accessTitle">Need installation support or a capability brief?</h2><p data-download="accessBody">Download the Windows preview above. For build details, supported controller combinations or project validation, contact the product team.</p></div><a class="download-button download-button-large" href="https://www.suretron.com/" target="_blank" rel="noopener noreferrer"><span data-download="accessAction">Contact product team ↗</span><b aria-hidden="true">↗</b></a></div>
+      </section>
+    </main>
+
+    <footer class="info-footer"><div class="info-shell"><span>DALI Control Platform</span><span data-download="footerNote">Windows preview download available · macOS distribution pending</span><span>© 2026</span></div></footer>
+
+    <script src="customer-copy.js?v=20261121-1"></script>
+    <script src="download-copy.js?v=20261121-3"></script>
+    <script src="download-page.js?v=20261120-3"></script>
+  </body>
+</html>

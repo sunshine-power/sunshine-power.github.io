@@ -1,6 +1,6 @@
 const copy = {
   'zh-Hans': {
-    brandSub: '控制平台', navPrivacy: '隐私说明', navAbout: '关于产品', navProduct: '产品主页', legalLanguageLabel: '本说明语言', contentsLabel: '本页内容', effectiveLabel: '更新日期', scopeLabel: '适用范围', footerNote: '产品信息与数据实践说明',
+    brandSub: '控制平台', navPrivacy: '隐私说明', navAbout: '关于产品', navProduct: '首页', legalLanguageLabel: '本说明语言', contentsLabel: '本页内容', effectiveLabel: '更新日期', scopeLabel: '适用范围', footerNote: '产品信息与数据实践说明',
     privacyEyebrow: 'PRIVACY / DATA PRACTICE', privacyTitle: '隐私说明', privacyLead: '说明 DALI 控制器工程软件在项目调试、配置、诊断与支持过程中可能处理的信息，以及我们坚持的数据边界。', privacyScopeValue: 'DALI Control Platform 软件与配套控制器',
     releaseStatus: '发布前必要信息', releaseTitle: '运营主体信息将在正式发布前补齐', releaseBody: '本页是与当前产品定位一致的产品级隐私说明。正式对外发布前，须由实际运营主体补充法定名称、联系地址、隐私邮箱、适用地区条款与生效日期，并完成法律审阅。',
     privacyScopeTitle: '适用范围', privacyScopeBody: '本说明适用于 DALI Control Platform 上位机与移动端工程软件，以及其与配套 DALI 控制器或网关之间的连接、项目配置、运行诊断、固件升级和技术支持流程。客户自行建设的平台、第三方操作系统与外部服务适用其各自规则。',
@@ -15,10 +15,10 @@ const copy = {
     privacySecurityTitle: '安全与责任边界', privacySecurityBody: '产品通过权限控制、受控连接、最小化数据与可追溯状态降低风险。客户仍应保护工程文件、网络环境、设备凭据与备份，并限制未授权人员接触控制系统。任何技术措施都不能保证绝对安全。',
     privacyChildrenTitle: '未成年人', privacyChildrenBody: '本产品面向专业照明工程与组织用户，不面向未成年人提供消费服务，也不以主动收集未成年人个人信息为目的。', privacyUpdatesTitle: '说明更新', privacyUpdatesBody: '当数据类型、处理目的、云端能力、AI 功能或适用法律发生实质变化时，我们将更新本说明，并在软件、发布页面或合同约定渠道中提供必要提示。', privacyContactTitle: '联系与发布信息', privacyContactBody: '正式的运营主体名称、隐私联系人、电子邮箱、通信地址与地区性权利说明将在产品发布前配置。当前展示版本不应使用示例邮箱接收真实的隐私请求。',
     aboutEyebrow: 'ABOUT / PRODUCT SCOPE', aboutTitle: '关于 DALI Control Platform', aboutLead: '面向专业照明项目，把控制器连接、DALI 工程配置与长期维护组织成一套清晰、跨平台的产品体验。', aboutFactStandard: '标准导向', aboutFactLanguages: '界面语言', aboutFactPlatforms: '平台形态',
-    aboutPositionTitle: '产品定位', aboutPositionBody: 'DALI Control Platform 由配套控制器 / 网关与工程软件构成，服务于设备发现、寻址、分组、场景、参数、调光、诊断与交付。它关注的是工程团队如何稳定完成工作，而不是展示底层协议实现细节。', aboutAudienceTitle: '面向谁', aboutAudienceBody: '主要面向系统集成商、调试工程师、照明 OEM、工程交付团队、渠道伙伴及需要维护专业照明系统的组织客户。', aboutValueTitle: '业务价值', aboutValueBody: '通过一致的对象、状态与工程流程减少工具切换，让现场配置更清楚、项目交付更可复制，并为后续维护、产品集成与品牌合作保留扩展空间。', aboutDeploymentTitle: '部署与平台', aboutDeploymentBody: '当前产品方向覆盖 Type-C 直连与 LAN 局域网接入，并为 Windows、Mac、iPhone、iPad、Android 手机及 Android 平板等使用形态规划一致体验。最终平台、功能与交付方式以正式版本和合同资料为准。', aboutStandardsTitle: '标准与能力边界', aboutStandardsBody: '产品围绕 IEC 62386、DALI-2、DT6、DT8 与 D4i 等行业体系规划能力。“标准导向”不等同于获得第三方认证；任何认证、兼容清单或性能指标仅在完成验证并正式发布后使用。', aboutSafetyTitle: '适用边界', aboutSafetyBody: '本产品用于专业照明工程，不应在未经专项评估、冗余设计和法规确认的情况下作为生命安全、应急疏散或其他安全关键系统的唯一控制手段。', aboutAiTitle: 'AI 路线', aboutAiBody: '未来 AI 能力将以稳定的工程对象、可追溯状态与用户控制为前提，探索自然语言意图、场景建议、异常信号与引导式调试。页面中的 AI 描述属于路线规划，不代表当前已交付功能。', aboutCooperationTitle: '合作方向', aboutCooperationBody: '支持围绕硬件形态、软件品牌、平台适配、系统集成、渠道交付与长期运维展开合作。正式商务范围、服务等级、知识产权与数据责任应由双方合同明确。', aboutVersionTitle: '信息版本', aboutVersionBody: '本页用于解释当前产品定位和公开能力边界，不替代产品规格书、认证文件、许可协议、服务合同或项目验收文件。'
+    aboutPositionTitle: '产品定位', aboutPositionBody: 'DALI Control Platform 由配套控制器 / 网关与工程软件构成，服务于设备发现、寻址、分组、场景、参数、调光、诊断与交付。它关注工程团队如何稳定完成工作，并提供清晰可核对的结果。', aboutAudienceTitle: '面向谁', aboutAudienceBody: '主要面向系统集成商、调试工程师、照明 OEM、工程交付团队、渠道伙伴及需要维护专业照明系统的组织客户。', aboutValueTitle: '业务价值', aboutValueBody: '通过一致的对象、状态与工程流程减少工具切换，让现场配置更清楚、项目交付更可复制，并为后续维护、产品集成与品牌合作保留扩展空间。', aboutDeploymentTitle: '部署与平台', aboutDeploymentBody: '当前产品方向覆盖 Type-C 直连与 LAN 局域网接入，并为 Windows、Mac、iPhone、iPad、Android 手机及 Android 平板等使用形态规划一致体验。最终平台、功能与交付方式以正式版本和合同资料为准。', aboutStandardsTitle: '标准与能力边界', aboutStandardsBody: '产品围绕 IEC 62386、DALI-2、DT6、DT8 与 D4i 等行业体系规划能力。“标准导向”不等同于获得第三方认证；任何认证、兼容清单或性能指标仅在完成验证并正式发布后使用。', aboutSafetyTitle: '适用边界', aboutSafetyBody: '本产品用于专业照明工程，不应在未经专项评估、冗余设计和法规确认的情况下作为生命安全、应急疏散或其他安全关键系统的唯一控制手段。', aboutAiTitle: 'AI 路线', aboutAiBody: '未来 AI 能力将以稳定的工程对象、可追溯状态与用户控制为前提，探索自然语言意图、场景建议、异常信号与引导式调试。页面中的 AI 描述属于路线规划，不代表当前已交付功能。', aboutCooperationTitle: '合作方向', aboutCooperationBody: '支持围绕硬件形态、软件品牌、平台适配、系统集成、渠道交付与长期运维展开合作。正式商务范围、服务等级、知识产权与数据责任应由双方合同明确。', aboutVersionTitle: '信息版本', aboutVersionBody: '本页用于解释当前产品定位和公开能力边界，不替代产品规格书、认证文件、许可协议、服务合同或项目验收文件。'
   },
   'zh-Hant': {
-    brandSub: '控制平台', navPrivacy: '隱私說明', navAbout: '關於產品', navProduct: '產品主頁', legalLanguageLabel: '本說明語言', contentsLabel: '本頁內容', effectiveLabel: '更新日期', scopeLabel: '適用範圍', footerNote: '產品資訊與資料實務說明',
+    brandSub: '控制平台', navPrivacy: '隱私說明', navAbout: '關於產品', navProduct: '首頁', legalLanguageLabel: '本說明語言', contentsLabel: '本頁內容', effectiveLabel: '更新日期', scopeLabel: '適用範圍', footerNote: '產品資訊與資料實務說明',
     privacyEyebrow: 'PRIVACY / DATA PRACTICE', privacyTitle: '隱私說明', privacyLead: '說明 DALI 控制器工程軟件在專案調試、設定、診斷與支援過程中可能處理的資訊，以及我們堅持的資料邊界。', privacyScopeValue: 'DALI Control Platform 軟件與配套控制器',
     releaseStatus: '發佈前必要資訊', releaseTitle: '營運主體資訊將於正式發佈前補齊', releaseBody: '本頁是與目前產品定位一致的產品級隱私說明。正式對外發佈前，須由實際營運主體補充法定名稱、聯絡地址、隱私電郵、適用地區條款與生效日期，並完成法律審閱。',
     privacyScopeTitle: '適用範圍', privacyScopeBody: '本說明適用於 DALI Control Platform 桌面端與流動端工程軟件，以及其與配套 DALI 控制器或閘道器之間的連線、專案設定、運行診斷、韌體升級和技術支援流程。客戶自行建設的平台、第三方作業系統與外部服務適用其各自規則。',
@@ -33,10 +33,10 @@ const copy = {
     privacySecurityTitle: '安全與責任邊界', privacySecurityBody: '產品透過權限控制、受控連線、資料最小化與可追溯狀態降低風險。客戶仍應保護工程檔案、網路環境、裝置憑證與備份，並限制未經授權人員接觸控制系統。任何技術措施都不能保證絕對安全。',
     privacyChildrenTitle: '未成年人', privacyChildrenBody: '本產品面向專業照明工程與組織使用者，不向未成年人提供消費服務，也不以主動蒐集未成年人個人資訊為目的。', privacyUpdatesTitle: '說明更新', privacyUpdatesBody: '當資料類型、處理目的、雲端能力、AI 功能或適用法律發生實質變化時，我們將更新本說明，並在軟件、發佈頁面或合約約定管道中提供必要提示。', privacyContactTitle: '聯絡與發佈資訊', privacyContactBody: '正式的營運主體名稱、隱私聯絡人、電子郵件、通訊地址與地區性權利說明將於產品發佈前設定。目前展示版本不應使用示例郵箱接收真實的隱私要求。',
     aboutEyebrow: 'ABOUT / PRODUCT SCOPE', aboutTitle: '關於 DALI Control Platform', aboutLead: '面向專業照明專案，把控制器連線、DALI 工程設定與長期維護組織成一套清晰、跨平台的產品體驗。', aboutFactStandard: '標準導向', aboutFactLanguages: '介面語言', aboutFactPlatforms: '平台形態',
-    aboutPositionTitle: '產品定位', aboutPositionBody: 'DALI Control Platform 由配套控制器 / 閘道器與工程軟件構成，服務於裝置發現、定址、分組、場景、參數、調光、診斷與交付。它關注的是工程團隊如何穩定完成工作，而不是展示底層協定實作細節。', aboutAudienceTitle: '面向誰', aboutAudienceBody: '主要面向系統整合商、調試工程師、照明 OEM、工程交付團隊、通路夥伴及需要維護專業照明系統的組織客戶。', aboutValueTitle: '業務價值', aboutValueBody: '透過一致的物件、狀態與工程流程減少工具切換，讓現場設定更清楚、專案交付更可複製，並為後續維護、產品整合與品牌合作保留擴展空間。', aboutDeploymentTitle: '部署與平台', aboutDeploymentBody: '目前產品方向涵蓋 Type-C 直連與 LAN 區域網路接入，並為 Windows、Mac、iPhone、iPad、Android 手機及 Android 平板等使用形態規劃一致體驗。最終平台、功能與交付方式以正式版本和合約資料為準。', aboutStandardsTitle: '標準與能力邊界', aboutStandardsBody: '產品圍繞 IEC 62386、DALI-2、DT6、DT8 與 D4i 等產業體系規劃能力。「標準導向」不等同於獲得第三方認證；任何認證、相容清單或效能指標僅在完成驗證並正式發佈後使用。', aboutSafetyTitle: '適用邊界', aboutSafetyBody: '本產品用於專業照明工程，不應在未經專項評估、冗餘設計和法規確認的情況下，作為生命安全、緊急疏散或其他安全關鍵系統的唯一控制手段。', aboutAiTitle: 'AI 路線', aboutAiBody: '未來 AI 能力將以穩定的工程物件、可追溯狀態與使用者控制為前提，探索自然語言意圖、場景建議、異常訊號與引導式調試。頁面中的 AI 描述屬於路線規劃，不代表目前已交付功能。', aboutCooperationTitle: '合作方向', aboutCooperationBody: '支援圍繞硬體形態、軟件品牌、平台適配、系統整合、通路交付與長期維運展開合作。正式商務範圍、服務等級、智慧財產權與資料責任應由雙方合約明確。', aboutVersionTitle: '資訊版本', aboutVersionBody: '本頁用於解釋目前產品定位和公開能力邊界，不取代產品規格書、認證文件、授權協議、服務合約或專案驗收文件。'
+    aboutPositionTitle: '產品定位', aboutPositionBody: 'DALI Control Platform 由配套控制器 / 閘道器與工程軟件構成，服務於裝置發現、定址、分組、場景、參數、調光、診斷與交付。它關注工程團隊如何穩定完成工作，並提供清晰可核對的結果。', aboutAudienceTitle: '面向誰', aboutAudienceBody: '主要面向系統整合商、調試工程師、照明 OEM、工程交付團隊、通路夥伴及需要維護專業照明系統的組織客戶。', aboutValueTitle: '業務價值', aboutValueBody: '透過一致的物件、狀態與工程流程減少工具切換，讓現場設定更清楚、專案交付更可複製，並為後續維護、產品整合與品牌合作保留擴展空間。', aboutDeploymentTitle: '部署與平台', aboutDeploymentBody: '目前產品方向涵蓋 Type-C 直連與 LAN 區域網路接入，並為 Windows、Mac、iPhone、iPad、Android 手機及 Android 平板等使用形態規劃一致體驗。最終平台、功能與交付方式以正式版本和合約資料為準。', aboutStandardsTitle: '標準與能力邊界', aboutStandardsBody: '產品圍繞 IEC 62386、DALI-2、DT6、DT8 與 D4i 等產業體系規劃能力。「標準導向」不等同於獲得第三方認證；任何認證、相容清單或效能指標僅在完成驗證並正式發佈後使用。', aboutSafetyTitle: '適用邊界', aboutSafetyBody: '本產品用於專業照明工程，不應在未經專項評估、冗餘設計和法規確認的情況下，作為生命安全、緊急疏散或其他安全關鍵系統的唯一控制手段。', aboutAiTitle: 'AI 路線', aboutAiBody: '未來 AI 能力將以穩定的工程物件、可追溯狀態與使用者控制為前提，探索自然語言意圖、場景建議、異常訊號與引導式調試。頁面中的 AI 描述屬於路線規劃，不代表目前已交付功能。', aboutCooperationTitle: '合作方向', aboutCooperationBody: '支援圍繞硬體形態、軟件品牌、平台適配、系統整合、通路交付與長期維運展開合作。正式商務範圍、服務等級、智慧財產權與資料責任應由雙方合約明確。', aboutVersionTitle: '資訊版本', aboutVersionBody: '本頁用於解釋目前產品定位和公開能力邊界，不取代產品規格書、認證文件、授權協議、服務合約或專案驗收文件。'
   },
   en: {
-    brandSub: 'CONTROL PLATFORM', navPrivacy: 'Privacy', navAbout: 'About', navProduct: 'Product', legalLanguageLabel: 'Notice language', contentsLabel: 'On this page', effectiveLabel: 'Last updated', scopeLabel: 'Scope', footerNote: 'Product and data practice information',
+    brandSub: 'CONTROL PLATFORM', navPrivacy: 'Privacy', navAbout: 'About', navProduct: 'Home', legalLanguageLabel: 'Notice language', contentsLabel: 'On this page', effectiveLabel: 'Last updated', scopeLabel: 'Scope', footerNote: 'Product and data practice information',
     privacyEyebrow: 'PRIVACY / DATA PRACTICE', privacyTitle: 'Privacy Notice', privacyLead: 'This notice explains the information the DALI controller engineering software may process during commissioning, configuration, diagnostics and support, and the boundaries we apply to that data.', privacyScopeValue: 'DALI Control Platform software and companion controllers',
     releaseStatus: 'Required before release', releaseTitle: 'Operator details will be completed before public release', releaseBody: 'This page is a product-level notice aligned with the current product scope. Before public release, the actual operator must add its legal name, contact address, privacy email, regional terms and effective date, followed by legal review.',
     privacyScopeTitle: 'Scope', privacyScopeBody: 'This notice applies to the DALI Control Platform desktop and mobile engineering software and its connection, project configuration, operational diagnostics, firmware update and technical support workflows with companion DALI controllers or gateways. Customer-built platforms, third-party operating systems and external services follow their own terms.',
@@ -51,7 +51,7 @@ const copy = {
     privacySecurityTitle: 'Security and responsibility', privacySecurityBody: 'The product reduces risk through access controls, controlled connections, data minimisation and traceable state. Customers remain responsible for protecting project files, networks, device credentials and backups, and for limiting unauthorised access to control systems. No technical measure can guarantee absolute security.',
     privacyChildrenTitle: 'Children', privacyChildrenBody: 'This product is intended for professional lighting projects and organisational users. It does not provide a consumer service to children or intentionally seek to collect children’s personal information.', privacyUpdatesTitle: 'Changes to this notice', privacyUpdatesBody: 'We will update this notice when there are material changes to data types, purposes, cloud capabilities, AI features or applicable law, with appropriate notice through the software, release page or agreed contractual channel.', privacyContactTitle: 'Contact and release details', privacyContactBody: 'The operator name, privacy contact, email address, postal address and regional rights information will be configured before product release. The current showcase must not use a sample email address for genuine privacy requests.',
     aboutEyebrow: 'ABOUT / PRODUCT SCOPE', aboutTitle: 'About DALI Control Platform', aboutLead: 'A clear, cross-platform product experience that brings controller connectivity, DALI engineering configuration and long-term maintenance together for professional lighting projects.', aboutFactStandard: 'standards-led', aboutFactLanguages: 'interface languages', aboutFactPlatforms: 'platform formats',
-    aboutPositionTitle: 'Product position', aboutPositionBody: 'DALI Control Platform combines companion controllers or gateways with engineering software for device discovery, addressing, grouping, scenes, parameters, dimming, diagnostics and delivery. It focuses on helping engineering teams complete work reliably without exposing underlying protocol implementation details.', aboutAudienceTitle: 'Who it serves', aboutAudienceBody: 'The product is designed for system integrators, commissioning engineers, lighting OEMs, delivery teams, channel partners and organisations that maintain professional lighting systems.', aboutValueTitle: 'Business value', aboutValueBody: 'Consistent objects, states and workflows reduce tool switching, make on-site configuration clearer and help teams repeat successful project delivery, while preserving room for maintenance, integration and brand partnerships.', aboutDeploymentTitle: 'Deployment and platforms', aboutDeploymentBody: 'The current direction covers direct Type-C and LAN access, with a consistent experience planned for Windows, Mac, iPhone, iPad, Android phones and Android tablets. Final platforms, features and delivery methods are subject to released product and contract materials.', aboutStandardsTitle: 'Standards and capability boundaries', aboutStandardsBody: 'Capabilities are planned around IEC 62386, DALI-2, DT6, DT8 and D4i industry frameworks. “Standards-led” does not mean third-party certification; certifications, compatibility lists and performance claims will be used only after verification and formal release.', aboutSafetyTitle: 'Intended-use boundary', aboutSafetyBody: 'This product is intended for professional lighting engineering. It must not be the sole control for life safety, emergency egress or other safety-critical systems without dedicated assessment, redundancy and regulatory confirmation.', aboutAiTitle: 'AI direction', aboutAiBody: 'Future AI capabilities will build on stable engineering objects, traceable state and user control to explore natural-language intent, scene recommendations, anomaly signals and guided commissioning. AI descriptions on this site are roadmap items, not currently delivered features.', aboutCooperationTitle: 'Ways to work together', aboutCooperationBody: 'Potential collaboration spans hardware formats, software branding, platform adaptation, system integration, channel delivery and long-term operations. Commercial scope, service levels, intellectual property and data responsibilities must be defined by contract.', aboutVersionTitle: 'Information version', aboutVersionBody: 'This page explains current product positioning and public capability boundaries. It does not replace a product specification, certification file, licence agreement, service contract or project acceptance document.'
+    aboutPositionTitle: 'Product position', aboutPositionBody: 'DALI Control Platform combines companion controllers or gateways with engineering software for device discovery, addressing, grouping, scenes, parameters, dimming, diagnostics and delivery. It helps engineering teams complete work reliably with clear, traceable results.', aboutAudienceTitle: 'Who it serves', aboutAudienceBody: 'The product is designed for system integrators, commissioning engineers, lighting OEMs, delivery teams, channel partners and organisations that maintain professional lighting systems.', aboutValueTitle: 'Business value', aboutValueBody: 'Consistent objects, states and workflows reduce tool switching, make on-site configuration clearer and help teams repeat successful project delivery, while preserving room for maintenance, integration and brand partnerships.', aboutDeploymentTitle: 'Deployment and platforms', aboutDeploymentBody: 'The current direction covers direct Type-C and LAN access, with a consistent experience planned for Windows, Mac, iPhone, iPad, Android phones and Android tablets. Final platforms, features and delivery methods are subject to released product and contract materials.', aboutStandardsTitle: 'Standards and capability boundaries', aboutStandardsBody: 'Capabilities are planned around IEC 62386, DALI-2, DT6, DT8 and D4i industry frameworks. “Standards-led” does not mean third-party certification; certifications, compatibility lists and performance claims will be used only after verification and formal release.', aboutSafetyTitle: 'Intended-use boundary', aboutSafetyBody: 'This product is intended for professional lighting engineering. It must not be the sole control for life safety, emergency egress or other safety-critical systems without dedicated assessment, redundancy and regulatory confirmation.', aboutAiTitle: 'AI direction', aboutAiBody: 'Future AI capabilities will build on stable engineering objects, traceable state and user control to explore natural-language intent, scene recommendations, anomaly signals and guided commissioning. AI descriptions on this site are roadmap items, not currently delivered features.', aboutCooperationTitle: 'Ways to work together', aboutCooperationBody: 'Potential collaboration spans hardware formats, software branding, platform adaptation, system integration, channel delivery and long-term operations. Commercial scope, service levels, intellectual property and data responsibilities must be defined by contract.', aboutVersionTitle: 'Information version', aboutVersionBody: 'This page explains current product positioning and public capability boundaries. It does not replace a product specification, certification file, licence agreement, service contract or project acceptance document.'
   }
 };
 
@@ -75,6 +75,23 @@ Object.assign(copy.en, {
   privacySecurityBody: 'Controlled connections and data minimisation can reduce risk. Customers remain responsible for protecting networks, device credentials and any exported records, and for limiting unauthorised access to control systems. No technical measure can guarantee absolute security.'
 });
 
+for (const [locale, localized] of Object.entries(globalThis.daliCustomerCopy || {})) {
+  Object.assign(copy[locale], localized.info);
+}
+
+const downloadNavLabels = {
+  'zh-Hans': '软件下载', 'zh-Hant': '軟件下載', en: 'Downloads', ja: 'ダウンロード', ko: '다운로드', fr: 'Téléchargements',
+  de: 'Downloads', es: 'Descargas', pt: 'Downloads', nl: 'Downloads', it: 'Download', el: 'Λήψεις', et: 'Allalaadimised',
+  ms: 'Muat turun', fil: 'Downloads', vi: 'Tải xuống', tr: 'İndirmeler'
+};
+Object.entries(downloadNavLabels).forEach(([locale, label]) => { if (copy[locale]) copy[locale].navDownloads = label; });
+const productNavLabels = {
+  'zh-Hans': '首页', 'zh-Hant': '首頁', en: 'Home', ja: 'ホーム', ko: '홈', fr: 'Accueil',
+  de: 'Startseite', es: 'Inicio', pt: 'Início', nl: 'Home', it: 'Home', el: 'Αρχική',
+  et: 'Avaleht', ms: 'Laman utama', fil: 'Home', vi: 'Trang chủ', tr: 'Ana sayfa'
+};
+Object.entries(productNavLabels).forEach(([locale, label]) => { copy[locale].navProduct = label; });
+
 const languageOptions = [
   ['zh-Hans', '简体中文'], ['zh-Hant', '繁體中文'], ['en', 'English'], ['ja', '日本語'], ['ko', '한국어'],
   ['fr', 'Français'], ['de', 'Deutsch'], ['es', 'Español'], ['pt', 'Português'], ['nl', 'Nederlands'],
@@ -83,9 +100,9 @@ const languageOptions = [
 ];
 const supportedLegalLocales = languageOptions.map(([locale]) => locale);
 const languageTags = { 'zh-Hans': 'zh-CN', 'zh-Hant': 'zh-Hant', en: 'en', ja: 'ja', ko: 'ko', fr: 'fr', de: 'de', es: 'es', pt: 'pt', nl: 'nl', it: 'it', el: 'el', et: 'et', ms: 'ms', fil: 'fil', vi: 'vi', tr: 'tr' };
-const themeOrder = ['dark', 'graphite', 'light', 'sky'];
-const themeColors = { dark: '#0c1921', graphite: '#191e1d', light: '#f3f7f4', sky: '#f2f9fd' };
-const themeIcons = { dark: '◐', graphite: '◑', light: '☀', sky: '◒' };
+const preferences = globalThis.DaliSitePreferences;
+const themeOrder = preferences.themes;
+const themeIcons = preferences.themeIcons;
 const themeNames = {
   'zh-Hans': { dark: '深色', graphite: '石墨深色', light: '清透亮色', sky: '天蓝亮色', action: '切换色调主题' },
   'zh-Hant': { dark: '深色', graphite: '石墨深色', light: '清透亮色', sky: '天藍亮色', action: '切換色調主題' },
@@ -99,19 +116,9 @@ const themeNames = {
   vi: { dark: 'Tối', graphite: 'Than chì', light: 'Sáng', sky: 'Xanh trời', action: 'Đổi giao diện' }, tr: { dark: 'Koyu', graphite: 'Grafit', light: 'Açık', sky: 'Gök mavisi', action: 'Temayı değiştir' }
 };
 
-const state = {
-  locale: resolveInitialLocale(),
-  theme: themeOrder.includes(localStorage.getItem('dali-theme')) ? localStorage.getItem('dali-theme') : 'light'
-};
+const state = { locale: preferences.locale, theme: preferences.theme };
 
-function resolveInitialLocale() {
-  const storedLegalLocale = localStorage.getItem('dali-legal-locale');
-  if (supportedLegalLocales.includes(storedLegalLocale)) return storedLegalLocale;
-  const mainLocale = localStorage.getItem('dali-locale');
-  return supportedLegalLocales.includes(mainLocale) ? mainLocale : 'en';
-}
-
-function applyLocale(locale) {
+function applyLocale(locale, persist = true) {
   state.locale = supportedLegalLocales.includes(locale) ? locale : 'en';
   const messages = copy[state.locale];
   document.documentElement.lang = languageTags[state.locale];
@@ -137,15 +144,13 @@ function applyLocale(locale) {
   document.title = `${messages[titleKey]} | DALI Control Platform`;
   document.querySelector('meta[name="description"]').content = messages[descriptionKey];
   document.querySelector('#info-language-panel').setAttribute('aria-label', messages.legalLanguageLabel);
-  localStorage.setItem('dali-legal-locale', state.locale);
+  preferences.setLocale(state.locale, { persist });
   updateThemeButton();
 }
 
-function applyTheme(theme) {
+function applyTheme(theme, persist = true) {
   state.theme = themeOrder.includes(theme) ? theme : 'light';
-  document.body.dataset.theme = state.theme;
-  document.querySelector('meta[name="theme-color"]').content = themeColors[state.theme];
-  localStorage.setItem('dali-theme', state.theme);
+  preferences.setTheme(state.theme, { persist });
   updateThemeButton();
 }
 
@@ -210,5 +215,9 @@ document.querySelector('#theme-toggle').addEventListener('click', () => {
   applyTheme(nextTheme);
 });
 
-applyTheme(state.theme);
-applyLocale(state.locale);
+window.addEventListener('dali-preferences-change', () => {
+  if (state.locale !== preferences.locale) applyLocale(preferences.locale, false);
+  if (state.theme !== preferences.theme) applyTheme(preferences.theme, false);
+});
+applyTheme(state.theme, false);
+applyLocale(state.locale, false);

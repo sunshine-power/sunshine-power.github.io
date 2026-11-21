@@ -5,6 +5,7 @@
   "description": "Static showcase for the DALI Control Platform",
   "scripts": {
     "dev": "node dev-server.mjs",
-    "start": "node dev-server.mjs"
+    "start": "node dev-server.mjs",
+    "test": "node --test ../tool/tests/site_preferences.test.mjs"
   }
 }

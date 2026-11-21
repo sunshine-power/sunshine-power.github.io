@@ -1,25 +1,125 @@
 <!doctype html>
-<html lang="en" data-theme="dark" data-core-scroll-container>
+<html lang="en" data-theme="light" data-core-scroll-container>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#f3f7f4">
+  <script id="site-preferences">
+(() => {
+  'use strict';
+
+  const defaults = Object.freeze({ locale: 'zh-Hans', theme: 'light' });
+  document.documentElement.dataset.siteLoading = '';
+  const languages = Object.freeze([
+    ['zh-Hans', '简体中文', 'zh-Hans'], ['zh-Hant', '繁體中文', 'zh-Hant'], ['en', 'English', 'en'],
+    ['ja', '日本語', 'ja'], ['ko', '한국어', 'ko'], ['fr', 'Français', 'fr'], ['de', 'Deutsch', 'de'],
+    ['es', 'Español', 'es'], ['pt', 'Português', 'pt'], ['nl', 'Nederlands', 'nl'], ['it', 'Italiano', 'it'],
+    ['el', 'Ελληνικά', 'el'], ['et', 'Eesti', 'et'], ['ms', 'Bahasa Melayu', 'ms'], ['fil', 'Filipino', 'fil'],
+    ['vi', 'Tiếng Việt', 'vi'], ['tr', 'Türkçe', 'tr']
+  ].map(([locale, name, tag]) => Object.freeze({ locale, name, tag })));
+  const themes = Object.freeze(['dark', 'graphite', 'light', 'sky']);
+  const themeColors = Object.freeze({ dark: '#0c1921', graphite: '#191e1d', light: '#f3f7f4', sky: '#f2f9fd' });
+  const themeIcons = Object.freeze({ dark: '◐', graphite: '◑', light: '☼', sky: '◉' });
+  const localeKeys = ['dali-locale', 'dali-legal-locale', 'dali-download-locale'];
+
+  function read(key) {
+    try { return localStorage.getItem(key); } catch { return null; }
+  }
+
+  function write(key, value) {
+    try { localStorage.setItem(key, value); } catch { /* The page remains usable without storage. */ }
+  }
+
+  function normalizeLocale(value) {
+    if (typeof value !== 'string') return null;
+    const tag = value.trim().replace(/_/g, '-').toLowerCase();
+    if (tag === 'zh' || /^zh-(hans|cn|sg)(-|$)/.test(tag)) return 'zh-Hans';
+    if (/^zh-(hant|tw|hk|mo)(-|$)/.test(tag)) return 'zh-Hant';
+    const base = tag.split('-')[0];
+    return languages.find(({ locale }) => locale.toLowerCase() === tag || locale === base)?.locale || (base === 'tl' ? 'fil' : null);
+  }
+
+  function storedLocale() {
+    return localeKeys.map((key) => normalizeLocale(read(key))).find(Boolean) || defaults.locale;
+  }
+
+  function storedTheme() {
+    const value = read('dali-theme');
+    return themes.includes(value) ? value : defaults.theme;
+  }
+
+  function locationPreferences() {
+    const query = new URLSearchParams(location.search);
+    return { locale: normalizeLocale(query.get('lang') || query.get('locale')), theme: query.get('theme') };
+  }
+
+  const requested = locationPreferences();
+  const state = {
+    locale: requested.locale || storedLocale(),
+    theme: themes.includes(requested.theme) ? requested.theme : storedTheme()
+  };
+
+  function applyDocument() {
+    document.documentElement.lang = state.locale;
+    document.documentElement.dataset.locale = state.locale;
+    document.documentElement.dataset.theme = state.theme;
+    if (document.body) document.body.dataset.theme = state.theme;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = themeColors[state.theme];
+  }
+
+  function notify() {
+    window.dispatchEvent(new CustomEvent('dali-preferences-change', { detail: { ...state } }));
+  }
+
+  function setLocale(value, { persist = true } = {}) {
+    const locale = normalizeLocale(value) || defaults.locale;
+    const changed = locale !== state.locale;
+    state.locale = locale;
+    if (persist) localeKeys.forEach((key) => write(key, locale));
+    applyDocument();
+    if (changed) notify();
+    return locale;
+  }
+
+  function setTheme(value, { persist = true } = {}) {
+    const theme = themes.includes(value) ? value : defaults.theme;
+    const changed = theme !== state.theme;
+    state.theme = theme;
+    if (persist) write('dali-theme', theme);
+    applyDocument();
+    if (changed) notify();
+    return theme;
+  }
+
+  globalThis.DaliSitePreferences = Object.freeze({
+    defaults, languages, themes, themeColors, themeIcons, normalizeLocale, setLocale, setTheme,
+    get locale() { return state.locale; },
+    get theme() { return state.theme; }
+  });
+
+  // Migrate valid existing choices without resetting them when the site is updated.
+  localeKeys.forEach((key) => write(key, storedLocale()));
+  write('dali-theme', storedTheme());
+  applyDocument();
+  document.addEventListener('DOMContentLoaded', () => {
+    applyDocument();
+    delete document.documentElement.dataset.siteLoading;
+  }, { once: true });
+  window.addEventListener('storage', (event) => {
+    if (event.key === null || localeKeys.includes(event.key)) setLocale(storedLocale(), { persist: false });
+    if (event.key === null || event.key === 'dali-theme') setTheme(storedTheme(), { persist: false });
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (!event.persisted) return;
+    const currentRequest = locationPreferences();
+    setLocale(currentRequest.locale || storedLocale(), { persist: false });
+    setTheme(themes.includes(currentRequest.theme) ? currentRequest.theme : storedTheme(), { persist: false });
+  });
+})();
+</script>
   <title>DALI Control Platform Help</title>
   <style>
-    :root {
-      --bg: #07131a;
-      --surface: rgba(15, 31, 40, .92);
-      --surface-strong: rgba(21, 43, 53, .96);
-      --line: rgba(151, 210, 225, .18);
-      --text: #eef8fa;
-      --muted: #a7c0c8;
-      --accent: #5eead4;
-      --accent-soft: rgba(94, 234, 212, .13);
-      --shadow: 0 24px 70px rgba(0, 0, 0, .32);
-      --radius: 16px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-    }
     * { box-sizing: border-box; }
     html {
       min-height: 100%;
@@ -35,11 +135,7 @@
       overflow: visible;
       touch-action: pan-x pan-y pinch-zoom;
       color: var(--text);
-      background:
-        radial-gradient(circle at 84% -10%, rgba(51, 191, 208, .16), transparent 38%),
-        linear-gradient(145deg, #07131a 0%, #0b1b25 58%, #102934 100%);
-      font-size: 14px;
-      line-height: 1.55;
+      background: var(--canvas);
     }
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
@@ -62,11 +158,11 @@
       max-width: 100%;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: var(--radius);
       background: var(--surface);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .16);
+      box-shadow: var(--shadow);
     }
-    .toc-head { padding: 15px 14px 11px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .025); }
+    .toc-head { padding: 15px 14px 11px; border-bottom: 1px solid var(--line); background: var(--surface-2); }
     .toc-title { display: block; font-size: 14px; line-height: 1.35; }
     .toc-scope { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
     .toc-links { display: grid; gap: 5px; padding: 10px; }
@@ -78,12 +174,12 @@
       min-height: 40px;
       padding: 7px 8px;
       border: 1px solid transparent;
-      border-radius: 9px;
+      border-radius: 4px;
       color: var(--muted);
       text-decoration: none;
       transition: color .18s ease, background-color .18s ease, border-color .18s ease;
     }
-    .toc-link:hover, .toc-link:focus-visible { color: var(--text); background: rgba(255, 255, 255, .05); outline: none; }
+    .toc-link:hover, .toc-link:focus-visible { color: var(--text); background: var(--surface-2); outline: none; }
     .toc-link.is-active { color: var(--text); border-color: color-mix(in srgb, var(--accent) 38%, transparent); background: var(--accent-soft); }
     .toc-index {
       display: grid;
@@ -91,12 +187,12 @@
       width: 26px;
       height: 26px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, .06);
+      background: var(--surface-2);
       color: var(--muted);
       font-size: 10px;
       font-weight: 700;
     }
-    .toc-link.is-active .toc-index { background: var(--accent); color: #062328; box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 36%, transparent); }
+    .toc-link.is-active .toc-index { background: var(--accent); color: var(--on-accent); box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 36%, transparent); }
     .toc-label { min-width: 0; font-size: 11.5px; font-weight: 650; line-height: 1.35; }
     .content { min-width: 0; }
     .hero {
@@ -105,7 +201,7 @@
       padding: 22px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(31, 80, 91, .62), rgba(13, 29, 38, .82));
+      background: var(--surface-2);
       box-shadow: var(--shadow);
     }
     .hero::after {
@@ -138,7 +234,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--surface);
-      box-shadow: 0 12px 36px rgba(0, 0, 0, .16);
+      box-shadow: var(--shadow);
     }
     .section h2 { margin-bottom: 6px; font-size: 18px; line-height: 1.25; }
     .section-intro { margin-bottom: 14px; color: var(--muted); }
@@ -146,15 +242,15 @@
     .hierarchy-item {
       min-height: 94px;
       padding: 13px;
-      border: 1px solid rgba(151, 210, 225, .13);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, .035);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface-2);
     }
     .hierarchy-item h3 { margin-bottom: 5px; font-size: 14px; }
     .hierarchy-item p { margin-bottom: 0; color: var(--muted); font-size: 12.5px; }
-    .status-list { display: grid; gap: 1px; overflow: hidden; border: 1px solid rgba(151, 210, 225, .13); border-radius: 12px; }
-    .status-row { display: grid; grid-template-columns: minmax(112px, .55fr) minmax(78px, .35fr) minmax(0, 1.55fr); gap: 12px; align-items: center; padding: 11px 13px; background: rgba(255, 255, 255, .035); }
-    .status-row + .status-row { border-top: 1px solid rgba(151, 210, 225, .11); }
+    .status-list { display: grid; gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); }
+    .status-row { display: grid; grid-template-columns: minmax(112px, .55fr) minmax(78px, .35fr) minmax(0, 1.55fr); gap: 12px; align-items: center; padding: 11px 13px; background: var(--surface-2); }
+    .status-row + .status-row { border-top: 1px solid var(--line); }
     .status-name { font-weight: 700; }
     .status-color { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
     .dot { width: 9px; height: 9px; flex: 0 0 9px; border-radius: 50%; background: var(--state); box-shadow: 0 0 12px color-mix(in srgb, var(--state) 65%, transparent); }
@@ -182,17 +278,109 @@
       .status-row { grid-template-columns: 1fr; gap: 4px; }
       .status-color { font-size: 11px; }
     }
-    @media (prefers-color-scheme: light) {
-      html[data-theme="auto"] {
-        --bg: #edf6f8; --surface: rgba(255, 255, 255, .9); --surface-strong: #fff;
-        --line: rgba(20, 72, 83, .16); --text: #10272f; --muted: #4d6871;
-        --accent: #087f86; --accent-soft: rgba(8, 127, 134, .1); --shadow: 0 18px 52px rgba(23, 69, 77, .14);
-      }
-    }
   </style>
+  <style id="site-language-panel">
+.language-control { position: relative; flex: 0 0 auto; }
+.language-trigger { min-width: 154px; min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: transparent; text-align: left; transition: border var(--transition), color var(--transition), background var(--transition); }
+.language-trigger:hover, .language-trigger:focus-visible, .language-control.is-open .language-trigger { color: var(--ink); border-color: var(--accent); background: var(--surface); outline: none; }
+.language-trigger-copy { min-width: 0; display: grid; gap: 1px; line-height: 1.1; }
+.language-trigger-copy strong { overflow: hidden; color: var(--ink); font-size: 13px; font-weight: 750; text-overflow: ellipsis; white-space: nowrap; }
+.language-trigger-chevron { color: var(--soft); font-size: 15px; line-height: 1; transform: translateY(-2px); transition: transform var(--transition); }
+.language-control.is-open .language-trigger-chevron { transform: rotate(180deg) translateY(2px); }
+.language-panel { position: absolute; z-index: 60; top: calc(100% + 20px); right: 0; width: min(680px, calc(100vw - 32px)); padding: 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); box-shadow: 0 20px 48px rgba(2, 13, 19, .2); }
+.language-panel[hidden] { display: none; }
+.language-panel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding: 1px 2px 11px; border-bottom: 1px solid var(--line); }
+.language-panel-heading strong { color: var(--ink); font-size: 13px; font-weight: 750; }
+.language-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding-top: 10px; }
+.language-option { position: relative; min-width: 0; min-height: 62px; display: grid; align-content: center; gap: 4px; padding: 9px 34px 9px 10px; border: 1px solid transparent; border-radius: 4px; color: var(--ink); background: var(--surface-2); text-align: left; transition: border var(--transition), background var(--transition), color var(--transition), transform var(--transition); }
+.language-option:hover, .language-option:focus-visible { border-color: var(--accent); background: var(--surface); outline: none; transform: translateY(-1px); }
+.language-option.is-selected { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, var(--surface-2)); box-shadow: inset 3px 0 0 var(--accent); }
+.language-option.is-selected::after { content: '✓'; position: absolute; top: 50%; right: 11px; color: var(--accent); font-size: 15px; font-weight: 800; line-height: 1; transform: translateY(-50%); }
+.language-option.is-selected strong { color: var(--accent); }
+.language-option strong { font-size: 13px; font-weight: 750; line-height: 1.25; overflow-wrap: anywhere; }
+.language-option small { color: var(--muted); font-size: 11px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+</style>
+  <style id="site-theme">
+:root {
+  color-scheme: light;
+  --ink: #102128;
+  --muted: #425a5f;
+  --soft: #5d7478;
+  --line: rgba(24, 65, 68, .18);
+  --surface: #f5faf6;
+  --surface-2: #eaf4ef;
+  --canvas: #f3f7f4;
+  --accent: #117c6b;
+  --accent-2: #416cb5;
+  --warm: #a76b1b;
+  --danger: #c24d4b;
+  --on-accent: #ffffff;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --bg: var(--canvas);
+  --paper: var(--surface);
+  --text: var(--ink);
+  --surface-strong: var(--surface-2);
+  --shadow: 0 12px 36px rgba(2, 13, 19, .08);
+  --radius: 6px;
+  --transition: 180ms ease;
+  --site-font: 'Manrope', 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', 'PingFang TC', 'Microsoft JhengHei', 'Noto Sans', sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+}
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --ink: #f4f8f5; --muted: #bdcbcc; --soft: #9bafb2; --line: rgba(164, 194, 190, .26);
+  --surface: #13252e; --surface-2: #19313b; --canvas: #0c1921; --accent: #69e6cb;
+  --accent-2: #74a8ff; --warm: #e5bc79; --danger: #ff7a78; --on-accent: #06131a;
+}
+html[data-theme='graphite'] {
+  color-scheme: dark;
+  --ink: #f5f4ef; --muted: #c7c9c3; --soft: #a5aaa5; --line: rgba(207, 213, 204, .22);
+  --surface: #242a28; --surface-2: #2e3633; --canvas: #191e1d; --accent: #e4c46f;
+  --accent-2: #78d6bf; --warm: #e4c46f; --danger: #ff8b7b; --on-accent: #211b0c;
+}
+html[data-theme='sky'] {
+  color-scheme: light;
+  --ink: #102735; --muted: #365a6a; --soft: #557481; --line: rgba(23, 92, 126, .2);
+  --surface: #ffffff; --surface-2: #e7f4fb; --canvas: #f2f9fd; --accent: #1478ad;
+  --accent-2: #3f67b5; --warm: #a66a20; --danger: #bc4d55; --on-accent: #ffffff;
+}
+html[lang='zh-Hant'] { --site-font: 'Manrope', 'PingFang TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans', sans-serif; }
+html[data-site-loading] body { visibility: hidden; }
+body {
+  font-family: var(--site-font);
+  font-size: 15px;
+  line-height: 1.65;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, input, select { font: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.icon-button, .theme-button, .site-theme-toggle {
+  display: inline-grid; place-items: center; flex: 0 0 38px; width: 38px; height: 38px; padding: 0;
+  border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: transparent; font-size: 19px; line-height: 1; cursor: pointer;
+}
+.icon-button:hover, .theme-button:hover, .site-theme-toggle:hover { color: var(--ink); border-color: var(--accent); background: var(--surface); }
+.site-preferences-controls { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.help-header-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; }
+.help-page-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.help-page-header strong { font-size: 16px; letter-spacing: .12em; }
+.content-language-note { flex: none; margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+@media (max-width: 760px) {
+  .site-preferences-controls .language-trigger { min-width: 120px; }
+  .site-preferences-controls .language-panel { position: fixed; top: var(--site-language-top, 72px); right: 16px; left: 16px; width: auto; max-height: calc(100vh - var(--site-language-top, 72px) - 16px); overflow-y: auto; }
+  .site-preferences-controls .language-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .help-header-actions { width: 100%; justify-content: flex-start; gap: 10px; }
+  .help-header-actions .switcher { flex: 1 1 100%; min-width: 0; }
+  .help-header-actions .switcher button { flex: 1; min-width: 0; white-space: normal; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0s !important; animation-duration: 0s !important; } }
+</style>
 </head>
 <body>
   <div class="page">
+    <header class="help-page-header"><strong>DALI</strong><div data-site-preferences-controls></div></header>
     <div class="help-layout">
       <nav class="toc" aria-labelledby="tocTitle">
         <div class="toc-head">
@@ -292,62 +480,68 @@
       }
     };
 
+    const preferences = globalThis.DaliSitePreferences;
     const injected = '__DALI_LOCALE__';
-    const browserLocale = (navigator.language || 'en').replace('-', '_');
-    const languageCode = (injected === '__DALI_LOCALE__' ? browserLocale : injected).toLowerCase();
-    const key = Object.keys(packs).find((entry) => entry.toLowerCase() === languageCode) ||
-      Object.keys(packs).find((entry) => entry.toLowerCase().startsWith(languageCode.split('_')[0])) || 'en';
-    const copy = packs[key];
-    const directoryCopy = {
-      en: ['Help contents', 'Project tree'],
-      zh_Hans: ['帮助目录', '工程对象树'],
-      zh_Hant: ['說明目錄', '工程物件樹'],
-      ja: ['ヘルプ目次', 'プロジェクトツリー'],
-      ko: ['도움말 목차', '프로젝트 트리'],
-      fr: ['Sommaire de l’aide', 'Arborescence du projet'],
-      de: ['Hilfeinhalt', 'Projektbaum'],
-      es: ['Contenido de ayuda', 'Árbol del proyecto'],
-      pt: ['Conteúdo da ajuda', 'Árvore do projeto'],
-      nl: ['Helpinhoud', 'Projectstructuur'],
-      it: ['Indice della guida', 'Albero del progetto'],
-      el: ['Περιεχόμενα βοήθειας', 'Δέντρο έργου'],
-      et: ['Abi sisukord', 'Projektipuu'],
-      ms: ['Kandungan bantuan', 'Pepohon projek'],
-      fil: ['Mga nilalaman ng tulong', 'Project tree'],
-      vi: ['Mục lục trợ giúp', 'Cây dự án'],
-      tr: ['Yardım içeriği', 'Proje ağacı']
-    }[key] || ['Help contents', 'Project tree'];
-    const statusCopy = {
-      en: ['Status colors', 'Colors follow the active application theme. The meaning stays the same in light and dark themes.'],
-      zh_Hans: ['状态颜色', '颜色会跟随当前软件主题；浅色和深色主题下的含义保持一致。'],
-      zh_Hant: ['狀態顏色', '顏色會跟隨目前軟體主題；淺色與深色主題下的含義保持一致。'],
-      ja: ['状態の色', '色は現在のアプリテーマに従います。明るいテーマと暗いテーマで意味は変わりません。'],
-      ko: ['상태 색상', '색상은 현재 앱 테마를 따릅니다. 밝은 테마와 어두운 테마에서 의미는 같습니다.'],
-      fr: ['Couleurs d’état', 'Les couleurs suivent le thème actif. Leur signification reste identique en mode clair ou sombre.'],
-      de: ['Statusfarben', 'Die Farben folgen dem aktiven Theme. Ihre Bedeutung bleibt in hellen und dunklen Themes gleich.'],
-      es: ['Colores de estado', 'Los colores siguen el tema activo. Su significado es el mismo en temas claros y oscuros.'],
-      pt: ['Cores de estado', 'As cores seguem o tema ativo. O significado é o mesmo nos temas claro e escuro.'],
-      nl: ['Statuskleuren', 'De kleuren volgen het actieve thema. De betekenis blijft gelijk in lichte en donkere thema’s.'],
-      it: ['Colori di stato', 'I colori seguono il tema attivo. Il significato resta uguale nei temi chiari e scuri.'],
-      el: ['Χρώματα κατάστασης', 'Τα χρώματα ακολουθούν το ενεργό θέμα. Η σημασία παραμένει ίδια στα φωτεινά και σκοτεινά θέματα.'],
-      et: ['Olekuvärvid', 'Värvid järgivad aktiivset teemat. Tähendus on heledas ja tumedas teemas sama.'],
-      ms: ['Warna status', 'Warna mengikut tema aplikasi aktif. Maksudnya sama dalam tema cerah dan gelap.'],
-      fil: ['Mga kulay ng status', 'Sumusunod ang mga kulay sa aktibong tema ng app. Pareho ang kahulugan sa light at dark theme.'],
-      vi: ['Màu trạng thái', 'Màu sắc theo chủ đề ứng dụng đang dùng. Ý nghĩa không đổi giữa chủ đề sáng và tối.'],
-      tr: ['Durum renkleri', 'Renkler etkin uygulama temasını izler. Açık ve koyu temalarda anlam aynıdır.']
-    }[key] || ['Status colors', 'Colors follow the active application theme.'];
-    const text = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value; };
-    text('tocTitle', directoryCopy[0]); text('tocScope', directoryCopy[1]);
-    text('tocHierarchy', copy.hierarchyTitle); text('tocStatus', statusCopy[0]); text('tocRepeated', copy.noteTitle);
-    text('eyebrow', copy.eyebrow); text('title', copy.title); text('lead', copy.lead);
-    text('hierarchyTitle', copy.hierarchyTitle); text('hierarchyIntro', copy.hierarchyIntro);
-    text('statusTitle', statusCopy[0]);
-    text('statusIntro', statusCopy[1]);
-    text('noteTitle', copy.noteTitle); text('note', copy.note); text('footer', copy.footer);
-    document.title = copy.title;
-    document.documentElement.lang = copy.lang;
-    document.getElementById('hierarchy').innerHTML = copy.hierarchy.map(([title, description]) => `<article class="hierarchy-item"><h3>${title}</h3><p>${description}</p></article>`).join('');
-    document.getElementById('statuses').innerHTML = copy.statuses.map(([name, color, description], index) => `<div class="status-row"><strong class="status-name">${name}</strong><span class="status-color"><i class="dot" style="--state:${['#4ade80', '#22d3ee', '#fbbf24', '#a78bfa', '#fb7185', '#9ca3af', '#64748b'][index]}"></i>${color}</span><p class="status-description">${description}</p></div>`).join('');
+    if (injected !== '__DALI_LOCALE__') preferences.setLocale(injected, { persist: false });
+    let renderedLocale;
+    function applyStatusLocale() {
+      if (renderedLocale === preferences.locale) return;
+      renderedLocale = preferences.locale;
+      const key = Object.keys(packs).find(entry => preferences.normalizeLocale(entry) === preferences.locale) || 'en';
+      const copy = packs[key];
+      const directoryCopy = {
+        en: ['Help contents', 'Project tree'],
+        zh_Hans: ['帮助目录', '工程对象树'],
+        zh_Hant: ['說明目錄', '工程物件樹'],
+        ja: ['ヘルプ目次', 'プロジェクトツリー'],
+        ko: ['도움말 목차', '프로젝트 트리'],
+        fr: ['Sommaire de l’aide', 'Arborescence du projet'],
+        de: ['Hilfeinhalt', 'Projektbaum'],
+        es: ['Contenido de ayuda', 'Árbol del proyecto'],
+        pt: ['Conteúdo da ajuda', 'Árvore do projeto'],
+        nl: ['Helpinhoud', 'Projectstructuur'],
+        it: ['Indice della guida', 'Albero del progetto'],
+        el: ['Περιεχόμενα βοήθειας', 'Δέντρο έργου'],
+        et: ['Abi sisukord', 'Projektipuu'],
+        ms: ['Kandungan bantuan', 'Pepohon projek'],
+        fil: ['Mga nilalaman ng tulong', 'Project tree'],
+        vi: ['Mục lục trợ giúp', 'Cây dự án'],
+        tr: ['Yardım içeriği', 'Proje ağacı']
+      }[key] || ['Help contents', 'Project tree'];
+      const statusCopy = {
+        en: ['Status colors', 'Colors follow the active application theme. The meaning stays the same in light and dark themes.'],
+        zh_Hans: ['状态颜色', '颜色会跟随当前软件主题；浅色和深色主题下的含义保持一致。'],
+        zh_Hant: ['狀態顏色', '顏色會跟隨目前軟體主題；淺色與深色主題下的含義保持一致。'],
+        ja: ['状態の色', '色は現在のアプリテーマに従います。明るいテーマと暗いテーマで意味は変わりません。'],
+        ko: ['상태 색상', '색상은 현재 앱 테마를 따릅니다. 밝은 테마와 어두운 테마에서 의미는 같습니다.'],
+        fr: ['Couleurs d’état', 'Les couleurs suivent le thème actif. Leur signification reste identique en mode clair ou sombre.'],
+        de: ['Statusfarben', 'Die Farben folgen dem aktiven Theme. Ihre Bedeutung bleibt in hellen und dunklen Themes gleich.'],
+        es: ['Colores de estado', 'Los colores siguen el tema activo. Su significado es el mismo en temas claros y oscuros.'],
+        pt: ['Cores de estado', 'As cores seguem o tema ativo. O significado é o mesmo nos temas claro e escuro.'],
+        nl: ['Statuskleuren', 'De kleuren volgen het actieve thema. De betekenis blijft gelijk in lichte en donkere thema’s.'],
+        it: ['Colori di stato', 'I colori seguono il tema attivo. Il significato resta uguale nei temi chiari e scuri.'],
+        el: ['Χρώματα κατάστασης', 'Τα χρώματα ακολουθούν το ενεργό θέμα. Η σημασία παραμένει ίδια στα φωτεινά και σκοτεινά θέματα.'],
+        et: ['Olekuvärvid', 'Värvid järgivad aktiivset teemat. Tähendus on heledas ja tumedas teemas sama.'],
+        ms: ['Warna status', 'Warna mengikut tema aplikasi aktif. Maksudnya sama dalam tema cerah dan gelap.'],
+        fil: ['Mga kulay ng status', 'Sumusunod ang mga kulay sa aktibong tema ng app. Pareho ang kahulugan sa light at dark theme.'],
+        vi: ['Màu trạng thái', 'Màu sắc theo chủ đề ứng dụng đang dùng. Ý nghĩa không đổi giữa chủ đề sáng và tối.'],
+        tr: ['Durum renkleri', 'Renkler etkin uygulama temasını izler. Açık ve koyu temalarda anlam aynıdır.']
+      }[key] || ['Status colors', 'Colors follow the active application theme.'];
+      const text = (id, value) => { const node = document.getElementById(id); if (node) node.textContent = value; };
+      text('tocTitle', directoryCopy[0]); text('tocScope', directoryCopy[1]);
+      text('tocHierarchy', copy.hierarchyTitle); text('tocStatus', statusCopy[0]); text('tocRepeated', copy.noteTitle);
+      text('eyebrow', copy.eyebrow); text('title', copy.title); text('lead', copy.lead);
+      text('hierarchyTitle', copy.hierarchyTitle); text('hierarchyIntro', copy.hierarchyIntro);
+      text('statusTitle', statusCopy[0]);
+      text('statusIntro', statusCopy[1]);
+      text('noteTitle', copy.noteTitle); text('note', copy.note); text('footer', copy.footer);
+      document.title = copy.title;
+      document.documentElement.lang = copy.lang;
+      document.getElementById('hierarchy').innerHTML = copy.hierarchy.map(([title, description]) => `<article class="hierarchy-item"><h3>${title}</h3><p>${description}</p></article>`).join('');
+      document.getElementById('statuses').innerHTML = copy.statuses.map(([name, color, description], index) => `<div class="status-row"><strong class="status-name">${name}</strong><span class="status-color"><i class="dot" style="--state:${['#4ade80', '#22d3ee', '#fbbf24', '#a78bfa', '#fb7185', '#9ca3af', '#64748b'][index]}"></i>${color}</span><p class="status-description">${description}</p></div>`).join('');
+    }
+    window.addEventListener('dali-preferences-change', applyStatusLocale);
+    applyStatusLocale();
 
     const tocLinks = [...document.querySelectorAll('.toc-link')];
     const sections = tocLinks.map((link) => document.getElementById(link.dataset.section)).filter(Boolean);
@@ -374,5 +568,138 @@
     }, { rootMargin: '-12% 0px -58% 0px', threshold: [0, .2, .5] });
     sections.forEach((section) => sectionObserver.observe(section));
   </script>
+  <script id="site-controls">
+(() => {
+  'use strict';
+  const preferences = globalThis.DaliSitePreferences;
+  const labels = {
+    en: ['Language', 'Switch colour theme', 'Dark', 'Graphite dark', 'Light', 'Sky light'],
+    'zh-Hans': ['语言', '切换色调主题', '深色', '石墨深色', '清透亮色', '天蓝亮色'],
+    'zh-Hant': ['語言', '切換色調主題', '深色', '石墨深色', '清透亮色', '天藍亮色'],
+    ja: ['言語', '配色テーマを切り替え', 'ダーク', 'グラファイト', 'ライト', 'スカイ'],
+    ko: ['언어', '색상 테마 전환', '다크', '그래파이트', '라이트', '스카이'],
+    fr: ['Langue', 'Changer le thème', 'Sombre', 'Graphite', 'Clair', 'Bleu ciel'],
+    de: ['Sprache', 'Farbthema wechseln', 'Dunkel', 'Graphit', 'Hell', 'Himmelblau'],
+    es: ['Idioma', 'Cambiar tema', 'Oscuro', 'Grafito', 'Claro', 'Azul cielo'],
+    pt: ['Idioma', 'Mudar tema', 'Escuro', 'Grafite', 'Claro', 'Azul-céu'],
+    nl: ['Taal', 'Thema wijzigen', 'Donker', 'Grafiet', 'Licht', 'Hemelsblauw'],
+    it: ['Lingua', 'Cambia tema', 'Scuro', 'Grafite', 'Chiaro', 'Azzurro'],
+    el: ['Γλώσσα', 'Αλλαγή θέματος', 'Σκούρο', 'Γραφίτης', 'Φωτεινό', 'Γαλάζιο'],
+    et: ['Keel', 'Vaheta teemat', 'Tume', 'Grafiit', 'Hele', 'Taevasinine'],
+    ms: ['Bahasa', 'Tukar tema', 'Gelap', 'Grafit', 'Cerah', 'Biru langit'],
+    fil: ['Wika', 'Palitan ang tema', 'Madilim', 'Graphite', 'Maliwanag', 'Asul'],
+    vi: ['Ngôn ngữ', 'Đổi giao diện', 'Tối', 'Than chì', 'Sáng', 'Xanh trời'],
+    tr: ['Dil', 'Temayı değiştir', 'Koyu', 'Grafit', 'Açık', 'Gök mavisi']
+  };
+  document.querySelectorAll('[data-site-preferences-controls]').forEach((container, index) => {
+    container.classList.add('site-preferences-controls');
+    const control = document.createElement('div');
+    control.className = 'language-control';
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'language-trigger';
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.setAttribute('aria-controls', `site-language-panel-${index}`);
+    const triggerCopy = document.createElement('span');
+    triggerCopy.className = 'language-trigger-copy';
+    const current = document.createElement('strong');
+    triggerCopy.append(current);
+    const chevron = document.createElement('span');
+    chevron.className = 'language-trigger-chevron';
+    chevron.textContent = '⌄';
+    chevron.setAttribute('aria-hidden', 'true');
+    trigger.append(triggerCopy, chevron);
+    const panel = document.createElement('div');
+    panel.id = `site-language-panel-${index}`;
+    panel.className = 'language-panel';
+    panel.hidden = true;
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-labelledby', `site-language-title-${index}`);
+    const heading = document.createElement('div');
+    heading.className = 'language-panel-heading';
+    const title = document.createElement('strong');
+    title.id = `site-language-title-${index}`;
+    heading.append(title);
+    const grid = document.createElement('div');
+    grid.className = 'language-grid';
+    const options = preferences.languages.map(({ locale, name }) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'language-option';
+      const nativeName = document.createElement('strong');
+      nativeName.textContent = name;
+      const translatedName = document.createElement('small');
+      button.append(nativeName, translatedName);
+      button.addEventListener('click', () => {
+        preferences.setLocale(locale);
+        setOpen(false);
+        trigger.focus();
+      });
+      grid.append(button);
+      return { locale, name, button, translatedName };
+    });
+    panel.append(heading, grid);
+    control.append(trigger, panel);
+    const theme = document.createElement('button');
+    theme.type = 'button';
+    theme.className = 'site-theme-toggle';
+    function updatePosition() {
+      panel.style.setProperty('--site-language-top', `${trigger.getBoundingClientRect().bottom + 8}px`);
+    }
+    function setOpen(open) {
+      if (open) updatePosition();
+      panel.hidden = !open;
+      control.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', String(open));
+    }
+    function update() {
+      const copy = labels[preferences.locale] || labels.en;
+      const selected = preferences.languages.find(({ locale }) => locale === preferences.locale);
+      current.textContent = selected.name;
+      trigger.setAttribute('aria-label', `${copy[0]}: ${selected.name}`);
+      title.textContent = copy[0];
+      for (const option of options) {
+        let name = option.name;
+        try { name = new Intl.DisplayNames([preferences.locale], { type: 'language' }).of(option.locale); } catch { /* Use the native language name. */ }
+        const active = option.locale === preferences.locale;
+        option.translatedName.textContent = name;
+        option.translatedName.hidden = active;
+        option.button.classList.toggle('is-selected', active);
+        option.button.setAttribute('aria-pressed', String(active));
+        option.button.setAttribute('aria-label', active ? option.name : `${option.name} / ${name}`);
+      }
+      theme.textContent = preferences.themeIcons[preferences.theme];
+      const themeIndex = preferences.themes.indexOf(preferences.theme);
+      const nextIndex = (themeIndex + 1) % preferences.themes.length;
+      const themeTitle = `${copy[1]}: ${copy[themeIndex + 2]}. ${copy[nextIndex + 2]}`;
+      theme.title = themeTitle;
+      theme.setAttribute('aria-label', themeTitle);
+    }
+    trigger.addEventListener('click', () => setOpen(panel.hidden));
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowDown') return;
+      event.preventDefault();
+      setOpen(true);
+      options.find(({ locale }) => locale === preferences.locale).button.focus();
+    });
+    theme.addEventListener('click', () => {
+      const themeIndex = preferences.themes.indexOf(preferences.theme);
+      preferences.setTheme(preferences.themes[(themeIndex + 1) % preferences.themes.length]);
+    });
+    document.addEventListener('click', (event) => { if (!control.contains(event.target)) setOpen(false); });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hidden) {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+    window.addEventListener('resize', () => { if (!panel.hidden) updatePosition(); });
+    container.replaceChildren(control, theme);
+    window.addEventListener('dali-preferences-change', update);
+    update();
+  });
+})();
+</script>
 </body>
 </html>
