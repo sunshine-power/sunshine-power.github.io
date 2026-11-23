@@ -139,6 +139,9 @@ h2 { font-size: clamp(34px, 4vw, 57px); }
 .market-card h3, .market-card p { overflow-wrap: anywhere; }
 
 .future-band { position: relative; overflow: hidden; background: #091e26; border-top: 1px solid rgba(97, 230, 202, .2); border-bottom: 1px solid rgba(97, 230, 202, .2); }
+html[data-theme='light'] .future-band { --accent: #0d6d60; --soft: #50686b; background: #dceee8; }
+html[data-theme='sky'] .future-band { --accent: #0e6796; --soft: #476976; background: #d8eef9; }
+html[data-theme='graphite'] .future-band { background: #222a27; }
 .future-layout { position: relative; display: grid; grid-template-columns: 160px minmax(0, 650px); align-items: center; gap: 35px; min-height: 450px; }
 .future-mark { color: var(--accent); font-family: 'DM Mono', monospace; font-size: 66px; font-weight: 500; line-height: .85; letter-spacing: -.15em; opacity: .9; }
 .future-mark span { padding-left: 12px; font-size: 40px; }
